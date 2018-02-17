@@ -1,0 +1,122 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(rvest)
+library(purrr)
+library(stringr)
+library(tidyverse)
+```
+
+To Do:
+
+- Extract serving size and calories (.servings-count and .calorie-count)
+- Convert units so they're all the same
+- `bind_rows()` earlier
+- summarise by ingredient type so all the fats (eg) get added up
+
+```{r}
+#initialize vector
+cupcakes_urls <- c()
+base_url <- "http://allrecipes.com/recipes/377/desserts/cakes/cupcakes/"
+for(i in 1:12){ #tested and found there are 12 pages of cupcake recipes
+  cupcakes_urls <- c(cupcakes_urls, paste0(base_url, "?page=", i))
+}
+
+cupcakes <- map(cupcakes_urls, read_html)
+results <- cupcakes %>% map(~html_nodes(.,".fixed-recipe-card__title-link"))
+cupcakes_links <- results %>% map(~html_attr(.,"href"))
+
+cupcakes_links <- cupcakes_links %>% flatten_chr()
+cupcakes_links <- cupcakes_links[!is.na(cupcakes_links)]
+head(cupcakes_links)
+```
+Sweet! (literally) Now we have `r length(cupcakes_links)` cupcake recipes.  Let's randomly sample a few to see how easy it is to scrape the actual ingredients list
+
+```{r}
+cupcakes_sample <- sample(cupcakes_links, 4)
+```
+
+# Scrape a recipe!
+
+```{r}
+cupcake1 <- cupcakes_sample[1] %>% read_html()
+
+cupcake1_ing <- cupcake1 %>% html_nodes(".added") %>% html_text()
+
+cupcake1_ing <- cupcake1_ing %>%
+  as_tibble() %>%
+  #add a column for what part of the recipe the ingredient is for
+  mutate(part = str_extract(.$value, ".+:$")) %>% 
+  #fill down the "part" column
+  fill(part) %>% 
+  #remove the headers like "Cupcakes:"
+  filter(!str_detect(.$value, ":"))
+cupcake1_ing
+```
+
+# Try applying to multiple recipes!
+
+```{r}
+cupcakes_ing <- cupcakes_sample %>% map(read_html) %>% map(~html_nodes(., ".added")) %>% map(html_text)
+
+cupcakes_ing <- cupcakes_ing %>% map(~ as_tibble(.) %>%
+                       mutate(part = str_extract(.$value, ".+:$")) %>% 
+                       fill(part) %>% 
+                       filter(!str_detect(.$value, ":")) %>% 
+                       filter(value != "Add all ingredients to list") %>% 
+                       #I'll assume that if there isn't a "part" listed, then it's for the cupcake
+                       mutate(part = ifelse(is.na(part), "Cupcake:", part)))
+
+```
+
+# Now let's try extracing ingredients?
+
+```{r}
+cupcakes_ing2 <- cupcakes_ing %>% map(~ 
+  mutate(., value = tolower(value)) %>% 
+  mutate(ammount = str_extract(.$value, "^[\\d, /]+"),
+         units = str_extract(.$value, "(\\(.+\\)|[^0-9, /]+)"), #finds either something in parens, or next word
+         ingredient = case_when(str_detect(.$value, "sugar")        ~ "sugar",
+                                str_detect(.$value, "honey")        ~ "sugar",
+                                str_detect(.$value, "agave")        ~ "sugar",
+                                str_detect(.$value, "flour")        ~ "flour",
+                                str_detect(.$value, "egg")          ~ "eggs",
+                                str_detect(.$value, "baking")       ~ "leavening",
+                                str_detect(.$value, "\\boil\\b")    ~ "fat",
+                                str_detect(.$value, "butter")       ~ "fat",
+                                str_detect(.$value, "shortening")   ~ "fat",
+                                str_detect(.$value, "cream cheese") ~ "other dairy",
+                                str_detect(.$value, "sour cream")   ~ "other dairy",
+                                str_detect(.$value, "milk")         ~ "milk",
+                                str_detect(.$value, "tartar")       ~ "other",
+                                str_detect(.$value, "cream")        ~ "milk",
+                                str_detect(.$value, "salt")         ~ "salt",
+                                str_detect(.$value, "yogurt")       ~ "other dairy",
+                                str_detect(.$value, "water")        ~ "water",
+                                str_detect(.$value, "vanilla")      ~ "vanilla",
+                                TRUE ~ "other")) )
+
+# test <- cupcakes_ing[[1]]$value
+# str_view(test, "^[\\d, /]+")
+# str_view(test, "([^0-9, /]+|\\(.+\\))")
+# str_view(test, "(\\(.+\\)|[^0-9, /]+)")
+# str_view(test, "[^0-9, /, \\(]+")
+
+cupcakes_ing2
+```
+
+# Convert fractions to decimals
+The `ammount` column is character class.  I want numeric.
+
+I think one approach would be to turn a space into a "+" then use mutate to do `eval(parse(ammount))`
+```{r}
+cupcakes_ing3 <- cupcakes_ing2[[2]] %>% 
+  mutate(ammount = str_trim(.$ammount)) %>% 
+  mutate(ammount = str_replace(.$ammount, "\\s", "+")) %>% 
+  mutate(ammount = sapply(ammount, function(x) eval(parse(text=x))))
+cupcakes_ing3
+```
+
