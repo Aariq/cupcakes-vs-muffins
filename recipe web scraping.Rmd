@@ -9,14 +9,26 @@ library(rvest)
 library(purrr)
 library(stringr)
 library(tidyverse)
+library(beepr) #for notification sounds when long functions are done running
 ```
 
 To Do:
 
-- Extract serving size and calories (.servings-count and .calorie-count)
+- add a save_rds at some point to prevent having to re-run read_html_slow() so often 
 - Convert units so they're all the same
-- `bind_rows()` earlier
 - summarize by ingredient type so all the fats (eg) get added up
+
+```{r helpers}
+#create function to read_html slowly to avoid getting banned
+read_html_slow <- function(x, ...){
+  output <- read_html(x)
+  Sys.sleep(5)
+  return(output)
+}
+#testing:
+#read_html_slow("http://allrecipes.com/recipe/233538/really-real-strawberry-cupcakes/")
+```
+
 
 # Get links to all cupcake recipes
 allrecipes.com has a tag structure that is easy to navigate.  All the recipes for a category show up, but on several pages.  I didn't bother figuring out how many pages there were programatically, I just looked on the website.
@@ -32,7 +44,8 @@ for(i in 1:12){ #tested and found there are 12 pages of cupcake recipes
 }
 
 # map the read_html function to read all the pages at once
-cupcakes <- map(cupcakes_urls, read_html)
+cupcakes <- map(cupcakes_urls, read_html_slow)
+beep(4)
 
 # extract the recipe links from all the pages
 results <- cupcakes %>% map(~html_nodes(.,".fixed-recipe-card__title-link"))
@@ -46,51 +59,65 @@ Sweet! (literally) Now we have `r length(cupcakes_links)` cupcake recipes.  Let'
 
 ```{r}
 #get random sample of n cupcake recipe links
-n = 5
+n = 50
 cupcakes_sample <- sample(cupcakes_links, n)
 ```
 
-# Scrape a recipe!
+# Scrape recipes!
 To figure out if cupcakes are different than muffins, I need to get all the ingredients, categorize them as variables, get all the units the same for each variable across recipes, and exclude frosting or toppings. (I only care if the cake part is different from a muffin, obviously cupcakes are frosted and muffins are not).  I should standardize ingredient amounts by serving size.  Serving size and calorie count are in the same spot in each recipe, so I might as well get those too.
 
-## Read in ingredients in "parts"
-Read in ingredients and use the headings like "Cake:" and "Frosting:" to create a variable that will allow us to filter out frosting and toppings later.  If there isn't a header, don't assume it's the cake part.  Some recipes don't use headers to separate cake and frosting ingredients.
+## Read in all the html of all the cupcake recipes
+```{r read-recipes}
+cupcakes_html <- cupcakes_sample %>% map(read_html_slow)
+beep(4)
+```
 
-```{r}
-cupcakes_ing <- cupcakes_sample %>% map(read_html) %>% map(~html_nodes(., ".added")) %>% map(html_text)
+## Extract ingredients and categorize into "parts"
+Most recipes divide the ingredients list with headers that end in a colon, like "Cake:" or "Frosting:".  I can use that to create a variable, `part`, that later will help me filter out toppings and frostings.
+```{r extract-parts}
+cupcakes_ing <- cupcakes_html %>% map(~html_nodes(., ".added")) %>% map(html_text)
 
 cupcakes_ing <- cupcakes_ing %>% map(~ as_tibble(.) %>%
                        mutate(part = str_extract(.$value, ".+:$")) %>% 
                        fill(part) %>% 
                        filter(!str_detect(.$value, ":")) %>% 
                        filter(value != "Add all ingredients to list"))
-                       
-cupcakes_ing
 ```
-## Scrape calories and serving size
+*Note:* this seems like it doesn't work with a lot of recipes and I'm not sure why.
+
+## Extract calories and serving size
+```{r}
+calories <- cupcakes_html %>% 
+  map(~html_nodes(., ".calorie-count span:nth-child(1)")) %>%
+  map(html_text)
+
+servings <- cupcakes_html %>% 
+  map(~html_nodes(., ".subtext")) %>%
+  map(html_text) %>% 
+  map(~str_extract(.,"(?<=yields\\s)\\d+"))
+
+cupcakes_ing <- map2(cupcakes_ing, servings, ~mutate(.x, servings = as.integer(.y)))
+cupcakes_ing <- map2(cupcakes_ing, calories, ~mutate(.x, calories = as.integer(.y)))
+```
+
+
+# Flatten
+Extract recipe ID number and `bind_rows()` to create one data frame for all recipes in `cupcake_sample`
 
 ```{r}
-calories <- cupcakes_sample %>% map(read_html) %>% map(~html_nodes(., ".calorie-count span:nth-child(1)")) %>% map(html_text)
+#add names to list of data frames
+names(cupcakes_ing) <- str_extract(cupcakes_sample, "(?<=/)\\d+")
 
-servings <- cupcakes_sample %>%
-  map(~read_html(.) %>%
-        html_nodes(".subtext") %>%
-        str_extract("(?<=yields\\s)\\d+"))
-
-cupcakes_ing <- map2(cupcakes_ing, servings, ~mutate(.x, servings = .y))
-cupcakes_ing <- map2(cupcakes_ing, calories, ~mutate(.x, calories = .y))
-
-cupcakes_ing
+cupcakes_ing <- cupcakes_ing %>% bind_rows(.id = "Recipe ID")
 ```
-At this point I think I can safely read in all the recipes and combine them with `bind_rows()`.
 
 
-## Extract variables
+# Extract variables
 I'll use regular expressions to try to extract the amount and units.  Then in the same `mutate()` call I'll try to categorize ingredients into discrete variables.
 
 ```{r}
-cupcakes_ing2 <- cupcakes_ing %>% map(~ 
-  mutate(., value = tolower(value)) %>% 
+cupcakes_ing2 <- cupcakes_ing %>%  
+  mutate(value = tolower(value)) %>% 
   mutate(amount = str_extract(.$value, "^[\\d, /]+"),
          units = str_extract(.$value, "(\\(.+\\)|[^0-9, /]+)"), #finds either something in parens, or next word
          ingredient = case_when(str_detect(.$value, "sugar")        ~ "sugar",
@@ -111,7 +138,7 @@ cupcakes_ing2 <- cupcakes_ing %>% map(~
                                 str_detect(.$value, "yogurt")       ~ "other dairy",
                                 str_detect(.$value, "water")        ~ "water",
                                 str_detect(.$value, "vanilla")      ~ "vanilla",
-                                TRUE ~ "other")) )
+                                TRUE ~ "other"))
 
 # test <- cupcakes_ing[[1]]$value
 # str_view(test, "^[\\d, /]+")
@@ -124,17 +151,26 @@ cupcakes_ing2
 
 After testing this with several different random samples of cupcake recipes, I'm pretty happy with it. 
 
-# Apply ingredient extraction to all recipes.
-
 # Convert fractions to decimals
 The `ammount` column is character class.  I want numeric.
 
 I think one approach would be to turn a space into a "+" then use mutate to do `eval(parse(ammount))`
 ```{r}
-cupcakes_ing3 <- cupcakes_ing2[[2]] %>% 
-  mutate(ammount = str_trim(.$ammount)) %>% 
-  mutate(ammount = str_replace(.$ammount, "\\s", "+")) %>% 
-  mutate(ammount = sapply(ammount, function(x) eval(parse(text=x))))
-cupcakes_ing3
+cupcakes_ing3 <- cupcakes_ing2 %>% 
+  mutate(amount = str_trim(amount)) %>% 
+  mutate(dec_amount = str_replace(amount, "\\s", "+")) %>% 
+  mutate(dec_amount = sapply(dec_amount, function(x) eval(parse(text=x))))
+cupcakes_ing3 %>% select(amount, dec_amount, everything())
 ```
 
+# Dealing with inconsistencies between recipes
+
+Problems:
+
+1. **Recipes without defined "parts"**
+
+Some recipes don't define what ingredients are for the cakes vs. the frosting.  My intention is to exclude frosting ingredients from this analysis, so the safest way to deal with this is to assume that unless it has the word "cake" somewhere in the `part` column, then the ingredient is not for the cake part.
+
+2. **Weird ingredients with non-standard units**
+
+Some recipes include ingredients that are in units of counts, like "24 blueberries".  Alsmost always these are weird toppings, so they might not be a problem if I deal with problem #1.
