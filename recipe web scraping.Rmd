@@ -15,8 +15,11 @@ library(beepr) #for notification sounds when long functions are done running
 To Do:
 
 - add a save_rds at some point to prevent having to re-run read_html_slow() so often 
+- milk chocolate gets tagged as "milk" (e.g. 231057).  Add to `case_when()` call to catch chocolate.
+- apple butter gets tagged as "fat" (e.g. 255405)
 - Convert units so they're all the same
 - summarize by ingredient type so all the fats (eg) get added up
+
 
 ```{r helpers}
 #create function to read_html slowly to avoid getting banned
@@ -59,7 +62,7 @@ Sweet! (literally) Now we have `r length(cupcakes_links)` cupcake recipes.  Let'
 
 ```{r}
 #get random sample of n cupcake recipe links
-n = 50
+n = 10
 cupcakes_sample <- sample(cupcakes_links, n)
 ```
 
@@ -83,7 +86,13 @@ cupcakes_ing <- cupcakes_ing %>% map(~ as_tibble(.) %>%
                        filter(!str_detect(.$value, ":")) %>% 
                        filter(value != "Add all ingredients to list"))
 ```
-*Note:* this seems like it doesn't work with a lot of recipes and I'm not sure why.
+*What if there are no "parts"?* I think it is safe to assume that if a recipe has a "part" for some ingredients but not for others, the ones without a "part" are the cake.  If a recipe has no "parts" listed at all, then it should be excluded as it is not safe to assume all ingredients are for the cake (see "problems" below for examples and more discussion).
+
+```{r fill-in-parts}
+cupcakes_ing <- cupcakes_ing %>% map(~
+  mutate(., part = ifelse(any(!is.na(part)) & is.na(part), "Cake:", part)))
+```
+
 
 ## Extract calories and serving size
 ```{r}
@@ -163,6 +172,63 @@ cupcakes_ing3 <- cupcakes_ing2 %>%
 cupcakes_ing3 %>% select(amount, dec_amount, everything())
 ```
 
+# Unit conversions
+
+## Deal with package size
+Occasionally an ingredient is like "1 (8 ounce) packet of cream cheese" and my script so far detects "1" as the amount and "(8 ounce)" as the units.  I should deal with this.
+
+**Deal with "oz." and possible decimal points (e.g. "12.5 ounce")** (e.g. 234135)
+```{r}
+#test <- cupcakes_ing3$units
+#str_view_all(test, "\\(.+ (ounce|oz.)")
+
+#test2 <- c("(8 ounce)", "(.68 oz. tube)", "(12.3 ounce)")
+#str_view(test2, "\\.?\\d+\\.?\\d*")
+
+# as.numeric(str_extract(test, "\\d+"))*1
+cupcakes_ing3 <- cupcakes_ing3 %>%
+  mutate(dec_amount = ifelse(str_detect(units, "\\(.+ (ounce|oz.)"),
+                          as.numeric(str_extract(units, "\\.?\\d+\\.?\\d*")) * dec_amount,
+                          dec_amount),
+         units = ifelse(str_detect(units, "\\(.+ (ounce|oz.)"), "ounces", units))
+```
+
+```{r}
+#overwrite original amount column to avoid confusion
+cupcakes_ing4 <- cupcakes_ing3 %>%
+  select(-amount) %>%
+  rename(amount = dec_amount) %>% 
+  select(`Recipe ID`, ingredient, amount, units, part, servings, calories, value)
+```
+
+## Unit conversions
+```{r}
+#things that should be in cups
+cups <- c("flour", "sugar", "fat", "milk", "other dairy", "water", "other")
+#things that should be in tablespoons
+tbsp <- c("salt", "leavening", "vanilla")
+
+cupcakes_ing4 %>% 
+  mutate(units_std = case_when(ingredient %in% cups ~ "cups",
+                               ingredient == "eggs" ~ "eggs",
+                               ingredient %in% tbsp ~ "tablespoons")) %>% 
+  mutate(amount_std = case_when(ingredient %in% cups & str_detect(units, "cup")        ~ amount,
+                                ingredient %in% cups & str_detect(units, "teaspoon")   ~ amount * 0.0208333,
+                                ingredient %in% cups & str_detect(units, "tablespoon") ~ amount * 0.0625,
+                                ingredient %in% cups & str_detect(units, "ounce")      ~ amount * 0.125,
+                                ingredient %in% cups & str_detect(units, "pint")       ~ amount * 2,
+                                ingredient == "eggs"                                   ~ amount,
+                                ingredient %in% tbsp & str_detect(units, "tablespoon") ~ amount,
+                                ingredient %in% tbsp & str_detect(units, "teaspoon")   ~ amount * 1/3,
+                                ingredient %in% tbsp & str_detect(units, "cup")        ~ amount * 16,
+                                TRUE                                                   ~ as.numeric(NA))) %>% 
+  select(`Recipe ID`, ingredient, amount, units, amount_std, units_std, everything())
+
+```
+
+
+
+
 # Dealing with inconsistencies between recipes
 
 Problems:
@@ -171,6 +237,16 @@ Problems:
 
 Some recipes don't define what ingredients are for the cakes vs. the frosting.  My intention is to exclude frosting ingredients from this analysis, so the safest way to deal with this is to assume that unless it has the word "cake" somewhere in the `part` column, then the ingredient is not for the cake part.
 
+- Some have a "part" for frosting, but not for the cake. (e.g. 261244, 255301)  So in that case, all the ingredients that are NA for `part` go with the cake.
+
+- Some don't have frosting or toppings, and all the ingredients are for the cake (e.g. 235291, 239265).
+
+- Others list all the ingredients for the frosting and cake in one list (e.g. 245175, 218356).
+
+- Yet others are complete bullshit and have "cupcakes" as one of the ingredients (261787)
+
+So far I've dealt with this by assuming if a recipe has any parts, and some ingredients have no associated part, then they are for the cake.  (see code chunk 7: fill-in-parts).
+
 2. **Weird ingredients with non-standard units**
 
-Some recipes include ingredients that are in units of counts, like "24 blueberries".  Alsmost always these are weird toppings, so they might not be a problem if I deal with problem #1.
+Some recipes include ingredients that are in units of counts, like "24 blueberries".  Alsmost always these are weird toppings, so they might not be a problem if I deal with problem #1.  However, the "other" category is going to be difficult to be standardize regardless.  It might be better to deal with this like a count variable? Like, how many "others" are there?
