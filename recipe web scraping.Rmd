@@ -15,10 +15,9 @@ library(beepr) #for notification sounds when long functions are done running
 To Do:
 
 - add a save_rds at some point to prevent having to re-run read_html_slow() so often 
-- milk chocolate gets tagged as "milk" (e.g. 231057).  Add to `case_when()` call to catch chocolate.
 - apple butter gets tagged as "fat" (e.g. 255405)
-- Convert units so they're all the same
 - summarize by ingredient type so all the fats (eg) get added up
+- if units are weird (not handled by unit conversion `case_when()`), it's probably an "other" (e.g. "24 ice cream cones" gets labeled as "milk", but it's really an other.  You can tell becaue "ice" isn't a unit.)
 
 
 ```{r helpers}
@@ -60,23 +59,47 @@ head(cupcakes_links)
 ```
 Sweet! (literally) Now we have `r length(cupcakes_links)` cupcake recipes.  Let's randomly sample a few to see how easy it is to scrape the actual ingredients list
 
+# Get links to muffin recipes
 ```{r}
-#get random sample of n cupcake recipe links
-n = 10
-cupcakes_sample <- sample(cupcakes_links, n)
+muffin_urls <- c()
+base_url2 <- "https://www.allrecipes.com/recipes/350/bread/quick-bread/muffins/"
+for(i in 1:5){ #tested and found there are 5 pages of muffin recipes
+  muffin_urls <- c(muffin_urls, paste0(base_url2, "?page=", i))
+}
+
+muffins <- map(muffin_urls, read_html_slow)
+beep(4)
+
+# extract the recipe links from all the pages
+results2 <- muffins %>% map(~html_nodes(.,".fixed-recipe-card__title-link"))
+muffin_links <- results2 %>% map(~html_attr(.,"href")) %>% flatten_chr()
+
+# remove NAs
+muffin_links <- muffin_links[!is.na(muffin_links)]
+head(muffin_links)
+```
+
+
+```{r}
+#get random sample of recipe links
+n = 26
+cupcake_sample <- sample(cupcakes_links, n/2)
+muffin_sample <- sample(muffin_links, n/2)
 ```
 
 # Scrape recipes!
 To figure out if cupcakes are different than muffins, I need to get all the ingredients, categorize them as variables, get all the units the same for each variable across recipes, and exclude frosting or toppings. (I only care if the cake part is different from a muffin, obviously cupcakes are frosted and muffins are not).  I should standardize ingredient amounts by serving size.  Serving size and calorie count are in the same spot in each recipe, so I might as well get those too.
 
-## Read in all the html of all the cupcake recipes
+## Read in all the html of all the recipes
 ```{r read-recipes}
-cupcakes_html <- cupcakes_sample %>% map(read_html_slow)
+cupcakes_html <- cupcake_sample %>% map(read_html_slow)
+muffin_html <- muffin_sample %>% map(read_html_slow)
 beep(4)
 ```
 
 ## Extract ingredients and categorize into "parts"
-Most recipes divide the ingredients list with headers that end in a colon, like "Cake:" or "Frosting:".  I can use that to create a variable, `part`, that later will help me filter out toppings and frostings.
+Most cupcake recipes divide the ingredients list with headers that end in a colon, like "Cake:" or "Frosting:".  I can use that to create a variable, `part`, that later will help me filter out toppings and frostings.  I doubt muffins will have "parts" that are useful.  They might be separated into wet and dry ingredients, but those are both part of the muffin.
+
 ```{r extract-parts}
 cupcakes_ing <- cupcakes_html %>% map(~html_nodes(., ".added")) %>% map(html_text)
 
@@ -86,76 +109,147 @@ cupcakes_ing <- cupcakes_ing %>% map(~ as_tibble(.) %>%
                        filter(!str_detect(.$value, ":")) %>% 
                        filter(value != "Add all ingredients to list"))
 ```
-*What if there are no "parts"?* I think it is safe to assume that if a recipe has a "part" for some ingredients but not for others, the ones without a "part" are the cake.  If a recipe has no "parts" listed at all, then it should be excluded as it is not safe to assume all ingredients are for the cake (see "problems" below for examples and more discussion).
+
+## Filter out frosting
+Only keep "parts" that have the word "cake" in them for cupcakes.
+*What if there are no "parts"?* I think it is safe to assume that if a cupcake recipe has a "part" for some ingredients but not for others, the ingredients without a "part" are the cake.  If a cupcake recipe has no "parts" listed at all, then it should be excluded as it is not safe to assume all ingredients are for the cake (see "problems" below for examples and more discussion).
+
 
 ```{r fill-in-parts}
 cupcakes_ing <- cupcakes_ing %>% map(~
   mutate(., part = ifelse(any(!is.na(part)) & is.na(part), "Cake:", part)))
 ```
+Muffins won't have the problem of "parts", but I should still create that column so I can `bind_rows()` later without an issue.
+
+```{r}
+muffins_ing <- muffin_html %>% map(~html_nodes(., ".added")) %>% map(html_text)
+
+muffins_ing <- muffins_ing %>% map(~ as_tibble(.) %>%
+                       mutate(part = str_extract(.$value, ".+:$")) %>% 
+                       fill(part) %>% 
+                       filter(!str_detect(.$value, ":")) %>% 
+                       filter(value != "Add all ingredients to list"))
+```
 
 
 ## Extract calories and serving size
 ```{r}
-calories <- cupcakes_html %>% 
+cupcake_calories <- cupcakes_html %>% 
   map(~html_nodes(., ".calorie-count span:nth-child(1)")) %>%
   map(html_text)
 
-servings <- cupcakes_html %>% 
+cupcake_servings <- cupcakes_html %>% 
   map(~html_nodes(., ".subtext")) %>%
   map(html_text) %>% 
   map(~str_extract(.,"(?<=yields\\s)\\d+"))
 
-cupcakes_ing <- map2(cupcakes_ing, servings, ~mutate(.x, servings = as.integer(.y)))
-cupcakes_ing <- map2(cupcakes_ing, calories, ~mutate(.x, calories = as.integer(.y)))
+cupcakes_ing <- map2(cupcakes_ing, cupcake_servings, ~mutate(.x, servings = as.integer(.y)))
+cupcakes_ing <- map2(cupcakes_ing, cupcake_calories, ~mutate(.x, calories = as.integer(.y)))
+
+muffin_calories <- muffin_html %>% 
+  map(~html_nodes(., ".calorie-count span:nth-child(1)")) %>%
+  map(html_text)
+
+muffin_servings <- muffin_html %>% 
+  map(~html_nodes(., ".subtext")) %>%
+  map(html_text) %>% 
+  map(~str_extract(.,"(?<=yields\\s)\\d+"))
+
+muffins_ing <- map2(muffins_ing, muffin_servings, ~mutate(.x, servings = as.integer(.y)))
+muffins_ing <- map2(muffins_ing, muffin_calories, ~mutate(.x, calories = as.integer(.y)))
 ```
 
 
 # Flatten
-Extract recipe ID number and `bind_rows()` to create one data frame for all recipes in `cupcake_sample`
+Extract recipe ID number and `bind_rows()` to create one data frame for all recipes in `cupcake_sample` and one for all recipes in `muffin_sample`. Then `bind_rows()` of muffins and cupcakes using "muffin" or "cupcake" as the id.
 
 ```{r}
 #add names to list of data frames
-names(cupcakes_ing) <- str_extract(cupcakes_sample, "(?<=/)\\d+")
-
-cupcakes_ing <- cupcakes_ing %>% bind_rows(.id = "Recipe ID")
+names(cupcakes_ing) <- str_extract(cupcake_sample, "(?<=/)\\d+")
+names(muffins_ing) <- str_extract(muffin_sample, "(?<=/)\\d+")
+cupcakes_df <- cupcakes_ing %>% bind_rows(.id = "Recipe ID")
+muffins_df <- muffins_ing %>% bind_rows(.id = "Recipe ID")
+```
+**Filter out frosting here!**  Now is the chance to get rid of any cupcake recipe ingredients with no "part" listed or a part that is not "cake"
+```{r}
+cupcakes_df <- cupcakes_df %>% filter(str_detect(part, "cake"))
 ```
 
+```{r bind-all-recipes}
+#add "cupcake" or "muffin" as name
+recipes <- bind_rows(cupcakes_df, muffins_df, .id = "Type") %>% mutate(Type = ifelse(Type == 1, "cupcake", "muffin"))
+recipes
+```
 
 # Extract variables
 I'll use regular expressions to try to extract the amount and units.  Then in the same `mutate()` call I'll try to categorize ingredients into discrete variables.
 
 ```{r}
-cupcakes_ing2 <- cupcakes_ing %>%  
+str_detect_any <- function(string, pattern){
+  map_lgl(string, ~stri_detect_regex(., pattern) %>% any(.))
+}
+
+fruits <- c("\\w*apple", "\\w*berr(y|ies)", "raisin", "lemon", "banna",
+            "orange", "pear", "peach", "rhubarb", "plum", "cherry", "fruit")
+
+nuts <- c("\\w*nut", "almond", "pecan", "seed")
+
+veggies <- c("carrot", "pumpkin", "potato", "zucchini", "corn")
+
+spices <- c("cinnamon", "nutmeg", "clove", "ginger", "spice", "cardomom")
+```
+
+
+```{r}
+recipes2 <- recipes %>%  
   mutate(value = tolower(value)) %>% 
   mutate(amount = str_extract(.$value, "^[\\d, /]+"),
          units = str_extract(.$value, "(\\(.+\\)|[^0-9, /]+)"), #finds either something in parens, or next word
-         ingredient = case_when(str_detect(.$value, "sugar")        ~ "sugar",
-                                str_detect(.$value, "honey")        ~ "sugar",
-                                str_detect(.$value, "agave")        ~ "sugar",
+         ingredient = case_when(#sweeteners
+                                str_detect(.$value, "sugar")        ~ "sugar",
+                                str_detect(.$value, "juice")        ~ "fruit juice",
+                                str_detect(.$value, "honey")        ~ "honey",
+                                str_detect(.$value, "agave")        ~ "agave",
+                                #starches
                                 str_detect(.$value, "flour")        ~ "flour",
-                                str_detect(.$value, "egg")          ~ "eggs",
-                                str_detect(.$value, "baking")       ~ "leavening",
-                                str_detect(.$value, "\\boil\\b")    ~ "fat",
-                                str_detect(.$value, "butter")       ~ "fat",
-                                str_detect(.$value, "shortening")   ~ "fat",
-                                str_detect(.$value, "cream cheese") ~ "other dairy",
-                                str_detect(.$value, "sour cream")   ~ "other dairy",
+                                str_detect(.$value, "starch")       ~ "starch",
+                                str_detect(.$value, "corn\\s?meal") ~ "cornmeal",
+                                str_detect(.$value, "bran")         ~ "bran",
+                                str_detect(.$value, "oat")          ~ "oats",
+                                #dairy
+                                str_detect(.$value, "buttermilk")   ~ "buttermilk", #snag before butter and milk
                                 str_detect(.$value, "milk")         ~ "milk",
-                                str_detect(.$value, "tartar")       ~ "other",
-                                str_detect(.$value, "cream")        ~ "milk",
+                                str_detect(.$value, "cream cheese") ~ "cream cheese",
+                                str_detect(.$value, "sour cream")   ~ "sour cream",
+                                str_detect(.$value, "tartar")       ~ "other", #snag cream of tartar before cream
+                                str_detect(.$value, "cream")        ~ "cream",
+                                str_detect(.$value, "yogurt")       ~ "yogurt",
+                                #fats
+                                str_detect(.$value, "\\boil\\b")    ~ "oil",
+                                str_detect(.$value, "shortening")   ~ "shortening",
+                                str_detect(.$value, "mayonnaise")   ~ "mayonnaise",
+                                str_detect(.$value, "butter")       ~ "butter",
+                                #leavening
+                                str_detect(.$value, "baking soda")  ~ "baking soda",
+                                str_detect(.$value, "baking powder")~ "baking powder",
+                                #other
                                 str_detect(.$value, "salt")         ~ "salt",
-                                str_detect(.$value, "yogurt")       ~ "other dairy",
                                 str_detect(.$value, "water")        ~ "water",
                                 str_detect(.$value, "vanilla")      ~ "vanilla",
+                                str_detect(.$value, "chocolate")    ~ "chocolate",
+                                str_detect(.$value, "cocoa")        ~ "chocolate",
+                                str_detect(.$value, "egg")          ~ "eggs",
+                                #spices
+                                str_detect_any(.$value, spices)     ~ "spice",
+                                #nuts
+                                str_detect_any(.$value, nuts)       ~ "nut",
+                                #fruit
+                                str_detect_any(.$value, fruits)     ~ "fruit",
+                                #veggies
+                                str_detect_any(.$value, veggies)    ~ "vegetable",
                                 TRUE ~ "other"))
 
-# test <- cupcakes_ing[[1]]$value
-# str_view(test, "^[\\d, /]+")
-# str_view(test, "([^0-9, /]+|\\(.+\\))")
-# str_view(test, "(\\(.+\\)|[^0-9, /]+)")
-# str_view(test, "[^0-9, /, \\(]+")
-
-cupcakes_ing2
+recipes2 %>% select(value, ingredient, units, amount, everything())
 ```
 
 After testing this with several different random samples of cupcake recipes, I'm pretty happy with it. 
@@ -165,11 +259,11 @@ The `ammount` column is character class.  I want numeric.
 
 I think one approach would be to turn a space into a "+" then use mutate to do `eval(parse(ammount))`
 ```{r}
-cupcakes_ing3 <- cupcakes_ing2 %>% 
+recipes3 <- recipes2 %>% 
   mutate(amount = str_trim(amount)) %>% 
   mutate(dec_amount = str_replace(amount, "\\s", "+")) %>% 
   mutate(dec_amount = sapply(dec_amount, function(x) eval(parse(text=x))))
-cupcakes_ing3 %>% select(amount, dec_amount, everything())
+recipes3 %>% select(amount, dec_amount, everything())
 ```
 
 # Unit conversions
@@ -186,7 +280,7 @@ Occasionally an ingredient is like "1 (8 ounce) packet of cream cheese" and my s
 #str_view(test2, "\\.?\\d+\\.?\\d*")
 
 # as.numeric(str_extract(test, "\\d+"))*1
-cupcakes_ing3 <- cupcakes_ing3 %>%
+recipes3 <- recipes3 %>%
   mutate(dec_amount = ifelse(str_detect(units, "\\(.+ (ounce|oz.)"),
                           as.numeric(str_extract(units, "\\.?\\d+\\.?\\d*")) * dec_amount,
                           dec_amount),
@@ -195,10 +289,10 @@ cupcakes_ing3 <- cupcakes_ing3 %>%
 
 ```{r}
 #overwrite original amount column to avoid confusion
-cupcakes_ing4 <- cupcakes_ing3 %>%
+recipes4 <- recipes3 %>%
   select(-amount) %>%
   rename(amount = dec_amount) %>% 
-  select(`Recipe ID`, ingredient, amount, units, part, servings, calories, value)
+  select(Type, ingredient, amount, units, servings, calories, value,`Recipe ID`, part)
 ```
 
 ## Unit conversions
@@ -221,7 +315,7 @@ cupcakes_ing4 %>%
                                 ingredient %in% tbsp & str_detect(units, "tablespoon") ~ amount,
                                 ingredient %in% tbsp & str_detect(units, "teaspoon")   ~ amount * 1/3,
                                 ingredient %in% tbsp & str_detect(units, "cup")        ~ amount * 16,
-                                TRUE                                                   ~ as.numeric(NA))) %>% 
+                                TRUE                                                   ~ as.numeric(NA)))
   select(`Recipe ID`, ingredient, amount, units, amount_std, units_std, everything())
 
 ```
