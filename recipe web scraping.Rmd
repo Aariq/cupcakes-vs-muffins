@@ -27,12 +27,14 @@ read_html_slow <- function(x, ...){
   Sys.sleep(5)
   return(output)
 }
+
+read_html_safely <- possibly(read_html_slow, NA)
 #testing:
 #read_html_slow("http://allrecipes.com/recipe/233538/really-real-strawberry-cupcakes/")
 ```
 
 
-# Get links to all cupcake recipes
+# Get links to all cupcake and muffin recipes
 allrecipes.com has a tag structure that is easy to navigate.  All the recipes for a category show up, but on several pages.  I didn't bother figuring out how many pages there were programatically, I just looked on the website.
 ```{r}
 #initialize vector
@@ -57,7 +59,7 @@ cupcakes_links <- results %>% map(~html_attr(.,"href")) %>% flatten_chr()
 cupcakes_links <- cupcakes_links[!is.na(cupcakes_links)]
 head(cupcakes_links)
 ```
-Sweet! (literally) Now we have `r length(cupcakes_links)` cupcake recipes.  Let's randomly sample a few to see how easy it is to scrape the actual ingredients list
+Sweet! (literally) Now we have `r length(cupcakes_links)` cupcake recipes.
 
 # Get links to muffin recipes
 ```{r}
@@ -87,15 +89,53 @@ cupcake_sample <- sample(cupcakes_links, n/2)
 muffin_sample <- sample(muffin_links, n/2)
 ```
 
+```{r eval=FALSE, include=FALSE}
+#get ALL recipes!!!
+cupcake_sample <- cupcakes_links
+muffin_sample <- muffin_links
+```
+
+
 # Scrape recipes!
 To figure out if cupcakes are different than muffins, I need to get all the ingredients, categorize them as variables, get all the units the same for each variable across recipes, and exclude frosting or toppings. (I only care if the cake part is different from a muffin, obviously cupcakes are frosted and muffins are not).  I should standardize ingredient amounts by serving size.  Serving size and calorie count are in the same spot in each recipe, so I might as well get those too.
 
 ## Read in all the html of all the recipes
 ```{r read-recipes}
-cupcakes_html <- cupcake_sample %>% map(read_html_slow)
-muffin_html <- muffin_sample %>% map(read_html_slow)
+pb <- progress_estimated(length(cupcake_sample)) #makes a progress bar
+cupcakes_html <- cupcake_sample %>%
+  map(~{
+    pb$tick()$print() #updates progress bar
+    read_html_safely(.x)
+    })
+
+# anyNA(cupcakes_html)
+# length(cupcakes_html[is.na(cupcakes_html)])
+
+pb <- progress_estimated(length(muffin_sample))
+muffin_html <- muffin_sample %>%
+  map(~{
+    pb$tick()$print() #updates progress bar
+    read_html_safely(.x)
+    })
 beep(4)
+# anyNA(muffin_html)
+# length(muffin_html[is.na(muffin_html)])
 ```
+
+## Filter out any that didn't work
+If a recipe didn't get read in, I want to remove that link from `cupcake_sample` and `muffin_sample` because I'll use the same links later on to extract calories and servings, then remove it from `cupcakes_html` and `muffin_html` so that `html_nodes()` works on it.
+
+```{r}
+#first the links
+# cupcake_sample[is.na(cupcakes_html)]
+cupcake_sample <- cupcake_sample[!is.na(cupcakes_html)]
+muffin_sample <- muffin_sample[!is.na(muffin_html)]
+
+#then the html
+cupcakes_html <- cupcakes_html[!is.na(cupcakes_html)]
+muffin_html <- muffin_html[!is.na(muffin_html)]
+```
+
 
 ## Extract ingredients and categorize into "parts"
 Most cupcake recipes divide the ingredients list with headers that end in a colon, like "Cake:" or "Frosting:".  I can use that to create a variable, `part`, that later will help me filter out toppings and frostings.  I doubt muffins will have "parts" that are useful.  They might be separated into wet and dry ingredients, but those are both part of the muffin.
@@ -108,9 +148,10 @@ cupcakes_ing <- cupcakes_ing %>% map(~ as_tibble(.) %>%
                        fill(part) %>% 
                        filter(!str_detect(.$value, ":")) %>% 
                        filter(value != "Add all ingredients to list"))
+# head(cupcakes_ing)
 ```
 
-## Filter out frosting
+## Identify cake vs. frosting
 Only keep "parts" that have the word "cake" in them for cupcakes.
 *What if there are no "parts"?* I think it is safe to assume that if a cupcake recipe has a "part" for some ingredients but not for others, the ingredients without a "part" are the cake.  If a cupcake recipe has no "parts" listed at all, then it should be excluded as it is not safe to assume all ingredients are for the cake (see "problems" below for examples and more discussion).
 
@@ -133,27 +174,34 @@ muffins_ing <- muffins_ing %>% map(~ as_tibble(.) %>%
 
 
 ## Extract calories and serving size
+Occasionally a recipe seems to not have calories.  I need to catch these and conver to NA
 ```{r}
 cupcake_calories <- cupcakes_html %>% 
   map(~html_nodes(., ".calorie-count span:nth-child(1)")) %>%
-  map(html_text)
+  map(html_text) %>%
+  map(., ~ifelse(identical(., character(0)), NA, .)) #replaces character(0) with NA
+
+#cupcake_calories[[166]]
 
 cupcake_servings <- cupcakes_html %>% 
   map(~html_nodes(., ".subtext")) %>%
   map(html_text) %>% 
-  map(~str_extract(.,"(?<=yields\\s)\\d+"))
+  map(~str_extract(.,"(?<=yields\\s)\\d+")) %>% 
+  map(., ~ifelse(identical(., character(0)), NA, .)) #replaces character(0) with NA
 
 cupcakes_ing <- map2(cupcakes_ing, cupcake_servings, ~mutate(.x, servings = as.integer(.y)))
 cupcakes_ing <- map2(cupcakes_ing, cupcake_calories, ~mutate(.x, calories = as.integer(.y)))
 
 muffin_calories <- muffin_html %>% 
   map(~html_nodes(., ".calorie-count span:nth-child(1)")) %>%
-  map(html_text)
+  map(html_text) %>% 
+  map(., ~ifelse(identical(., character(0)), NA, .)) #replaces character(0) with NA
 
 muffin_servings <- muffin_html %>% 
   map(~html_nodes(., ".subtext")) %>%
   map(html_text) %>% 
-  map(~str_extract(.,"(?<=yields\\s)\\d+"))
+  map(~str_extract(.,"(?<=yields\\s)\\d+")) %>% 
+  map(., ~ifelse(identical(., character(0)), NA, .)) #replaces character(0) with NA
 
 muffins_ing <- map2(muffins_ing, muffin_servings, ~mutate(.x, servings = as.integer(.y)))
 muffins_ing <- map2(muffins_ing, muffin_calories, ~mutate(.x, calories = as.integer(.y)))
@@ -179,6 +227,8 @@ cupcakes_df <- cupcakes_df %>% filter(str_detect(part, "cake"))
 #add "cupcake" or "muffin" as name
 recipes <- bind_rows(cupcakes_df, muffins_df, .id = "Type") %>% mutate(Type = ifelse(Type == 1, "cupcake", "muffin"))
 recipes
+
+#write_rds(recipes, "recipes_raw.rds")
 ```
 
 # Extract variables
@@ -189,7 +239,7 @@ str_detect_any <- function(string, pattern){
   map_lgl(string, ~stri_detect_regex(., pattern) %>% any(.))
 }
 
-fruits <- c("\\w*apple", "\\w*berr(y|ies)", "raisin", "lemon", "banna",
+fruits <- c("\\w*apple", "\\w*berr(y|ies)", "raisin", "lemon", "banana",
             "orange", "pear", "peach", "rhubarb", "plum", "cherry", "fruit")
 
 nuts <- c("\\w*nut", "almond", "pecan", "seed")
@@ -210,35 +260,39 @@ recipes2 <- recipes %>%
                                 str_detect(.$value, "juice")        ~ "fruit juice",
                                 str_detect(.$value, "honey")        ~ "honey",
                                 str_detect(.$value, "agave")        ~ "agave",
+                                str_detect(.$value, "stevia")       ~ "low-cal sweetener",
+                                str_detect(.$value, "splenda")      ~ "low-cal sweetener",
+                                str_detect(.$value, "truvia")       ~ "low-cal sweetener",
                                 #starches
                                 str_detect(.$value, "flour")        ~ "flour",
                                 str_detect(.$value, "starch")       ~ "starch",
                                 str_detect(.$value, "corn\\s?meal") ~ "cornmeal",
                                 str_detect(.$value, "bran")         ~ "bran",
-                                str_detect(.$value, "oat")          ~ "oats",
+                                str_detect(.$value, "\\boat")       ~ "oats", # oat but not "coated"
                                 #dairy
                                 str_detect(.$value, "buttermilk")   ~ "buttermilk", #snag before butter and milk
                                 str_detect(.$value, "milk")         ~ "milk",
                                 str_detect(.$value, "cream cheese") ~ "cream cheese",
                                 str_detect(.$value, "sour cream")   ~ "sour cream",
                                 str_detect(.$value, "tartar")       ~ "other", #snag cream of tartar before cream
-                                str_detect(.$value, "cream")        ~ "cream",
+                                str_detect(.$value, "\\bcream\\b")  ~ "cream", #not "creamy"
                                 str_detect(.$value, "yogurt")       ~ "yogurt",
                                 #fats
-                                str_detect(.$value, "\\boil\\b")    ~ "oil",
+                                str_detect(.$value, "\\boil\\b")    ~ "oil", #not "boiling"
                                 str_detect(.$value, "shortening")   ~ "shortening",
                                 str_detect(.$value, "mayonnaise")   ~ "mayonnaise",
-                                str_detect(.$value, "butter")       ~ "butter",
+                                 #butter has to go at the end, after apple butter and peanut butter are captured
                                 #leavening
                                 str_detect(.$value, "baking soda")  ~ "baking soda",
                                 str_detect(.$value, "baking powder")~ "baking powder",
                                 #other
-                                str_detect(.$value, "salt")         ~ "salt",
+                                str_detect(.$value, "\\bsalt\\b")   ~ "salt", #not "salted" or "unsalted"
                                 str_detect(.$value, "water")        ~ "water",
                                 str_detect(.$value, "vanilla")      ~ "vanilla",
                                 str_detect(.$value, "chocolate")    ~ "chocolate",
                                 str_detect(.$value, "cocoa")        ~ "chocolate",
                                 str_detect(.$value, "egg")          ~ "eggs",
+                                str_detect(.$value, "vinegar")      ~ "vinegar",
                                 #spices
                                 str_detect_any(.$value, spices)     ~ "spice",
                                 #nuts
@@ -247,12 +301,25 @@ recipes2 <- recipes %>%
                                 str_detect_any(.$value, fruits)     ~ "fruit",
                                 #veggies
                                 str_detect_any(.$value, veggies)    ~ "vegetable",
+                                #butter
+                                str_detect(.$value, "butter")       ~ "butter",
                                 TRUE ~ "other"))
 
 recipes2 %>% select(value, ingredient, units, amount, everything())
 ```
 
 After testing this with several different random samples of cupcake recipes, I'm pretty happy with it. 
+
+Things I've noticed that are wrong/missed:
+
+- "creamy natural peanut butter" is categorized as cream
+- coffee
+- whiskey(?!?)
+- "caramel ice cream topping" is categorized as cream
+- tea
+- bacon grease
+- xanthan gum
+- bisquick
 
 # Convert fractions to decimals
 The `ammount` column is character class.  I want numeric.
@@ -296,34 +363,68 @@ recipes4 <- recipes3 %>%
 ```
 
 ## Unit conversions
+Just for the sake of uniformity, let's put everything in "cups" except eggs.
 ```{r}
-#things that should be in cups
-cups <- c("flour", "sugar", "fat", "milk", "other dairy", "water", "other")
-#things that should be in tablespoons
-tbsp <- c("salt", "leavening", "vanilla")
+#units we should be able to convert to "cups"
+convertable <- c("tablespoon", "teaspoon", "cup", "ounce", "pint", "pinch")
 
-cupcakes_ing4 %>% 
-  mutate(units_std = case_when(ingredient %in% cups ~ "cups",
-                               ingredient == "eggs" ~ "eggs",
-                               ingredient %in% tbsp ~ "tablespoons")) %>% 
-  mutate(amount_std = case_when(ingredient %in% cups & str_detect(units, "cup")        ~ amount,
-                                ingredient %in% cups & str_detect(units, "teaspoon")   ~ amount * 0.0208333,
-                                ingredient %in% cups & str_detect(units, "tablespoon") ~ amount * 0.0625,
-                                ingredient %in% cups & str_detect(units, "ounce")      ~ amount * 0.125,
-                                ingredient %in% cups & str_detect(units, "pint")       ~ amount * 2,
-                                ingredient == "eggs"                                   ~ amount,
-                                ingredient %in% tbsp & str_detect(units, "tablespoon") ~ amount,
-                                ingredient %in% tbsp & str_detect(units, "teaspoon")   ~ amount * 1/3,
-                                ingredient %in% tbsp & str_detect(units, "cup")        ~ amount * 16,
-                                TRUE                                                   ~ as.numeric(NA)))
+recipes5 <- recipes4 %>% 
+  mutate(amount_std = case_when(ingredient == "eggs"            ~ amount,
+                                str_detect(units, "cup")        ~ amount,
+                                str_detect(units, "pinch")      ~ amount / 768,
+                                str_detect(units, "teaspoon")   ~ amount * 0.0208333,
+                                str_detect(units, "tablespoon") ~ amount * 0.0625,
+                                str_detect(units, "ounce")      ~ amount * 0.125,
+                                str_detect(units, "pint")       ~ amount * 2,
+                                TRUE                            ~ as.numeric(NA))) %>%
+  #change units to cups
+  mutate(units_std = case_when(str_detect_any(units, convertable) ~ "cups",
+                               ingredient == "eggs"               ~ "eggs",
+                               TRUE                               ~ as.character(NA))) %>% 
+
   select(`Recipe ID`, ingredient, amount, units, amount_std, units_std, everything())
 
 ```
 
+# Summarise
+Some recipes may have multiple ingredients within an ingredient category.  For example, a recipe might have two kinds of fruit, or it might have 2 eggs plus 2 eggwhites, or two different kinds of oil.  I need to add up those amounts so each variable is only listed once per recipe.
+
+At the same time, I might be able to deal with ingredients with no units in some way.  These are mostly going to be ingredients like "2 apples."  It's not practical to estimate the volume of every one of these ingredients, but it seems "wrong" to ignore them.
+
+I see three options
+
+1. Ignore these ingredients.  Just remove ingredients with an `NA` for `units_std`
+2. Remove problem recipes.  Remove recipes with any ingredient that has `NA` for `units_std`
+3. **Count these ingredients.**  Instead of adding up actual amounts when summarising, convert the `amount_std` to 1 for all ingredients with `unit_std == NA`.  Then the sum will represent a count rather than a volume.  These ingredients should also be flagged as "unitless" so they can be removed from particular analyses if count data are inappropriate.
+
+
+```{r}
+#set up to "count" unitless ingredients
+recipes5b <- recipes5 %>% 
+  mutate(ingredient = ifelse(is.na(units_std), "unitless", ingredient),
+         amount_std = ifelse(is.na(units_std), 1, amount_std))
+
+recipes_tidy <- recipes5b %>% 
+  group_by(Type, `Recipe ID`, ingredient) %>% 
+  summarise(amount_sum = sum(amount_std),
+            units_std = first(units_std),
+            servings = first(servings),
+            calories = first(calories),
+            value = paste(value, collapse = ";")
+  )
+
+recipes_tidy
+# recipes_tidy %>% filter(ingredient == "unitless")
+```
+# Write to RDS
+You've done a lot of work.  Save it here
+```{r}
+write_rds(recipes_tidy, "recipes_tidy.rds")
+```
 
 
 
-# Dealing with inconsistencies between recipes
+# Notes
 
 Problems:
 
@@ -343,4 +444,4 @@ So far I've dealt with this by assuming if a recipe has any parts, and some ingr
 
 2. **Weird ingredients with non-standard units**
 
-Some recipes include ingredients that are in units of counts, like "24 blueberries".  Alsmost always these are weird toppings, so they might not be a problem if I deal with problem #1.  However, the "other" category is going to be difficult to be standardize regardless.  It might be better to deal with this like a count variable? Like, how many "others" are there?
+Some recipes include ingredients that are in units of counts, like "24 blueberries".  Alsmost always these are weird toppings, so they might not be a problem if I deal with problem #1.  However, the "other" category is going to be difficult to be standardize regardless.  It might be better to deal with this like a count variable? Like, how many "others" are there?  This should be relatively easy to take care of in the summarise step I think?
