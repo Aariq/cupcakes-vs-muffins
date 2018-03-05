@@ -10,7 +10,7 @@ library(purrr)
 library(stringr)
 library(tidyverse)
 library(beepr) #for notification sounds when long functions are done running
-library(glue)
+library(stringi)
 ```
 
 To Do:
@@ -379,7 +379,6 @@ recipes5 <- recipes4 %>%
                                TRUE                               ~ as.character(NA))) %>% 
 
   select(`Recipe ID`, ingredient, amount, units, amount_std, units_std, everything())
-
 ```
 
 # Summarise
