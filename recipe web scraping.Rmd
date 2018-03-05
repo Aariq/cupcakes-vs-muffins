@@ -14,11 +14,7 @@ library(beepr) #for notification sounds when long functions are done running
 
 To Do:
 
-- add a save_rds at some point to prevent having to re-run read_html_slow() so often 
-- apple butter gets tagged as "fat" (e.g. 255405)
-- summarize by ingredient type so all the fats (eg) get added up
-- if units are weird (not handled by unit conversion `case_when()`), it's probably an "other" (e.g. "24 ice cream cones" gets labeled as "milk", but it's really an other.  You can tell becaue "ice" isn't a unit.)
-
+- Figure out why so many recipes are missing by the end. Cupcakes go from ~200 to 45 after removing ones with ambiguous "part" assignments for ingredients.  The "Flatten" step loses 3 muffins for some unkown reason.
 
 ```{r helpers}
 #create function to read_html slowly to avoid getting banned
@@ -81,23 +77,23 @@ muffin_links <- muffin_links[!is.na(muffin_links)]
 head(muffin_links)
 ```
 
+# Scrape recipes!
+To figure out if cupcakes are different than muffins, I need to get all the ingredients, categorize them as variables, get all the units the same for each variable across recipes, and exclude frosting or toppings. (I only care if the cake part is different from a muffin, obviously cupcakes are frosted and muffins are not).  I should standardize ingredient amounts by serving size.  Serving size and calorie count are in the same spot in each recipe, so I might as well get those too.
 
-```{r}
+**Note:** For debugging, use the first code chunk below (default) that only uses a random sample of recipes.  To get all cupcake and muffin recipes, use the second code chunk
+```{r sample}
 #get random sample of recipe links
 n = 26
 cupcake_sample <- sample(cupcakes_links, n/2)
 muffin_sample <- sample(muffin_links, n/2)
 ```
 
-```{r eval=FALSE, include=FALSE}
+```{r all-recipes, eval=FALSE, include=FALSE}
 #get ALL recipes!!!
 cupcake_sample <- cupcakes_links
 muffin_sample <- muffin_links
 ```
 
-
-# Scrape recipes!
-To figure out if cupcakes are different than muffins, I need to get all the ingredients, categorize them as variables, get all the units the same for each variable across recipes, and exclude frosting or toppings. (I only care if the cake part is different from a muffin, obviously cupcakes are frosted and muffins are not).  I should standardize ingredient amounts by serving size.  Serving size and calorie count are in the same spot in each recipe, so I might as well get those too.
 
 ## Read in all the html of all the recipes
 ```{r read-recipes}
@@ -196,15 +192,19 @@ muffin_calories <- muffin_html %>%
   map(~html_nodes(., ".calorie-count span:nth-child(1)")) %>%
   map(html_text) %>% 
   map(., ~ifelse(identical(., character(0)), NA, .)) #replaces character(0) with NA
+# length(muffin_calories)
 
 muffin_servings <- muffin_html %>% 
   map(~html_nodes(., ".subtext")) %>%
   map(html_text) %>% 
   map(~str_extract(.,"(?<=yields\\s)\\d+")) %>% 
   map(., ~ifelse(identical(., character(0)), NA, .)) #replaces character(0) with NA
+# length(muffin_servings)
 
 muffins_ing <- map2(muffins_ing, muffin_servings, ~mutate(.x, servings = as.integer(.y)))
 muffins_ing <- map2(muffins_ing, muffin_calories, ~mutate(.x, calories = as.integer(.y)))
+
+# length(muffins_ing)
 ```
 
 
@@ -217,10 +217,12 @@ names(cupcakes_ing) <- str_extract(cupcake_sample, "(?<=/)\\d+")
 names(muffins_ing) <- str_extract(muffin_sample, "(?<=/)\\d+")
 cupcakes_df <- cupcakes_ing %>% bind_rows(.id = "Recipe ID")
 muffins_df <- muffins_ing %>% bind_rows(.id = "Recipe ID")
+# muffins_df %>% group_by(`Recipe ID`) %>% summarise(n()) %>% nrow()
 ```
 **Filter out frosting here!**  Now is the chance to get rid of any cupcake recipe ingredients with no "part" listed or a part that is not "cake"
 ```{r}
 cupcakes_df <- cupcakes_df %>% filter(str_detect(part, "cake"))
+cupcakes_df %>% group_by(`Recipe ID`) %>% summarise(n()) %>% nrow()
 ```
 
 ```{r bind-all-recipes}
@@ -422,6 +424,23 @@ You've done a lot of work.  Save it here
 write_rds(recipes_tidy, "recipes_tidy.rds")
 ```
 
+# Create wide data for multivarite analysis
+```{r}
+recipes_wide <- recipes_tidy %>% 
+  select(Type, `Recipe ID`, servings, calories, ingredient, amount_sum) %>% 
+  spread(ingredient, value = amount_sum)
+```
+## Check that we got all the recipes
+
+Where did we lose so many recipes? I know we got rid of a lot of cupcakes where it isn't clear whether the ingredients are for the cake or the frosting, but it seems like very few recipes.  3 muffin recipes are missing as well.
+
+```{r}
+nrow(recipes_wide)
+length(cupcakes_links) + length(muffin_links)
+
+nrow(recipes_wide %>% filter(Type == "muffin"))
+length(muffin_links)
+```
 
 
 # Notes
