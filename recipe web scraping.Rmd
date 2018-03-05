@@ -10,6 +10,7 @@ library(purrr)
 library(stringr)
 library(tidyverse)
 library(beepr) #for notification sounds when long functions are done running
+library(glue)
 ```
 
 To Do:
@@ -33,15 +34,10 @@ read_html_safely <- possibly(read_html_slow, NA)
 # Get links to all cupcake and muffin recipes
 allrecipes.com has a tag structure that is easy to navigate.  All the recipes for a category show up, but on several pages.  I didn't bother figuring out how many pages there were programatically, I just looked on the website.
 ```{r}
-#initialize vector
-cupcakes_urls <- c()
-
 #This link takes you to page 1 by default
 base_url <- "http://allrecipes.com/recipes/377/desserts/cakes/cupcakes/"
-
-for(i in 1:12){ #tested and found there are 12 pages of cupcake recipes
-  cupcakes_urls <- c(cupcakes_urls, paste0(base_url, "?page=", i))
-}
+pages <- 1:12
+cupcakes_urls <- paste0(base_url, "?page=", pages)
 
 # map the read_html function to read all the pages at once
 cupcakes <- map(cupcakes_urls, read_html_slow)
@@ -59,11 +55,10 @@ Sweet! (literally) Now we have `r length(cupcakes_links)` cupcake recipes.
 
 # Get links to muffin recipes
 ```{r}
-muffin_urls <- c()
 base_url2 <- "https://www.allrecipes.com/recipes/350/bread/quick-bread/muffins/"
-for(i in 1:5){ #tested and found there are 5 pages of muffin recipes
-  muffin_urls <- c(muffin_urls, paste0(base_url2, "?page=", i))
-}
+pages2 <- 1:5
+muffin_urls <- paste0(base_url2, "?page=", pages2)
+
 
 muffins <- map(muffin_urls, read_html_slow)
 beep(4)
@@ -221,15 +216,14 @@ muffins_df <- muffins_ing %>% bind_rows(.id = "Recipe ID")
 ```
 **Filter out frosting here!**  Now is the chance to get rid of any cupcake recipe ingredients with no "part" listed or a part that is not "cake"
 ```{r}
-cupcakes_df <- cupcakes_df %>% filter(str_detect(part, "cake"))
-cupcakes_df %>% group_by(`Recipe ID`) %>% summarise(n()) %>% nrow()
+cupcakes_df2 <- cupcakes_df %>% filter(str_detect(tolower(part), "cake"))
+cupcakes_df2 %>% group_by(`Recipe ID`) %>% summarise(n()) %>% nrow()
 ```
 
 ```{r bind-all-recipes}
 #add "cupcake" or "muffin" as name
-recipes <- bind_rows(cupcakes_df, muffins_df, .id = "Type") %>% mutate(Type = ifelse(Type == 1, "cupcake", "muffin"))
+recipes <- bind_rows(cupcakes_df2, muffins_df, .id = "Type") %>% mutate(Type = ifelse(Type == 1, "cupcake", "muffin"))
 recipes
-
 #write_rds(recipes, "recipes_raw.rds")
 ```
 
