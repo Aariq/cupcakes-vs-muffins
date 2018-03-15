@@ -1,0 +1,267 @@
+---
+title: "Muffin vs Cupcake: Data Wrangling"
+output: html_notebook
+author: "Eric R. Scott"
+---
+```{r}
+library(tidyverse)
+library(rvest)
+```
+Take the html from the cupcake and muffin recipes and convert it into a data frame/tibble.
+
+To-Do:
+
+- Output two dataframes: one with frosting, one without.
+
+# Read in lists of data frames
+```{r}
+muffins_ing <- read_rds("muffin_raw.rds")
+cupcakes_ing <- read_rds("cupcake_raw.rds")
+```
+
+# Flatten
+Use `bind_rows()` to create one data frame for all recipes in `cupcake_sample` and one for all recipes in `muffin_sample` using recipe ID from the data frame names as the id. Then `bind_rows()` of muffins and cupcakes using "muffin" or "cupcake" as the id.
+
+```{r}
+cupcakes_df <- cupcakes_ing %>% bind_rows(.id = "Recipe ID")
+muffins_df <- muffins_ing %>% bind_rows(.id = "Recipe ID")
+# muffins_df %>% group_by(`Recipe ID`) %>% summarise(n()) %>% nrow()
+```
+
+
+```{r bind-all-recipes}
+#add "cupcake" or "muffin" as name
+recipes <- bind_rows(cupcakes_df, muffins_df, .id = "Type") %>% mutate(Type = ifelse(Type == 1, "cupcake", "muffin"))
+recipes
+#write_rds(recipes, "recipes_raw.rds")
+```
+
+# Extract variables
+I'll use regular expressions to try to extract the amount and units.  Then in the same `mutate()` call I'll try to categorize ingredients into discrete variables.
+
+```{r}
+# recipes <- read_rds("recipes_raw.rds")
+str_detect_any <- function(string, pattern){
+  map_lgl(string, ~stri_detect_regex(., pattern) %>% any(.))
+}
+
+fruits <- c("\\w*apple", "\\w*berr(y|ies)", "raisin", "lemon", "banana",
+            "orange", "pear", "peach", "rhubarb", "plum", "cherry", "fruit")
+
+nuts <- c("\\w*nut", "almond", "pecan", "seed")
+
+veggies <- c("carrot", "pumpkin", "potato", "zucchini", "\\bcorn\\b")
+
+spices <- c("cinnamon", "nutmeg", "clove", "ginger", "spice", "cardomom")
+```
+
+
+```{r}
+recipes2 <- recipes %>%  
+  mutate(value = tolower(value)) %>% 
+  mutate(amount = str_extract(.$value, "^[\\d, /]+"),
+         units = str_extract(.$value, "(\\(.+\\)|[^0-9, /]+)"), #finds either something in parens, or next word
+         ingredient = case_when(#sweeteners
+                                str_detect(.$value, "sugar")        ~ "sugar",
+                                str_detect(.$value, "juice")        ~ "fruit juice",
+                                str_detect(.$value, "honey")        ~ "honey",
+                                str_detect(.$value, "agave")        ~ "agave",
+                                str_detect(.$value, "stevia")       ~ "low-cal sweetener",
+                                str_detect(.$value, "splenda")      ~ "low-cal sweetener",
+                                str_detect(.$value, "truvia")       ~ "low-cal sweetener",
+                                #starches
+                                str_detect(.$value, "flour")        ~ "flour",
+                                str_detect(.$value, "starch")       ~ "starch",
+                                str_detect(.$value, "corn\\s?meal") ~ "cornmeal",
+                                str_detect(.$value, "bran")         ~ "bran",
+                                str_detect(.$value, "\\boat")       ~ "oats", # oat but not "coated"
+                                #dairy
+                                str_detect(.$value, "buttermilk")   ~ "buttermilk", #snag before butter and milk
+                                str_detect(.$value, "milk")         ~ "milk",
+                                str_detect(.$value, "cream cheese") ~ "cream cheese",
+                                str_detect(.$value, "sour cream")   ~ "sour cream",
+                                str_detect(.$value, "tartar")       ~ "other", #snag cream of tartar before cream
+                                str_detect(.$value, "\\bcream\\b")  ~ "cream", #not "creamy"
+                                str_detect(.$value, "yogurt")       ~ "yogurt",
+                                #fats
+                                str_detect(.$value, "\\boil\\b")    ~ "oil", #not "boiling"
+                                str_detect(.$value, "shortening")   ~ "shortening",
+                                str_detect(.$value, "mayonnaise")   ~ "mayonnaise",
+                                 #butter has to go at the end, after apple butter and peanut butter are captured
+                                #leavening
+                                str_detect(.$value, "baking soda")  ~ "baking soda",
+                                str_detect(.$value, "baking powder")~ "baking powder",
+                                #other
+                                str_detect(.$value, "\\bsalt\\b")   ~ "salt", #not "salted" or "unsalted"
+                                str_detect(.$value, "water")        ~ "water",
+                                str_detect(.$value, "vanilla")      ~ "vanilla",
+                                str_detect(.$value, "chocolate")    ~ "chocolate",
+                                str_detect(.$value, "cocoa")        ~ "chocolate",
+                                str_detect(.$value, "egg")          ~ "eggs",
+                                str_detect(.$value, "vinegar")      ~ "vinegar",
+                                #spices
+                                str_detect_any(.$value, spices)     ~ "spice",
+                                #nuts
+                                str_detect_any(.$value, nuts)       ~ "nut",
+                                #fruit
+                                str_detect_any(.$value, fruits)     ~ "fruit",
+                                #veggies
+                                str_detect_any(.$value, veggies)    ~ "vegetable",
+                                #butter
+                                str_detect(.$value, "butter")       ~ "butter",
+                                TRUE ~ "other"))
+
+recipes2 %>% select(value, ingredient, units, amount, everything())
+```
+
+After testing this with several different random samples of cupcake recipes, I'm pretty happy with it. 
+
+Things I've noticed that are wrong/missed:
+
+- "creamy natural peanut butter" is categorized as cream
+- coffee
+- whiskey(?!?)
+- "caramel ice cream topping" is categorized as cream
+- tea
+- bacon grease
+- xanthan gum
+- bisquick
+
+# Deal with cheaters
+Get rid of recipes that call for self-rising flour, bisquick, cupcakes, or cake mix.  I *could* figure out what self-rising flour is, but that seems like too much work.
+
+```{r}
+cheaters <- recipes2 %>%
+  filter(str_detect_any(value, c("self-rising", "bisquick", "cupcake", "mix\\b"))) %>%
+  .$`Recipe ID`
+
+recipes2 <- recipes2 %>% filter(`Recipe ID` %!in% cheaters)
+#remove recipeID's that match this
+```
+
+# Convert fractions to decimals
+The `ammount` column is character class.  I want numeric.
+
+I think one approach would be to turn a space into a "+" then use mutate to do `eval(parse(ammount))`
+```{r}
+recipes3 <- recipes2 %>% 
+  mutate(amount = str_trim(amount)) %>% 
+  mutate(dec_amount = str_replace(amount, "\\s", "+")) %>% 
+  mutate(dec_amount = sapply(dec_amount, function(x) eval(parse(text=x))))
+recipes3 %>% select(amount, dec_amount, everything())
+```
+
+# Unit conversions
+
+## Deal with package size
+Occasionally an ingredient is like "1 (8 ounce) packet of cream cheese" and my script so far detects "1" as the amount and "(8 ounce)" as the units.  I should deal with this.
+
+**Deal with "oz." and possible decimal points (e.g. "12.5 ounce")** (e.g. 234135)
+```{r}
+#test <- cupcakes_ing3$units
+#str_view_all(test, "\\(.+ (ounce|oz.)")
+
+#test2 <- c("(8 ounce)", "(.68 oz. tube)", "(12.3 ounce)")
+#str_view(test2, "\\.?\\d+\\.?\\d*")
+
+# as.numeric(str_extract(test, "\\d+"))*1
+recipes3 <- recipes3 %>%
+  mutate(dec_amount = ifelse(str_detect(units, "\\(.+ (ounce|oz.)"),
+                          as.numeric(str_extract(units, "\\.?\\d+\\.?\\d*")) * dec_amount,
+                          dec_amount),
+         units = ifelse(str_detect(units, "\\(.+ (ounce|oz.)"), "ounces", units))
+```
+
+```{r}
+#overwrite original amount column to avoid confusion
+recipes4 <- recipes3 %>%
+  select(-amount) %>%
+  rename(amount = dec_amount) %>% 
+  select(Type, ingredient, amount, units, servings, calories, value,`Recipe ID`, part)
+```
+
+## Unit conversions
+Just for the sake of uniformity, let's put everything in "cups" except eggs.
+```{r}
+#units we should be able to convert to "cups"
+convertable <- c("tablespoon", "teaspoon", "cup", "ounce", "pint", "pinch")
+
+recipes5 <- recipes4 %>% 
+  mutate(amount_std = case_when(ingredient == "eggs"            ~ amount,
+                                str_detect(units, "cup")        ~ amount,
+                                str_detect(units, "pinch")      ~ amount / 768,
+                                str_detect(units, "teaspoon")   ~ amount * 0.0208333,
+                                str_detect(units, "tablespoon") ~ amount * 0.0625,
+                                str_detect(units, "ounce")      ~ amount * 0.125,
+                                str_detect(units, "pint")       ~ amount * 2,
+                                TRUE                            ~ as.numeric(NA))) %>%
+  #change units to cups
+  mutate(units_std = case_when(str_detect_any(units, convertable) ~ "cups",
+                               ingredient == "eggs"               ~ "eggs",
+                               TRUE                               ~ as.character(NA))) %>% 
+
+  select(`Recipe ID`, ingredient, amount, units, amount_std, units_std, everything())
+```
+
+# Summarise
+Some recipes may have multiple ingredients within an ingredient category.  For example, a recipe might have two kinds of fruit, or it might have 2 eggs plus 2 eggwhites, or two different kinds of oil.  I need to add up those amounts so each variable is only listed once per recipe.
+
+At the same time, I might be able to deal with ingredients with no units in some way.  These are mostly going to be ingredients like "2 apples."  It's not practical to estimate the volume of every one of these ingredients, but it seems "wrong" to ignore them.
+
+I see three options
+
+1. Ignore these ingredients.  Just remove ingredients with an `NA` for `units_std`
+2. Remove problem recipes.  Remove recipes with any ingredient that has `NA` for `units_std`
+3. **Count these ingredients.**  Instead of adding up actual amounts when summarising, convert the `amount_std` to 1 for all ingredients with `unit_std == NA`.  Then the sum will represent a count rather than a volume.  These ingredients should also be flagged as "unitless" so they can be removed from particular analyses if count data are inappropriate.
+
+
+```{r}
+#set up to "count" unitless ingredients
+recipes5b <- recipes5 %>% 
+  mutate(ingredient = ifelse(is.na(units_std), "unitless", ingredient),
+         amount_std = ifelse(is.na(units_std), 1, amount_std))
+
+recipes_tidy <- recipes5b %>% 
+  group_by(Type, `Recipe ID`, ingredient) %>% 
+  summarise(amount_sum = sum(amount_std),
+            units_std = first(units_std),
+            servings = first(servings),
+            calories = first(calories),
+            value = paste(value, collapse = ";")
+  )
+
+recipes_tidy
+# recipes_tidy %>% filter(ingredient == "unitless")
+```
+# Write to RDS
+You've done a lot of work.  Save it here
+```{r}
+write_rds(recipes_tidy, "recipes_tidy.rds")
+```
+
+# Test creating wide data for multivarite analysis
+```{r}
+recipes_wide <- recipes_tidy %>% 
+  select(Type, `Recipe ID`, servings, calories, ingredient, amount_sum) %>% 
+  spread(ingredient, value = amount_sum)
+```
+## Check that we got all the recipes
+
+Where did we lose so many recipes? I know we got rid of a lot of cupcakes where it isn't clear whether the ingredients are for the cake or the frosting, but it seems like very few recipes.  3 muffin recipes are missing as well.
+
+```{r}
+recipes_wide
+nrow(recipes_wide)
+#length(cupcakes_links) + length(muffin_links)
+
+#nrow(recipes_wide %>% filter(Type == "muffin"))
+#length(muffin_links)
+```
+There are still a couple of recipes that don't contain flour.  I should check these and probably remove them.
+
+```{r}
+recipes_wide %>% filter(is.na(flour))
+
+recipes5b %>% filter(`Recipe ID` == "260467")
+```
+The first one was a broken link, the second one is because the "parts" matched cupcake even though they're not ("Cupcake Decoration").  Just get rid of recipes with no flour.  Should be fine.

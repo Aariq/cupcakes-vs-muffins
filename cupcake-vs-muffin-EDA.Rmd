@@ -1,0 +1,11 @@
+---
+title: "Cupcake V. Muffin EDA"
+output: html_notebook
+---
+
+Now that I have a dataset of the ingredients of many cupcake and muffin recipes, it's time for phase 2---EDA.
+
+I already know it is a pretty sparse data set and that the number of cupcakes and muffins are not very even.
+
+
+**IMPORTANT** Don't use calories with cupcake recipes because you've removed the frosting!
