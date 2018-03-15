@@ -6,49 +6,14 @@ author: "Eric R. Scott"
 This notebook will be for scraping the recipes ONLY.  At the end it should export a list of dataframes as a .rds file. (exporting the raw html doesn't work).
 ```{r packages, message=FALSE, warning=FALSE}
 library(rvest)
-library(purrr)
-library(stringr)
+#library(purrr)
+#library(stringr)
 library(tidyverse)
 library(beepr) #for notification sounds when long functions are done running
-library(stringi)
+#library(stringi)
 ```
 
 # To Do:
-
-- Figure out why so many recipes are missing by the end. Cupcakes go from ~200 to 45 after removing ones with ambiguous "part" assignments for ingredients.  The "Flatten" step loses 3 muffins for some unkown reason.
-- Deal with cheater cupcakes that use cupcakes or cake mix as an ingredient (see bottom).
-- Check for "decoration" in the "parts".  Some recipes with "Cupcake Decoration" parts might be getting picked up as cake.
-- Separate scraping and wrangling into two separate notebooks?
-
-# Problems:
-
-1. **Recipes without defined "parts"** (DONE)
-
-Some recipes don't define what ingredients are for the cakes vs. the frosting.  My intention is to exclude frosting ingredients from this analysis, so the safest way to deal with this is to assume that unless it has the word "cake" somewhere in the `part` column, then the ingredient is not for the cake part.
-
-- Some have a "part" for frosting, but not for the cake. (e.g. 261244, 255301)  So in that case, all the ingredients that are NA for `part` go with the cake.
-
-- Some don't have frosting or toppings, and all the ingredients are for the cake (e.g. 235291, 239265).
-
-- Others list all the ingredients for the frosting and cake in one list (e.g. 245175, 218356).
-
-- Yet others are complete bullshit and have "cupcakes" as one of the ingredients (261787)
-
-So far I've dealt with this by assuming if a recipe has any parts, and some ingredients have no associated part, then they are for the cake.  (see code chunk 10: fill-in-parts).
-
-2. **Weird ingredients with non-standard units**
-
-Some recipes have ingredients without standard units like "2 apples".  I can imagine several ways of dealing with these ingredients, with different consequences
-
- - Remove Entire Recipes: This would leave only recipes with measured ingredients.  It would err on the side of removing recipes with things like "cooking spray" to grease the tins that don't really affect batter volume.  However, the benefit is that I could add up ingredients to get a total batter volume.  I'd then have my choice of converting ingredient amounts to per serving *or* per total volume (percentage).
- 
- - Remove Problem Ingredients: I could also remove/ignore ingredients without units, but keep the rest of the recipe.
- 
- - **Tally the weird shit up:** I could create a category for "unitless" ingredients and just count how many there are in each recipe.  This is my current strategy.
-
-3. **Cheaters**
-
-Several recipes use Bisquick, cake mix, or even *store-bought cupcakes* as ingredients.  These recipes are obviously cheating and should be removed!!  One way to do this might be to require recipes to all have flour.  I should check to see if any have "self-rising flour".
 
 ```{r helpers}
 #create function to read_html slowly to avoid getting banned
@@ -59,8 +24,6 @@ read_html_slow <- function(x, ...){
 }
 
 read_html_safely <- possibly(read_html_slow, NA)
-
-`%!in%` <- Negate(`%in%`)
 #testing:
 #read_html_slow("http://allrecipes.com/recipe/233538/really-real-strawberry-cupcakes/")
 ```
