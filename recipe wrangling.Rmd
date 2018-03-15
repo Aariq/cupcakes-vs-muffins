@@ -6,12 +6,56 @@ author: "Eric R. Scott"
 ```{r}
 library(tidyverse)
 library(rvest)
+library(stringi)
+library(stringr)
 ```
 Take the html from the cupcake and muffin recipes and convert it into a data frame/tibble.
 
-To-Do:
+# To-Do:
 
-- Output two dataframes: one with frosting, one without.
+- Figure out why so many recipes are missing by the end. Cupcakes go from ~200 to 45 after removing ones with ambiguous "part" assignments for ingredients.  The "Flatten" step loses 3 muffins for some unkown reason.
+- Check for "decoration" in the "parts".  Some recipes with "Cupcake Decoration" parts might be getting picked up as cake.
+- Filter out recipes with no flour.  Seems like that's probably not actually a muffin or cupcake. Must be done after `spread()`ing since recipes with no flour won't list as ingredient (can't use `filter()` easily)
+
+# Problems:
+
+1. **Recipes without defined "parts"** (DONE)
+
+Some recipes don't define what ingredients are for the cakes vs. the frosting.  My intention is to exclude frosting ingredients from this analysis, so the safest way to deal with this is to assume that unless it has the word "cake" somewhere in the `part` column, then the ingredient is not for the cake part.
+
+- Some have a "part" for frosting, but not for the cake. (e.g. 261244, 255301)  So in that case, all the ingredients that are NA for `part` go with the cake.
+
+- Some don't have frosting or toppings, and all the ingredients are for the cake (e.g. 235291, 239265).
+
+- Others list all the ingredients for the frosting and cake in one list (e.g. 245175, 218356).
+
+- Yet others are complete bullshit and have "cupcakes" as one of the ingredients (261787)
+
+So far I've dealt with this by assuming if a recipe has any parts, and some ingredients have no associated part, then they are for the cake.  (see code chunk 10: fill-in-parts).
+
+2. **Weird ingredients with non-standard units**
+
+Some recipes have ingredients without standard units like "2 apples".  I can imagine several ways of dealing with these ingredients, with different consequences
+
+ - Remove Entire Recipes: This would leave only recipes with measured ingredients.  It would err on the side of removing recipes with things like "cooking spray" to grease the tins that don't really affect batter volume.  However, the benefit is that I could add up ingredients to get a total batter volume.  I'd then have my choice of converting ingredient amounts to per serving *or* per total volume (percentage).
+ 
+ - Remove Problem Ingredients: I could also remove/ignore ingredients without units, but keep the rest of the recipe.
+ 
+ - **Tally the weird shit up:** I could create a category for "unitless" ingredients and just count how many there are in each recipe.  This is my current strategy.
+
+3. **Cheaters**
+
+Several recipes use Bisquick, cake mix, or even *store-bought cupcakes* as ingredients.  These recipes are obviously cheating and should be removed!!  One way to do this might be to require recipes to all have flour.  I should check to see if any have "self-rising flour".
+
+# Helper functions
+```{r}
+`%!in%` <- Negate(`%in%`)
+
+str_detect_any <- function(string, pattern){
+  map_lgl(string, ~stri_detect_regex(., pattern) %>% any(.))
+}
+```
+
 
 # Read in lists of data frames
 ```{r}
@@ -19,7 +63,7 @@ muffins_ing <- read_rds("muffin_raw.rds")
 cupcakes_ing <- read_rds("cupcake_raw.rds")
 ```
 
-# Flatten
+# Flatten and Bind
 Use `bind_rows()` to create one data frame for all recipes in `cupcake_sample` and one for all recipes in `muffin_sample` using recipe ID from the data frame names as the id. Then `bind_rows()` of muffins and cupcakes using "muffin" or "cupcake" as the id.
 
 ```{r}
@@ -28,7 +72,6 @@ muffins_df <- muffins_ing %>% bind_rows(.id = "Recipe ID")
 # muffins_df %>% group_by(`Recipe ID`) %>% summarise(n()) %>% nrow()
 ```
 
-
 ```{r bind-all-recipes}
 #add "cupcake" or "muffin" as name
 recipes <- bind_rows(cupcakes_df, muffins_df, .id = "Type") %>% mutate(Type = ifelse(Type == 1, "cupcake", "muffin"))
@@ -36,23 +79,22 @@ recipes
 #write_rds(recipes, "recipes_raw.rds")
 ```
 
-# Extract variables
+# Extract Ingredient Variables
 I'll use regular expressions to try to extract the amount and units.  Then in the same `mutate()` call I'll try to categorize ingredients into discrete variables.
 
-```{r}
-# recipes <- read_rds("recipes_raw.rds")
-str_detect_any <- function(string, pattern){
-  map_lgl(string, ~stri_detect_regex(., pattern) %>% any(.))
-}
+First I define some ingredients that will be grouped.  Further grouping of ingredients may be done later.
 
+```{r ingredient-groups}
 fruits <- c("\\w*apple", "\\w*berr(y|ies)", "raisin", "lemon", "banana",
-            "orange", "pear", "peach", "rhubarb", "plum", "cherry", "fruit")
+            "orange", "pear", "peach", "rhubarb", "plum", "cherry", "fruit", "lime", "mango", "currant", "cherr(y|ies)")
 
 nuts <- c("\\w*nut", "almond", "pecan", "seed")
 
-veggies <- c("carrot", "pumpkin", "potato", "zucchini", "\\bcorn\\b")
+veggies <- c("carrot", "pumpkin", "potato", "zucchini", "\\bcorn\\b", "\\byam")
 
-spices <- c("cinnamon", "nutmeg", "clove", "ginger", "spice", "cardomom")
+spices <- c("cinnamon", "nutmeg", "clove", "ginger", "spice", "cardamom", "pepper")
+
+low_cal <- c("stevia", "splenda", "sucralose", "truvia", "erythritol")
 ```
 
 
@@ -60,21 +102,25 @@ spices <- c("cinnamon", "nutmeg", "clove", "ginger", "spice", "cardomom")
 recipes2 <- recipes %>%  
   mutate(value = tolower(value)) %>% 
   mutate(amount = str_extract(.$value, "^[\\d, /]+"),
-         units = str_extract(.$value, "(\\(.+\\)|[^0-9, /]+)"), #finds either something in parens, or next word
-         ingredient = case_when(#sweeteners
+         units = str_extract(.$value, "(\\(.+\\)|[^0-9, /]+)"), #finds either something in parens, or next word after numbers
+         ingredient = case_when(#cheaters
+                                str_detect(.$value, "\\bmix\\b")    ~ "mix",
+                                str_detect(.$value, "cupcake")      ~ "cupcakes",
+                                #sweeteners
                                 str_detect(.$value, "sugar")        ~ "sugar",
                                 str_detect(.$value, "juice")        ~ "fruit juice",
                                 str_detect(.$value, "honey")        ~ "honey",
                                 str_detect(.$value, "agave")        ~ "agave",
-                                str_detect(.$value, "stevia")       ~ "low-cal sweetener",
-                                str_detect(.$value, "splenda")      ~ "low-cal sweetener",
-                                str_detect(.$value, "truvia")       ~ "low-cal sweetener",
+                                str_detect_any(.$value, low_cal)    ~ "low-cal sweetener",
+                                str_detect(.$value, "syrup")        ~ "syrup",
+                                str_detect(.$value, "molasses")     ~ "molasses",
                                 #starches
                                 str_detect(.$value, "flour")        ~ "flour",
                                 str_detect(.$value, "starch")       ~ "starch",
                                 str_detect(.$value, "corn\\s?meal") ~ "cornmeal",
                                 str_detect(.$value, "bran")         ~ "bran",
                                 str_detect(.$value, "\\boat")       ~ "oats", # oat but not "coated"
+                                str_detect(.$value, "wheat germ")   ~ "wheat germ",
                                 #dairy
                                 str_detect(.$value, "buttermilk")   ~ "buttermilk", #snag before butter and milk
                                 str_detect(.$value, "milk")         ~ "milk",
@@ -83,11 +129,13 @@ recipes2 <- recipes %>%
                                 str_detect(.$value, "tartar")       ~ "other", #snag cream of tartar before cream
                                 str_detect(.$value, "\\bcream\\b")  ~ "cream", #not "creamy"
                                 str_detect(.$value, "yogurt")       ~ "yogurt",
+                                str_detect(.$value, "cheese")       ~ "cheese", #cheeses that are not cream cheese
                                 #fats
                                 str_detect(.$value, "\\boil\\b")    ~ "oil", #not "boiling"
                                 str_detect(.$value, "shortening")   ~ "shortening",
                                 str_detect(.$value, "mayonnaise")   ~ "mayonnaise",
-                                 #butter has to go at the end, after apple butter and peanut butter are captured
+                                str_detect(.$value, "margarine")    ~ "margarine",
+                                  #butter has to go at the end, after apple butter and peanut butter are captured
                                 #leavening
                                 str_detect(.$value, "baking soda")  ~ "baking soda",
                                 str_detect(.$value, "baking powder")~ "baking powder",
@@ -111,7 +159,7 @@ recipes2 <- recipes %>%
                                 str_detect(.$value, "butter")       ~ "butter",
                                 TRUE ~ "other"))
 
-recipes2 %>% select(value, ingredient, units, amount, everything())
+recipes2 %>% select(value, ingredient, units, amount, everything()) %>% filter(ingredient == "other")
 ```
 
 After testing this with several different random samples of cupcake recipes, I'm pretty happy with it. 
@@ -149,6 +197,16 @@ recipes3 <- recipes2 %>%
   mutate(dec_amount = str_replace(amount, "\\s", "+")) %>% 
   mutate(dec_amount = sapply(dec_amount, function(x) eval(parse(text=x))))
 recipes3 %>% select(amount, dec_amount, everything())
+```
+## What gets missed?
+```{r}
+recipes3 %>% filter(is.na(dec_amount))
+```
+"pinch" gets missed.
+Fixed:
+```{r}
+recipes3 <- recipes3 %>%
+  mutate(dec_amount = ifelse(units == "pinch" & is.na(amount), 1, dec_amount))
 ```
 
 # Unit conversions
@@ -203,8 +261,8 @@ recipes5 <- recipes4 %>%
   select(`Recipe ID`, ingredient, amount, units, amount_std, units_std, everything())
 ```
 
-# Summarise
-Some recipes may have multiple ingredients within an ingredient category.  For example, a recipe might have two kinds of fruit, or it might have 2 eggs plus 2 eggwhites, or two different kinds of oil.  I need to add up those amounts so each variable is only listed once per recipe.
+# Collapse ingredients
+Some recipes may have multiple ingredients within an ingredient category.  For example, a recipe might have two kinds of fruit, or it might have 2 eggs plus 2 eggwhites, or two different kinds of sugar (granulated and brown).  I need to add up those amounts so each variable is only listed once per recipe.
 
 At the same time, I might be able to deal with ingredients with no units in some way.  These are mostly going to be ingredients like "2 apples."  It's not practical to estimate the volume of every one of these ingredients, but it seems "wrong" to ignore them.
 
@@ -231,13 +289,48 @@ recipes_tidy <- recipes5b %>%
   )
 
 recipes_tidy
-# recipes_tidy %>% filter(ingredient == "unitless")
+recipes_tidy %>% filter(ingredient == "unitless")
+recipes_tidy %>% filter(ingredient == "other")
 ```
-# Write to RDS
-You've done a lot of work.  Save it here
+There are actually a lot of "unitless" ingredients, but most are in frosting I think?
+
+
+## Write to RDS
+This data set is basically ready for analysis, although it contains cupcake recipes with frosting (part != cake) or with unclear grouping of ingredients (all parts = NA).
 ```{r}
 write_rds(recipes_tidy, "recipes_tidy.rds")
 ```
+
+
+# Filter out frosting
+We all know cupcakes have frosting and muffins don't, so let's create a subset of `recipes_tidy` that removes frosting.
+```{r}
+nofrosting_tidy <- recipes5b %>%
+  #all ingredients that are from muffin recipes or cupcake recipes where the part contains the word "cake"
+  filter(Type == "muffin" | Type == "cupcake" & str_detect(tolower(part), "cake")) %>% 
+  #This code is the same code that created recipes_tidy above
+  group_by(Type, `Recipe ID`, ingredient) %>% 
+  summarise(amount_sum = sum(amount_std),
+            units_std = first(units_std),
+            servings = first(servings),
+            calories = first(calories),
+            value = paste(value, collapse = ";")
+  )
+nofrosting_tidy
+```
+This subset has about half the number of rows as the full dataset.  That's a lot of frosting/ambiguous ingredients!
+I should remove the "calories" column since they no longer reflect the ingredients left.
+
+```{r}
+nofrosting_tidy <- nofrosting_tidy %>% select(-calories)
+```
+
+## Write to RDS
+```{r}
+write_rds(nofrosting_tidy, "nofrosting_tidy.rds")
+```
+
+
 
 # Test creating wide data for multivarite analysis
 ```{r}
@@ -261,6 +354,7 @@ There are still a couple of recipes that don't contain flour.  I should check th
 
 ```{r}
 recipes_wide %>% filter(is.na(flour))
+# recipes_tidy %>% filter(is.na(amount_sum)) #this doesn't work because flour just isn't listed as an ingredient
 
 recipes5b %>% filter(`Recipe ID` == "260467")
 ```

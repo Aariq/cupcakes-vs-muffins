@@ -142,12 +142,14 @@ cupcakes_ing <- cupcakes_ing %>% map(~ as_tibble(.) %>%
 
 ## Identify cake vs. frosting
 Only keep "parts" that have the word "cake" in them for cupcakes.
-*What if there are no "parts"?* I think it is safe to assume that if a cupcake recipe has a "part" for some ingredients but not for others, the ingredients without a "part" are the cake.  If a cupcake recipe has no "parts" listed at all, then it should be excluded as it is not safe to assume all ingredients are for the cake (see "problems" below for examples and more discussion).
+*What if there are no "parts"?* I think it is safe to assume that if a cupcake recipe has a "part" for some ingredients but not for others, the ingredients without a "part" are the cake.  If a cupcake recipe has no "parts" listed at all, then it is not safe to assume all ingredients are for the cake (see "problems" below for examples and more discussion).
 
 
 ```{r fill-in-parts}
 cupcakes_ing <- cupcakes_ing %>% map(~
   mutate(., part = ifelse(any(!is.na(part)) & is.na(part), "Cake:", part)))
+# take cupcakes_ing and map the following mutate function to it:
+# For a given recipe, if any of the "parts" are not blank and the current ingredient's part *is* blank, then that ingredient's part is "Cake:", otherwise just keep the part you previously assigned it.
 ```
 Muffins won't have the problem of "parts", but I should still create that column so I can `bind_rows()` later without an issue.
 
