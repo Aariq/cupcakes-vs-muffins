@@ -9,5 +9,25 @@ I already know it is a pretty sparse data set and that the number of cupcakes an
 
 
 **IMPORTANT** Don't use calories with cupcake recipes because you've removed the frosting!
+```{r}
+library(tidyverse)
+```
 
+# Read in files
+With frosting and calories
+```{r}
+recipes <- read_rds("recipes_tidy.rds")
+nofrosting <- read_rds("nofrosting_tidy.rds")
+```
+
+# Summarise
+Let's see what we're working with
+```{r}
+recipes %>% group_by(Type) %>% summarise(n_distinct(`Recipe ID`))
+```
+173 cupcake recipes and 101 muffin recipes.  If I exclude cupcake recipes with ambiguous frosting/cake designation for ingredients...
+```{r}
+nofrosting %>% group_by(Type) %>% summarise(n_distinct(`Recipe ID`))
+```
+Only 61 cupcake recipes!
 
