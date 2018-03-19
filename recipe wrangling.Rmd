@@ -184,6 +184,7 @@ cheaters <- recipes2 %>%
 
 recipes2 <- recipes2 %>% filter(`Recipe ID` %!in% cheaters)
 #remove recipeID's that match this
+length(cheaters)
 ```
 
 # Convert fractions to decimals
