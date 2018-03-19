@@ -14,7 +14,6 @@ Take the html from the cupcake and muffin recipes and convert it into a data fra
 # To-Do:
 
 - Figure out why so many recipes are missing by the end. Cupcakes go from ~200 to 45 after removing ones with ambiguous "part" assignments for ingredients.  The "Flatten" step loses 3 muffins for some unkown reason.
-- Check for "decoration" in the "parts".  Some recipes with "Cupcake Decoration" parts might be getting picked up as cake.
 - Filter out recipes with no flour.  Seems like that's probably not actually a muffin or cupcake. Must be done after `spread()`ing since recipes with no flour won't list as ingredient (can't use `filter()` easily)
 
 # Problems:
@@ -261,6 +260,21 @@ recipes5 <- recipes4 %>%
   select(`Recipe ID`, ingredient, amount, units, amount_std, units_std, everything())
 ```
 
+# Filter out recipes with no flour
+There's gotta be something wrong if a recipe has no flour in it.
+
+```{r}
+flourless <- recipes5 %>%
+  group_by(`Recipe ID`) %>%
+  summarise(hasflour = any(ingredient == "flour")) %>%
+  filter(hasflour == FALSE) %>% 
+  .$`Recipe ID`
+
+recipes5a <- recipes5 %>%
+  filter(`Recipe ID` %!in% flourless)
+```
+They're all mini cheesecakes I bet.  That is **not** a cupcake
+
 # Collapse ingredients
 Some recipes may have multiple ingredients within an ingredient category.  For example, a recipe might have two kinds of fruit, or it might have 2 eggs plus 2 eggwhites, or two different kinds of sugar (granulated and brown).  I need to add up those amounts so each variable is only listed once per recipe.
 
@@ -275,7 +289,7 @@ I see three options
 
 ```{r}
 #set up to "count" unitless ingredients
-recipes5b <- recipes5 %>% 
+recipes5b <- recipes5a %>% 
   mutate(ingredient = ifelse(is.na(units_std), "unitless", ingredient),
          amount_std = ifelse(is.na(units_std), 1, amount_std))
 
@@ -294,8 +308,7 @@ recipes_tidy %>% filter(ingredient == "other")
 ```
 There are actually a lot of "unitless" ingredients, but most are in frosting I think?
 
-
-## Write to RDS
+# Write full, tidied dataset to RDS
 This data set is basically ready for analysis, although it contains cupcake recipes with frosting (part != cake) or with unclear grouping of ingredients (all parts = NA).
 ```{r}
 write_rds(recipes_tidy, "recipes_tidy.rds")
@@ -307,7 +320,7 @@ We all know cupcakes have frosting and muffins don't, so let's create a subset o
 ```{r}
 nofrosting_tidy <- recipes5b %>%
   #all ingredients that are from muffin recipes or cupcake recipes where the part contains the word "cake"
-  filter(Type == "muffin" | Type == "cupcake" & str_detect(tolower(part), "cake")) %>% 
+  filter(Type == "muffin" | Type == "cupcake" & str_detect(tolower(part), "cake") & !str_detect(tolower(part), "decoration")) %>% 
   #This code is the same code that created recipes_tidy above
   group_by(Type, `Recipe ID`, ingredient) %>% 
   summarise(amount_sum = sum(amount_std),
@@ -325,37 +338,7 @@ I should remove the "calories" column since they no longer reflect the ingredien
 nofrosting_tidy <- nofrosting_tidy %>% select(-calories)
 ```
 
-## Write to RDS
+## Write frostingless dataset to RDS
 ```{r}
 write_rds(nofrosting_tidy, "nofrosting_tidy.rds")
 ```
-
-
-
-# Test creating wide data for multivarite analysis
-```{r}
-recipes_wide <- recipes_tidy %>% 
-  select(Type, `Recipe ID`, servings, calories, ingredient, amount_sum) %>% 
-  spread(ingredient, value = amount_sum)
-```
-## Check that we got all the recipes
-
-Where did we lose so many recipes? I know we got rid of a lot of cupcakes where it isn't clear whether the ingredients are for the cake or the frosting, but it seems like very few recipes.  3 muffin recipes are missing as well.
-
-```{r}
-recipes_wide
-nrow(recipes_wide)
-#length(cupcakes_links) + length(muffin_links)
-
-#nrow(recipes_wide %>% filter(Type == "muffin"))
-#length(muffin_links)
-```
-There are still a couple of recipes that don't contain flour.  I should check these and probably remove them.
-
-```{r}
-recipes_wide %>% filter(is.na(flour))
-# recipes_tidy %>% filter(is.na(amount_sum)) #this doesn't work because flour just isn't listed as an ingredient
-
-recipes5b %>% filter(`Recipe ID` == "260467")
-```
-The first one was a broken link, the second one is because the "parts" matched cupcake even though they're not ("Cupcake Decoration").  Just get rid of recipes with no flour.  Should be fine.
