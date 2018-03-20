@@ -14,13 +14,14 @@ library(tidyverse)
 ```
 
 # Read in files
-With frosting and calories
 ```{r}
+# With frosting and calories/serving
 recipes <- read_rds("recipes_tidy.rds")
+# without frosting and calories
 nofrosting <- read_rds("nofrosting_tidy.rds")
 ```
 
-# Summarise
+# Number of Recipes
 Let's see what we're working with
 ```{r}
 recipes %>% group_by(Type) %>% summarise(n_distinct(`Recipe ID`))
@@ -30,4 +31,55 @@ recipes %>% group_by(Type) %>% summarise(n_distinct(`Recipe ID`))
 nofrosting %>% group_by(Type) %>% summarise(n_distinct(`Recipe ID`))
 ```
 Only 61 cupcake recipes!
+
+# Calories
+Are muffins or cupcakes more caloric on average?
+
+```{r}
+recipes %>% group_by(Type) %>% summarise(mean_cals = mean(calories, na.rm = TRUE))
+```
+```{r}
+ggplot(recipes, aes(x = Type, y = calories)) +
+  geom_boxplot()
+```
+
+Woah! There is a cupcake with more than 800 calories per serving?!
+```{r}
+recipes %>% filter(calories > 750)
+```
+What's the most caloric muffin?
+```{r}
+recipes %>% filter(Type == "muffin") %>% ungroup() %>% summarise(ID = first(`Recipe ID`), cals = max(calories))
+```
+
+# Number of ingredients
+How does number of ingredients vary by muffin/cupcake?
+
+```{r}
+recipes %>%
+  group_by(Type, `Recipe ID`) %>%
+  summarise(num_ingreds = n_distinct(ingredient)) %>% 
+  group_by(Type) %>% 
+  summarise(mean_ing_num = mean(num_ingreds))
+```
+Cupcakes have slightly more ingredients on average, probably because of frosting/toppings.  Oh, but this is after all the "others" are combined, so this might not be that meaningful.
+
+# Make wide data for multivariate analysis
+I need to calculate amount per serving for each ingredient and then `spread()` into a wide data frame
+```{r}
+recipes_wide <- recipes %>%
+  mutate(amount_per_serving = amount_sum/servings) %>% 
+  select(Type, `Recipe ID`, ingredient, amount_per_serving) %>% 
+  spread(key = ingredient, value = amount_per_serving)
+recipes_wide
+```
+
+This is a very sparse dataset with a LOT of `NA`s.  Let's see if I can figure out what percentage of the data is `NA`
+```{r}
+na_num <- recipes_wide %>% ungroup() %>% select_if(is.numeric) %>% is.na() %>% sum()
+dimension <- recipes_wide %>% ungroup() %>% select_if(is.numeric) %>% dim()
+na_num / (dimension[1] * dimension[2]) * 100
+```
+73% NA's.  Yikes!
+
 
