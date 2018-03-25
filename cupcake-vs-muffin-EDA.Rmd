@@ -7,10 +7,17 @@ Now that I have a dataset of the ingredients of many cupcake and muffin recipes,
 
 I already know it is a pretty sparse data set and that the number of cupcakes and muffins are not very even.
 
+Figures I might want to make:
+
+- "heatmap" of pres/abs of ingredients.
+- boxplot of calories with scatterplot and labeled outliers
+- ridge plot of distribution of amounts per serving of each ingredient
+
 
 **IMPORTANT** Don't use calories with cupcake recipes because you've removed the frosting!
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(tidyverse)
+library(ggridges)
 ```
 
 # Read in files
@@ -25,12 +32,32 @@ nofrosting <- read_rds("nofrosting_tidy.rds")
 Let's see what we're working with
 ```{r}
 recipes %>% group_by(Type) %>% summarise(n_distinct(`Recipe ID`))
-```
-173 cupcake recipes and 101 muffin recipes.  If I exclude cupcake recipes with ambiguous frosting/cake designation for ingredients...
-```{r}
 nofrosting %>% group_by(Type) %>% summarise(n_distinct(`Recipe ID`))
 ```
-Only 61 cupcake recipes!
+173 cupcake recipes and 101 muffin recipes.  If I exclude cupcake recipes with ambiguous frosting/cake designation for ingredients there are only 61 cupcake recipes!
+
+
+# Ridge plots
+```{r}
+recipes <- recipes %>% mutate(amount_per = amount_sum/servings)
+recipes %>% arrange(desc(amount_per))
+
+cols <- c("cupcake" = alpha("blue", 0.5), "muffin" = alpha("red", 0.5))
+
+ggplot(recipes) +
+  geom_density_ridges2(aes(x = amount_per, y = ingredient, fill = Type, color = Type),
+                       #alpha = 0.5,
+                       rel_min_height = 0.005,
+                       scale = 1.1) +
+  scale_fill_manual(values = cols) +
+  scale_color_manual(values = cols) +
+  coord_cartesian(xlim = c(0,0.65)) + # This cuts off some recipes like one with 4 eggs.
+  theme_bw()
+```
+# Heatmap
+I think a heatmap might be more appropriate.  Gotta learn how to make one first
+
+
 
 # Calories
 Are muffins or cupcakes more caloric on average?
