@@ -113,6 +113,7 @@ recipes2 <- recipes %>%
                                 str_detect_any(.$value, low_cal)    ~ "low-cal sweetener",
                                 str_detect(.$value, "syrup")        ~ "syrup",
                                 str_detect(.$value, "molasses")     ~ "molasses",
+                                str_detect(.$value, "frosting")     ~ "frosting",
                                 #starches
                                 str_detect(.$value, "flour")        ~ "flour",
                                 str_detect(.$value, "starch")       ~ "starch",
@@ -141,7 +142,7 @@ recipes2 <- recipes %>%
                                 #other
                                 str_detect(.$value, "\\bsalt\\b")   ~ "salt", #not "salted" or "unsalted"
                                 str_detect(.$value, "water")        ~ "water",
-                                str_detect(.$value, "vanilla")      ~ "vanilla",
+                                str_detect(.$value, "vanilla extract")  ~ "vanilla",
                                 str_detect(.$value, "chocolate")    ~ "chocolate",
                                 str_detect(.$value, "cocoa")        ~ "chocolate",
                                 str_detect(.$value, "egg")          ~ "eggs",
@@ -308,6 +309,13 @@ recipes_tidy %>% filter(ingredient == "unitless")
 recipes_tidy %>% filter(ingredient == "other")
 ```
 There are actually a lot of "unitless" ingredients, but most are in frosting I think?
+
+# Calculate amount per serving
+Normalize by serving amount
+```{r}
+recipes_tidy <- recipes_tidy %>% mutate(amount_per = amount_sum/servings)
+```
+
 
 # Write full, tidied dataset to RDS
 This data set is basically ready for analysis, although it contains cupcake recipes with frosting (part != cake) or with unclear grouping of ingredients (all parts = NA).
