@@ -18,6 +18,8 @@ Figures I might want to make:
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(ggridges)
+library(iheatmapr)
+library(gglabeller)
 ```
 
 # Read in files
@@ -36,27 +38,87 @@ nofrosting %>% group_by(Type) %>% summarise(n_distinct(`Recipe ID`))
 ```
 173 cupcake recipes and 101 muffin recipes.  If I exclude cupcake recipes with ambiguous frosting/cake designation for ingredients there are only 61 cupcake recipes!
 
+# Calculate ammount/serving
+```{r}
+recipes <- recipes %>% mutate(amount_per = amount_sum/servings)
+recipes %>% arrange((amount_per))
+```
+
+
+# Scatter plots
+Great for spotting outliers
+```{r}
+cols <- c("cupcake" = alpha("blue", 0.5), "muffin" = alpha("red", 0.5))
+
+p <- ggplot(recipes, aes(x = ingredient, y = amount_per, color = Type, label = `Recipe ID`)) +
+  geom_point(alpha = 0.2) +
+  coord_flip() +
+  scale_color_manual(values = cols) +
+  theme_bw()
+p.1 <- gglabeller(p)
+```
+```{r}
+p.1$plot
+recipes[p.1$ix, ]
+# recipes %>% filter(`Recipe ID` == "6869")
+```
+
+- **213813** is not a cupcake---it's "Steamed Pandan Tapioca Pearl Cakes"
+- **218681** is a mini cheesecake---also not a cupcake
+- 219859 is a legit cupcake, it just has a lot of artificial sweeteners of different types in it
+- **24971** is "Chocolate Muck Muck Cake".  It has 4 eggs and 4 yolks in it.  I'm comfortable eliminating this one
+- 260774 is a cupcake with a lot of weird toppings for ingredients.  It's legit.
+- **6869** has duplicated ingredients for some reson.  Omit.
+- **7164** call for "whole bran cereal" not just bran.  Omit.
+
+```{r}
+outliers <- c("6869", "24971", "218681", "213813", "7164")
+recipes <- recipes %>% filter(!(`Recipe ID` %in% outliers))
+```
 
 # Ridge plots
 ```{r}
-recipes <- recipes %>% mutate(amount_per = amount_sum/servings)
-recipes %>% arrange(desc(amount_per))
-
-cols <- c("cupcake" = alpha("blue", 0.5), "muffin" = alpha("red", 0.5))
-
 ggplot(recipes) +
   geom_density_ridges2(aes(x = amount_per, y = ingredient, fill = Type, color = Type),
-                       #alpha = 0.5,
+                       alpha = 0.5,
                        rel_min_height = 0.005,
                        scale = 1.1) +
   scale_fill_manual(values = cols) +
   scale_color_manual(values = cols) +
-  coord_cartesian(xlim = c(0,0.65)) + # This cuts off some recipes like one with 4 eggs.
+  #coord_cartesian(xlim = c(0,0.65)) + # This cuts off some recipes like one with 4 eggs.
   theme_bw()
 ```
 # Heatmap
 I think a heatmap might be more appropriate.  Gotta learn how to make one first
+```{r}
+recipes <- recipes %>% ungroup()
+recipes_wide <-
+  recipes %>%
+  select(Type, `Recipe ID`, ingredient, amount_per) %>%
+  mutate(ingredient = fct_infreq(ingredient)) %>% 
+  spread(key = ingredient, value = amount_per)
+recipes_wide
+```
+```{r}
+recipes_matrix <- recipes_wide %>% select_if(is.double) %>% as.matrix()
+rownames(recipes_matrix) <- recipes_wide$`Recipe ID`
+```
+```{r}
+main_heatmap(recipes_matrix %>% scale(., center=FALSE, scale = TRUE),
+             name = "amount per serving",
+             x_categorical = TRUE,
+             layout = list(font = list(size = 8))) %>%
+  add_row_groups(recipes_wide$Type,
+                  side = "left", name = "Muffin or Cupcake?",
+                  title = "Muffin/<br>Cupcake",
+                  colors = c(alpha("blue", 1), alpha("red", 1))) %>%
+  add_col_labels()
+```
 
+231057 has a lot of vanilla, but legit
+236467 has a lot of spice, but legit
+
+Muffins seem to have less vanilla, less sugar, less cream cheese, and less "other"
 
 
 # Calories
@@ -67,7 +129,7 @@ recipes %>% group_by(Type) %>% summarise(mean_cals = mean(calories, na.rm = TRUE
 ```
 ```{r}
 ggplot(recipes, aes(x = Type, y = calories)) +
-  geom_boxplot()
+  geom_boxplot() + theme_bw()
 ```
 
 Woah! There is a cupcake with more than 800 calories per serving?!
@@ -76,7 +138,7 @@ recipes %>% filter(calories > 750)
 ```
 What's the most caloric muffin?
 ```{r}
-recipes %>% filter(Type == "muffin") %>% ungroup() %>% summarise(ID = first(`Recipe ID`), cals = max(calories))
+recipes %>% filter(Type == "muffin") %>% summarise(ID = first(`Recipe ID`), calories = max(calories))
 ```
 
 # Number of ingredients
@@ -107,6 +169,19 @@ na_num <- recipes_wide %>% ungroup() %>% select_if(is.numeric) %>% is.na() %>% s
 dimension <- recipes_wide %>% ungroup() %>% select_if(is.numeric) %>% dim()
 na_num / (dimension[1] * dimension[2]) * 100
 ```
-73% NA's.  Yikes!
+74% NA's.  Yikes!
+```{r}
+recipes_wide <- recipes_wide %>% 
+  mutate_if(is.double, ~replace_na(.,0))
+test <- prcomp(recipes_wide %>% select_if(is.double), scale. = TRUE)
+summary(test)
+biplot(test)
+```
 
+Needs 19 PCs to explain ~ 70% of variance.  Might be good for demonstrating benefits of OPLS vs PCA.
+
+# Write outlier-removed recipes to RDS
+```{r}
+write_rds(recipes_wide, "recipes_wide.rds")
+```
 
