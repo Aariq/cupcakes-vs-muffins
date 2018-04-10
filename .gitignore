@@ -3,3 +3,8 @@
 .RData
 .Ruserdata
 *.nb.html
+<<<<<<< HEAD
+=======
+analysis.*
+
+>>>>>>> 5ed9c1f263c3f51a1dda45ede102f858e392ad70
