@@ -13,7 +13,6 @@ Figures I might want to make:
 - boxplot of calories with scatterplot and labeled outliers
 - ridge plot of distribution of amounts per serving of each ingredient
 
-
 **IMPORTANT** Don't use calories with cupcake recipes because you've removed the frosting!
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
