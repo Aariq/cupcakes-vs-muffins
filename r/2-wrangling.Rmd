@@ -368,7 +368,7 @@ I should remove the "calories" column since they no longer reflect the ingredien
 ```{r}
 nofrosting_tidy <- 
   nofrosting_tidy %>%
-  select(-calories)
+  select(-calories, - calories_per)
 ```
 
 ## Write frostingless dataset to RDS
