@@ -48,9 +48,8 @@ Some recipes have ingredients without standard units like "2 apples".  I can ima
 Several recipes use Bisquick, cake mix, or even *store-bought cupcakes* as ingredients.  These recipes are obviously cheating and should be removed!!  One way to do this might be to require recipes to all have flour.  I should check to see if any have "self-rising flour".
 
 # Helper functions
-```{r}
-# `%!in%` <- Negate(`%in%`)
 
+```{r}
 str_detect_any <- function(string, pattern){
   map_lgl(string, ~stri_detect_regex(., pattern) %>% any(.))
 }
@@ -58,18 +57,20 @@ str_detect_any <- function(string, pattern){
 
 
 # Read in lists of data frames
+
 ```{r}
 muffins_ing <- read_rds(here("data", "muffin_raw.rds"))
 cupcakes_ing <- read_rds(here("data", "cupcake_raw.rds"))
 ```
 
 # Flatten and Bind
+
 Use `bind_rows()` to create one data frame for all recipes in `cupcakes_ing` and one for all recipes in `muffins_ing` using recipe ID from the data frame names as the id. Then `bind_rows()` of muffins and cupcakes using "muffin" or "cupcake" as the id.
 
 ```{r}
 cupcakes_df <- cupcakes_ing %>% bind_rows(.id = "recipe_id")
 muffins_df <- muffins_ing %>% bind_rows(.id = "recipe_id")
-# muffins_df %>% group_by(`recipe_id`) %>% summarise(n()) %>% nrow()
+# muffins_df %>% group_by(recipe_id) %>% summarise(n()) %>% nrow()
 ```
 
 ```{r bind-all-recipes}
@@ -80,6 +81,7 @@ recipes
 ```
 
 # Extract Ingredient Variables
+
 I'll use regular expressions to try to extract the amount and units.  Then in the same `mutate()` call I'll try to categorize ingredients into discrete variables.
 
 First I define some ingredients that will be grouped.  Further grouping of ingredients may be done later.
@@ -95,6 +97,8 @@ veggies <- c("carrot", "pumpkin", "potato", "zucchini", "\\bcorn\\b", "\\byam")
 spices <- c("cinnamon", "nutmeg", "clove", "ginger", "spice", "cardamom", "pepper")
 
 low_cal <- c("stevia", "splenda", "sucralose", "truvia", "erythritol")
+
+trash <- c("paper", "reynolds", "cooking spray", "cutter", "baking spray")
 ```
 
 
@@ -158,9 +162,12 @@ recipes2 <- recipes %>%
                                 str_detect_any(.$value, veggies)    ~ "vegetable",
                                 #butter
                                 str_detect(.$value, "butter")       ~ "butter",
+                                str_detect_any(.$value, trash)      ~ "trash",
                                 TRUE ~ "other"))
 
-recipes2 %>% select(value, ingredient, units, amount, everything()) %>% filter(ingredient == "other")
+recipes2 %>% select(value, ingredient, units, amount, everything()) %>% filter(ingredient == "trash")
+#filter out trash
+recipes2 <- recipes2 %>% filter(ingredient != "trash")
 ```
 
 After testing this with several different random samples of cupcake recipes, I'm pretty happy with it. 
@@ -182,9 +189,9 @@ Get rid of recipes that call for self-rising flour, bisquick, cupcakes, or cake 
 ```{r}
 cheaters <- recipes2 %>%
   filter(str_detect_any(value, c("self-rising", "bisquick", "cupcake", "mix\\b"))) %>%
-  .$`recipe_id`
+  .$recipe_id
 
-recipes2 <- recipes2 %>% filter(!`recipe_id` %in% cheaters)
+recipes2 <- recipes2 %>% filter(!recipe_id %in% cheaters)
 #remove recipeID's that match this
 length(cheaters)
 ```
@@ -193,6 +200,7 @@ length(cheaters)
 The `ammount` column is character class.  I want numeric.
 
 I think one approach would be to turn a space into a "+" then use mutate to do `eval(parse(ammount))`
+
 ```{r}
 recipes3 <- recipes2 %>% 
   mutate(amount = str_trim(amount)) %>% 
@@ -236,7 +244,7 @@ recipes3 <- recipes3 %>%
 recipes4 <- recipes3 %>%
   select(-amount) %>%
   rename(amount = dec_amount) %>% 
-  select(type, ingredient, amount, units, servings, calories, value,`recipe_id`, part)
+  select(type, ingredient, amount, units, servings, calories, value,recipe_id, part)
 ```
 
 ## Unit conversions
@@ -260,7 +268,7 @@ recipes5 <- recipes4 %>%
                                ingredient == "eggs"               ~ "eggs",
                                TRUE                               ~ as.character(NA))) %>% 
 
-  select(`recipe_id`, ingredient, amount, units, amount_std, units_std, everything())
+  select(recipe_id, ingredient, amount, units, amount_std, units_std, everything())
 ```
 
 # Filter out recipes with no flour
@@ -268,13 +276,13 @@ There's gotta be something wrong if a recipe has no flour in it.
 
 ```{r}
 flourless <- recipes5 %>%
-  group_by(`recipe_id`) %>%
+  group_by(recipe_id) %>%
   summarise(hasflour = any(ingredient == "flour")) %>%
   filter(hasflour == FALSE) %>% 
-  .$`recipe_id`
+  .$recipe_id
 
 recipes5a <- recipes5 %>%
-  filter(!`recipe_id` %in% flourless)
+  filter(!recipe_id %in% flourless)
 ```
 
 They're all mini cheesecakes I bet.  That is **not** a cupcake
@@ -298,7 +306,7 @@ recipes5b <- recipes5a %>%
          amount_std = ifelse(is.na(units_std), 1, amount_std))
 
 recipes_tidy <- recipes5b %>% 
-  group_by(type, `recipe_id`, ingredient) %>% 
+  group_by(type, recipe_id, ingredient) %>% 
   summarise(amount_sum = sum(amount_std),
             units_std = first(units_std),
             servings = first(servings),
@@ -341,7 +349,7 @@ nofrosting_tidy <-
   #all ingredients that are from muffin recipes or cupcake recipes where the part is definitely cake and not frosting
   filter(type == "muffin" | type == "cupcake" & str_detect_any(tolower(part), c("cake", "dry", "wet", "batter")) & !str_detect_any(tolower(part), c("decoration", "garnish", "frosting", "icing"))) %>% 
   #This code is the same code that created recipes_tidy above
-  group_by(type, `recipe_id`, ingredient) %>% 
+  group_by(type, recipe_id, ingredient) %>% 
   summarise(amount_sum = sum(amount_std),
             units_std = first(units_std),
             servings = first(servings),
