@@ -1,0 +1,64 @@
+---
+title: "Cupcake or Muffin?"
+output: html_notebook
+---
+
+The purpose of this notebook is to analyze baked good ingredient data to answer a few questions:
+
+1. What ingredients vary the most among baked goods? (PCA)
+2. Are muffins and cupcakes empirically different? (PLS-DA)
+3. What ingredients best distinguish muffins from cupckaes? (PLS-DA)
+4. What ingredients best explain variation in calories per serving? (PLSR) 
+
+In the process, I will demonstrate some key differences between supervised and unsupervised approaches to multivariate statistics.  I'll be using the `ropls` package along with some helper tools in `holodeck` to answer these questions.
+
+```{r}
+library(tidyverse)
+library(here)
+library(ropls)
+library(holodeck)
+library(ggrepel)
+```
+
+**Is this the no-frosting data?**
+
+```{r}
+recipes <- read_rds(here("data", "recipes_wide.rds"))
+```
+
+
+
+# What ingredients vary the most among baked goods?
+
+To answer this question, we do PCA
+
+```{r}
+baked.pca <- opls(select(recipes, -Type, -`Recipe ID`), plotL = FALSE)
+get_loadings(baked.pca) %>% 
+  ggplot(aes(x = p1, y = p2, label = Variable)) +
+  geom_segment(aes(x = 0, y = 0, xend = p1, yend = p2), arrow = arrow(length = unit(0.15, "cm"))) +
+  geom_label_repel(segment.color = "darkgrey") +
+  theme_bw()
+get_loadings(baked.pca) %>% select(Variable, p1, p2) %>% arrange(desc(abs(p1)))
+```
+
+The loading plot shows that it takes 10 axes to explain 46% of the variation in ingredients  The axis that explains most of the variation, only explains 7.2%.  That variation is mostly negatively correlated with fruit, salt, baking powder, oil, oats, and flour and positively correlated with butter, cream cheese, sugar, and "unitless" (mostly toppings and additions like "10 blueberries").  As you might imagine, the correlation with butter, cream cheese, and sugar might be mostly because of frosting.  If we see how the recipe types map to this PCA, you'll see that the first axis does an OK job at discriminating muffins and cupcakes.
+
+```{r}
+plot_pca(baked.pca, recipes$Type)
+```
+
+
+*BUT* this doesn't answer the question of whether cupcakes and muffins are different.  It answers a slightly different question: "Do cupcakes and muffins differ in the ingredients that vary the most among both cupcakes and muffins?"
+
+# PLS-DA
+
+```{r}
+baked.plsda <- opls(select(recipes, -Type, -`Recipe ID`), recipes$Type, plotL = FALSE, predI = 1, orthoI = 1, permI = 200)
+plot_oplsda(baked.plsda)
+```
+
+```{r}
+get_loadings(baked.plsda) %>% arrange(desc(abs(p1)))
+```
+fruit, flour, baking powder, salt, and oats are associated with muffins while cream cheese, butter, vanilla and sugar are associated with cupcakes.  Makes sense.
