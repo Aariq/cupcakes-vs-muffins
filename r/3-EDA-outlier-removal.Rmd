@@ -77,7 +77,8 @@ recipes[p.1$ix, ]
 
 ```{r}
 outliers <- c("6869", "24971", "218681", "213813", "7164")
-recipes <- recipes %>% filter(!(recipe_id %in% outliers))
+recipes <- recipes %>% filter(!recipe_id %in% outliers)
+nofrosting <- recipes %>% filter(!recipe_id %in% outliers)
 ```
 
 # Ridge plots
@@ -183,7 +184,6 @@ nofrosting_wide <-
   select(type, recipe_id, ingredient, amount_per) %>% 
   spread(key = ingredient, value = amount_per) %>% 
   ungroup()
-nofrosting_wide
 ```
 
 This is a very sparse dataset with a LOT of `NA`s.  Let's see if I can figure out what percentage of the data is `NA`
@@ -208,6 +208,8 @@ recipes_wide <-
 nofrosting_wide <- 
   nofrosting_wide %>% 
   mutate_if(is.double, ~replace_na(.,0))
+
+recipes_wide %>% filter(recipe_id == "6869")
 ```
 
 Needs 19 PCs to explain ~ 70% of variance.  Might be good for demonstrating benefits of OPLS vs PCA.
