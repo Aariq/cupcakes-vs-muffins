@@ -41,12 +41,6 @@ nofrosting %>% group_by(type) %>% summarise(n_distinct(recipe_id))
 ```
 173 cupcake recipes and 101 muffin recipes.  If I exclude cupcake recipes with ambiguous frosting/cake designation for ingredients there are only 61 cupcake recipes!
 
-# Calculate ammount/serving
-
-```{r}
-recipes <- recipes %>% mutate(amount_per = amount_sum/servings)
-recipes %>% arrange((amount_per))
-```
 
 
 # Scatter plots
@@ -67,7 +61,7 @@ p.1 <- gglabeller(p, aes(label = recipes$recipe_id))
 ```{r}
 p.1$plot
 recipes[p.1$ix, ]
-recipes %>% filter(recipe_id == "242474")
+# recipes %>% filter(recipe_id == "242474")
 ```
 
 - **213813** is not a cupcake---it's "Steamed Pandan Tapioca Pearl Cakes"
@@ -177,13 +171,19 @@ Cupcakes have slightly more ingredients on average, probably because of frosting
 I need to calculate amount per serving for each ingredient and then `spread()` into a wide data frame
 
 ```{r}
-recipes_wide <- recipes %>%
-  mutate(amount_per_serving = amount_sum/servings) %>% 
-  select(type, recipe_id, ingredient, amount_per_serving) %>% 
-  spread(key = ingredient, value = amount_per_serving)
+recipes_wide <-
+  recipes %>%
+  select(type, recipe_id, calories_per, ingredient, amount_per) %>% 
+  spread(key = ingredient, value = amount_per) %>% 
+  ungroup()
 recipes_wide
 
-nofrosting_wide <- recipes_wide %>% filter(recipe_id %in% unique(nofrosting$recipe_id))
+nofrosting_wide <- 
+  nofrosting %>% 
+  select(type, recipe_id, ingredient, amount_per) %>% 
+  spread(key = ingredient, value = amount_per) %>% 
+  ungroup()
+nofrosting_wide
 ```
 
 This is a very sparse dataset with a LOT of `NA`s.  Let's see if I can figure out what percentage of the data is `NA`
@@ -196,12 +196,18 @@ na_num / (dimension[1] * dimension[2]) * 100
 
 74% NA's.  Yikes!
 
+
+Replaces NAs with zeroes.  They're not truly NAs, that ingredient doesn't exist in the recipe if there is an NA.  EXCEPT for when it's calories.  There an NA really is an NA, but I'll just remove the one recipe with no info on calories.
+
 ```{r}
-recipes_wide <- recipes_wide %>% 
+recipes_wide <- 
+  recipes_wide %>% 
+  filter(!is.na(calories_per)) %>% 
   mutate_if(is.double, ~replace_na(.,0))
-test <- prcomp(recipes_wide %>% select_if(is.double), scale. = TRUE)
-summary(test)
-biplot(test)
+
+nofrosting_wide <- 
+  nofrosting_wide %>% 
+  mutate_if(is.double, ~replace_na(.,0))
 ```
 
 Needs 19 PCs to explain ~ 70% of variance.  Might be good for demonstrating benefits of OPLS vs PCA.
