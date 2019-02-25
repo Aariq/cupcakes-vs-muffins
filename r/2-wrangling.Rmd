@@ -5,9 +5,10 @@ author: "Eric R. Scott"
 ---
 ```{r}
 library(tidyverse)
-library(rvest)
+# library(rvest)
 library(stringi)
 library(stringr)
+library(here)
 ```
 Take the html from the cupcake and muffin recipes and convert it into a data frame/tibble.
 
@@ -48,7 +49,7 @@ Several recipes use Bisquick, cake mix, or even *store-bought cupcakes* as ingre
 
 # Helper functions
 ```{r}
-`%!in%` <- Negate(`%in%`)
+# `%!in%` <- Negate(`%in%`)
 
 str_detect_any <- function(string, pattern){
   map_lgl(string, ~stri_detect_regex(., pattern) %>% any(.))
@@ -58,22 +59,22 @@ str_detect_any <- function(string, pattern){
 
 # Read in lists of data frames
 ```{r}
-muffins_ing <- read_rds("muffin_raw.rds")
-cupcakes_ing <- read_rds("cupcake_raw.rds")
+muffins_ing <- read_rds(here("data", "muffin_raw.rds"))
+cupcakes_ing <- read_rds(here("data", "cupcake_raw.rds"))
 ```
 
 # Flatten and Bind
-Use `bind_rows()` to create one data frame for all recipes in `cupcake_sample` and one for all recipes in `muffin_sample` using recipe ID from the data frame names as the id. Then `bind_rows()` of muffins and cupcakes using "muffin" or "cupcake" as the id.
+Use `bind_rows()` to create one data frame for all recipes in `cupcakes_ing` and one for all recipes in `muffins_ing` using recipe ID from the data frame names as the id. Then `bind_rows()` of muffins and cupcakes using "muffin" or "cupcake" as the id.
 
 ```{r}
-cupcakes_df <- cupcakes_ing %>% bind_rows(.id = "Recipe ID")
-muffins_df <- muffins_ing %>% bind_rows(.id = "Recipe ID")
-# muffins_df %>% group_by(`Recipe ID`) %>% summarise(n()) %>% nrow()
+cupcakes_df <- cupcakes_ing %>% bind_rows(.id = "recipe_id")
+muffins_df <- muffins_ing %>% bind_rows(.id = "recipe_id")
+# muffins_df %>% group_by(`recipe_id`) %>% summarise(n()) %>% nrow()
 ```
 
 ```{r bind-all-recipes}
 #add "cupcake" or "muffin" as name
-recipes <- bind_rows(cupcakes_df, muffins_df, .id = "Type") %>% mutate(Type = ifelse(Type == 1, "cupcake", "muffin"))
+recipes <- bind_rows(cupcakes_df, muffins_df, .id = "type") %>% mutate(type = ifelse(type == 1, "cupcake", "muffin"))
 recipes
 #write_rds(recipes, "recipes_raw.rds")
 ```
@@ -181,9 +182,9 @@ Get rid of recipes that call for self-rising flour, bisquick, cupcakes, or cake 
 ```{r}
 cheaters <- recipes2 %>%
   filter(str_detect_any(value, c("self-rising", "bisquick", "cupcake", "mix\\b"))) %>%
-  .$`Recipe ID`
+  .$`recipe_id`
 
-recipes2 <- recipes2 %>% filter(`Recipe ID` %!in% cheaters)
+recipes2 <- recipes2 %>% filter(!`recipe_id` %in% cheaters)
 #remove recipeID's that match this
 length(cheaters)
 ```
@@ -199,12 +200,16 @@ recipes3 <- recipes2 %>%
   mutate(dec_amount = sapply(dec_amount, function(x) eval(parse(text=x))))
 recipes3 %>% select(amount, dec_amount, everything())
 ```
+
 ## What gets missed?
+
 ```{r}
 recipes3 %>% filter(is.na(dec_amount))
 ```
+
 "pinch" gets missed.
 Fixed:
+
 ```{r}
 recipes3 <- recipes3 %>%
   mutate(dec_amount = ifelse(units == "pinch" & is.na(amount), 1, dec_amount))
@@ -213,17 +218,12 @@ recipes3 <- recipes3 %>%
 # Unit conversions
 
 ## Deal with package size
+
 Occasionally an ingredient is like "1 (8 ounce) packet of cream cheese" and my script so far detects "1" as the amount and "(8 ounce)" as the units.  I should deal with this.
 
 **Deal with "oz." and possible decimal points (e.g. "12.5 ounce")** (e.g. 234135)
+
 ```{r}
-#test <- cupcakes_ing3$units
-#str_view_all(test, "\\(.+ (ounce|oz.)")
-
-#test2 <- c("(8 ounce)", "(.68 oz. tube)", "(12.3 ounce)")
-#str_view(test2, "\\.?\\d+\\.?\\d*")
-
-# as.numeric(str_extract(test, "\\d+"))*1
 recipes3 <- recipes3 %>%
   mutate(dec_amount = ifelse(str_detect(units, "\\(.+ (ounce|oz.)"),
                           as.numeric(str_extract(units, "\\.?\\d+\\.?\\d*")) * dec_amount,
@@ -236,11 +236,12 @@ recipes3 <- recipes3 %>%
 recipes4 <- recipes3 %>%
   select(-amount) %>%
   rename(amount = dec_amount) %>% 
-  select(Type, ingredient, amount, units, servings, calories, value,`Recipe ID`, part)
+  select(type, ingredient, amount, units, servings, calories, value,`recipe_id`, part)
 ```
 
 ## Unit conversions
 Just for the sake of uniformity, let's put everything in "cups" except eggs.
+
 ```{r}
 #units we should be able to convert to "cups"
 convertable <- c("tablespoon", "teaspoon", "cup", "ounce", "pint", "pinch")
@@ -259,7 +260,7 @@ recipes5 <- recipes4 %>%
                                ingredient == "eggs"               ~ "eggs",
                                TRUE                               ~ as.character(NA))) %>% 
 
-  select(`Recipe ID`, ingredient, amount, units, amount_std, units_std, everything())
+  select(`recipe_id`, ingredient, amount, units, amount_std, units_std, everything())
 ```
 
 # Filter out recipes with no flour
@@ -267,14 +268,15 @@ There's gotta be something wrong if a recipe has no flour in it.
 
 ```{r}
 flourless <- recipes5 %>%
-  group_by(`Recipe ID`) %>%
+  group_by(`recipe_id`) %>%
   summarise(hasflour = any(ingredient == "flour")) %>%
   filter(hasflour == FALSE) %>% 
-  .$`Recipe ID`
+  .$`recipe_id`
 
 recipes5a <- recipes5 %>%
-  filter(`Recipe ID` %!in% flourless)
+  filter(!`recipe_id` %in% flourless)
 ```
+
 They're all mini cheesecakes I bet.  That is **not** a cupcake
 
 # Collapse ingredients
@@ -296,7 +298,7 @@ recipes5b <- recipes5a %>%
          amount_std = ifelse(is.na(units_std), 1, amount_std))
 
 recipes_tidy <- recipes5b %>% 
-  group_by(Type, `Recipe ID`, ingredient) %>% 
+  group_by(type, `recipe_id`, ingredient) %>% 
   summarise(amount_sum = sum(amount_std),
             units_std = first(units_std),
             servings = first(servings),
@@ -312,42 +314,57 @@ There are actually a lot of "unitless" ingredients, but most are in frosting I t
 
 # Calculate amount per serving
 Normalize by serving amount
+
 ```{r}
-recipes_tidy <- recipes_tidy %>% mutate(amount_per = amount_sum/servings)
+recipes_tidy <-
+  recipes_tidy %>%
+  mutate(amount_per = amount_sum/servings,
+         calories_per = calories/servings)
 ```
 
 
 # Write full, tidied dataset to RDS
 This data set is basically ready for analysis, although it contains cupcake recipes with frosting (part != cake) or with unclear grouping of ingredients (all parts = NA).
+
 ```{r}
-write_rds(recipes_tidy, "recipes_tidy.rds")
+write_rds(recipes_tidy, here("data", "recipes_tidy.rds"))
 ```
 
 
 # Filter out frosting
-We all know cupcakes have frosting and muffins don't, so let's create a subset of `recipes_tidy` that removes frosting.
+
+We all know cupcakes have frosting and muffins don't, so let's create a subset of `recipes_tidy` that removes frosting.  This code keeps all the muffin recipes intact, but only keeps cupcake ingredients that are definitely part of the cake part of a cupcake.  This results in some cupcake recipes being elminated when the "part" the ingredients are for is ambiguous.
+
 ```{r}
-nofrosting_tidy <- recipes5b %>%
-  #all ingredients that are from muffin recipes or cupcake recipes where the part contains the word "cake"
-  filter(Type == "muffin" | Type == "cupcake" & str_detect(tolower(part), "cake") & !str_detect(tolower(part), "decoration")) %>% 
+nofrosting_tidy <-
+  recipes5b %>%
+  #all ingredients that are from muffin recipes or cupcake recipes where the part is definitely cake and not frosting
+  filter(type == "muffin" | type == "cupcake" & str_detect_any(tolower(part), c("cake", "dry", "wet", "batter")) & !str_detect_any(tolower(part), c("decoration", "garnish", "frosting", "icing"))) %>% 
   #This code is the same code that created recipes_tidy above
-  group_by(Type, `Recipe ID`, ingredient) %>% 
+  group_by(type, `recipe_id`, ingredient) %>% 
   summarise(amount_sum = sum(amount_std),
             units_std = first(units_std),
             servings = first(servings),
             calories = first(calories),
             value = paste(value, collapse = ";")
-  )
+  ) %>% 
+    mutate(amount_per = amount_sum/servings,
+         calories_per = calories/servings)
 nofrosting_tidy
 ```
+
 This subset has about half the number of rows as the full dataset.  That's a lot of frosting/ambiguous ingredients!
+
 I should remove the "calories" column since they no longer reflect the ingredients left.
 
 ```{r}
-nofrosting_tidy <- nofrosting_tidy %>% select(-calories)
+nofrosting_tidy <- 
+  nofrosting_tidy %>%
+  select(-calories)
 ```
 
 ## Write frostingless dataset to RDS
+
 ```{r}
-write_rds(nofrosting_tidy, "nofrosting_tidy.rds")
+write_rds(nofrosting_tidy, here("data", "nofrosting_tidy.rds"))
 ```
