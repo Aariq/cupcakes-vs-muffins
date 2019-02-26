@@ -76,7 +76,6 @@ ggplot(cor.dat2) +
   theme_bw() +
   labs(x = glue("Correlation to PC1 ({baked.pca@modelDF$R2X[1]*100}%)"),
        y = glue("Correlation to PC2 ({baked.pca@modelDF$R2X[2]*100}%)"))
-
 ```
 
 
@@ -103,8 +102,40 @@ plot_oplsda(baked.plsda)
 ```
 
 ```{r}
+scores <- get_scores(baked.plsda)
+
+data <- baked.plsda@suppLs$xModelMN %>%
+  as_tibble()
+
+cor.dat2 <-
+  cor(scores[3:4], data) %>%
+    t() %>%
+    as_tibble(rownames = "variable") %>% 
+  rowwise() %>% 
+  mutate(distance = sqrt(sum((c(p1, o1) - c(0, 0))^2))) %>% 
+  ungroup %>% 
+  mutate(t = distance * sqrt((165-2)/(1-distance^2))) %>% 
+  mutate(p.dist = pt(t, df = 165-2, lower.tail = FALSE)) %>% 
+  mutate(p.adj = p.adjust(p.dist, method = "bonf"))
+cor.dat2
+```
+```{r}
+ggplot(cor.dat2) +
+  geom_segment(aes(x = 0, y = 0, xend = p1, yend = o1),
+               arrow = arrow(length = unit(0.15, "cm"))) +
+  gghighlight(p.adj < 0.05, use_direct_label = FALSE) +
+  geom_label_repel(aes(x = p1, y = o1, label = variable), segment.alpha = 0.6,direction = "y" ) +
+  theme_bw() +
+  labs(x = glue("Correlation to PC1 ({baked.plsda@modelDF$R2X[1]*100}%)"),
+       y = glue("Correlation to PC2 ({baked.plsda@modelDF$R2X[2]*100}%)"))
+```
+
+
+```{r}
 get_loadings(baked.plsda) %>% arrange(desc(abs(p1)))
 ```
+
+
 fruit, flour, baking powder, salt, and oats are associated with muffins while cream cheese, butter, vanilla and sugar are associated with cupcakes.  Makes sense.
 
 
