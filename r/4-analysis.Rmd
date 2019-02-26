@@ -17,13 +17,19 @@ library(tidyverse)
 library(here)
 library(ropls)
 library(holodeck)
+library(gghighlight)
 library(ggrepel)
+library(glue)
 ```
 
-**Is this the no-frosting data?**
+# Read in Data
+
+I have two datasets, one with all (filtered) cupcake and muffin recipes (`recipes`) which includes calories per serving, a recipe ID, a type (muffin or cupcake) and the amount in US cups of all the ingredients (except unitless ingredients and "other" which are count columns).  The other dataset, `nofrosting` has all the muffin recipes, but only cupcake ingredients which are pretty clearly *not* frosting or toppings.  I'll use `nofrosting` for most of the discriminatn analysis, but come back to `recipes` to look at PLS regression.
 
 ```{r}
+set.seed(888)
 recipes <- read_rds(here("data", "recipes_wide.rds"))
+nofrosting <- read_rds(here("data", "nofrosting_wide.rds")) %>% sample_n(30)
 ```
 
 
@@ -33,28 +39,66 @@ recipes <- read_rds(here("data", "recipes_wide.rds"))
 To answer this question, we do PCA
 
 ```{r}
-baked.pca <- opls(select(recipes, -Type, -`Recipe ID`), plotL = FALSE)
-get_loadings(baked.pca) %>% 
-  ggplot(aes(x = p1, y = p2, label = Variable)) +
-  geom_segment(aes(x = 0, y = 0, xend = p1, yend = p2), arrow = arrow(length = unit(0.15, "cm"))) +
-  geom_label_repel(segment.color = "darkgrey") +
-  theme_bw()
-get_loadings(baked.pca) %>% select(Variable, p1, p2) %>% arrange(desc(abs(p1)))
+baked.pca <- opls(select(nofrosting, -type, -recipe_id), scaleC = "standard", plotL = FALSE)
 ```
 
-The loading plot shows that it takes 10 axes to explain 46% of the variation in ingredients  The axis that explains most of the variation, only explains 7.2%.  That variation is mostly negatively correlated with fruit, salt, baking powder, oil, oats, and flour and positively correlated with butter, cream cheese, sugar, and "unitless" (mostly toppings and additions like "10 blueberries").  As you might imagine, the correlation with butter, cream cheese, and sugar might be mostly because of frosting.  If we see how the recipe types map to this PCA, you'll see that the first axis does an OK job at discriminating muffins and cupcakes.
+I'm imagining a correlation plot where there is a circle drawn representing the significance cutoff and only arrows outside of that significance cutoff labeled.  This could be a job for gghighlight or ggrepel or some combination.
+
+First I'll have to make a dataframe of correlations between loadings and data.
+
 
 ```{r}
-plot_pca(baked.pca, recipes$Type)
+scores <- get_scores(baked.pca)
+
+data <- baked.pca@suppLs$xModelMN %>%
+  as_tibble()
+
+cor.dat2 <-
+  cor(scores[2:3], data) %>%
+    t() %>%
+    as_tibble(rownames = "variable") %>% 
+  rowwise() %>% 
+  mutate(distance = sqrt(sum((c(p1, p2) - c(0, 0))^2))) %>% 
+  ungroup %>% 
+  mutate(t = distance * sqrt((165-2)/(1-distance^2))) %>% 
+  mutate(p.dist = pt(t, df = 165-2, lower.tail = FALSE)) %>% 
+  mutate(p.adj = p.adjust(p.dist, method = "bonf"))
+cor.dat2
 ```
 
+
+```{r}
+ggplot(cor.dat2) +
+  geom_segment(aes(x = 0, y = 0, xend = p1, yend = p2),
+               arrow = arrow(length = unit(0.15, "cm"))) +
+  gghighlight(p.adj < 0.05, use_direct_label = FALSE) +
+  geom_label_repel(aes(x = p1, y = p2, label = variable), segment.alpha = 0.6,direction = "y" ) +
+  theme_bw() +
+  labs(x = glue("Correlation to PC1 ({baked.pca@modelDF$R2X[1]*100}%)"),
+       y = glue("Correlation to PC2 ({baked.pca@modelDF$R2X[2]*100}%)"))
+
+```
+
+
+The axis that explains most of the variation, only explains 7.2%.  This axis is negatively correlated with butter, sugar, cream cheese, "unitless", chocolate, and vanilla while it is positively correlated with fruit, salt, oil, flour, baking powder, and oats.
+
+Axis 1 has a tradeoff in leavening between baking powder and baking soda.  Makes sense as you probably need about the same total amount of leavening always.  Baking soda is correlated with some acidic ingredients like yogurt, sour cream, and vegetable while baking powder is correlated with basic milk.  Makes sense.
+
+Axis 2 is a "healthiness" axis going from savory/healthy at the top to sweet/unhealthy at the bottom.
+
+```{r}
+plot_pca(baked.pca, nofrosting$type)
+```
+No separation along the first axis (leavening/pH) even though that's where the most variation is.  *Slight* separation along the healthyness axis with muffins tending to be a little more healthy than cupcakes.
 
 *BUT* this doesn't answer the question of whether cupcakes and muffins are different.  It answers a slightly different question: "Do cupcakes and muffins differ in the ingredients that vary the most among both cupcakes and muffins?"
 
 # PLS-DA
 
+A supervised analysis looks for a combination of variables that best explains categorization as cupcake or muffin. P1 only explains 9.44% of total variation, but explains **83%** of the difference between cupcakes and muffins!  
+
 ```{r}
-baked.plsda <- opls(select(recipes, -Type, -`Recipe ID`), recipes$Type, plotL = FALSE, predI = 1, orthoI = 1, permI = 200)
+baked.plsda <- opls(select(nofrosting, -type, -recipe_id), nofrosting$type, plotL = FALSE, predI = 1, orthoI = 1, permI = 200)
 plot_oplsda(baked.plsda)
 ```
 
@@ -62,3 +106,17 @@ plot_oplsda(baked.plsda)
 get_loadings(baked.plsda) %>% arrange(desc(abs(p1)))
 ```
 fruit, flour, baking powder, salt, and oats are associated with muffins while cream cheese, butter, vanilla and sugar are associated with cupcakes.  Makes sense.
+
+
+# Validation
+Is this just by chance?  We can test that through cross-validation where we train the PLS model with some data left out and then use it to predict the missing data to see how good it is.  It is pretty good! (use example data table with rows greyed out)
+
+We can also use permutation testing, where we randomly shuffle the muffin/cupcake label and see how the resulting PLS does.  We can ask how often the randomly permuted PLS does just as good a job or better at explaining differences between cupcakes and muffins compared to the PLS made with the real data.  
+
+Why important?  Because even this randomly permuted data sometimes looks like there is separation between muffins and cupcakes.  That's because PLS is *trying* to find separation.
+
+
+Only 0.5% of random models did better, so the difference we've found is real!
+
+
+
