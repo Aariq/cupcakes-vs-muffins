@@ -1,5 +1,6 @@
 ---
 title: "Cupcake or Muffin?"
+author: Eric R. Scott
 output: html_notebook
 ---
 
@@ -8,7 +9,7 @@ The purpose of this notebook is to analyze baked good ingredient data to answer 
 1. What ingredients vary the most among baked goods? (PCA)
 2. Are muffins and cupcakes empirically different? (PLS-DA)
 3. What ingredients best distinguish muffins from cupckaes? (PLS-DA)
-4. What ingredients best explain variation in calories per serving? (PLSR) 
+4. What ingredients best explain variation in calories per serving? (PLSR) (in progress...)
 
 In the process, I will demonstrate some key differences between supervised and unsupervised approaches to multivariate statistics.  I'll be using the `ropls` package along with some helper tools in `holodeck` to answer these questions.
 
@@ -20,41 +21,51 @@ library(holodeck)
 library(gghighlight)
 library(ggrepel)
 library(glue)
+library(latex2exp)
+library(cowplot)
 ```
+
 
 # Read in Data
 
-I have two datasets, one with all (filtered) cupcake and muffin recipes (`recipes`) which includes calories per serving, a recipe ID, a type (muffin or cupcake) and the amount in US cups of all the ingredients (except unitless ingredients and "other" which are count columns).  The other dataset, `nofrosting` has all the muffin recipes, but only cupcake ingredients which are pretty clearly *not* frosting or toppings.  I'll use `nofrosting` for most of the discriminatn analysis, but come back to `recipes` to look at PLS regression.
+I have two datasets, one with all (filtered and cleaned) cupcake and muffin recipes (`recipes`) which includes calories per serving, a recipe ID, a type (muffin or cupcake) and the amount in US cups per serving of all the ingredients (except unitless ingredients and "other" which are counts per serving).  The other dataset, `nofrosting` has all the muffin recipes, but only cupcake ingredients which are pretty clearly *not* frosting or toppings.  I'll use `nofrosting` for most of the discriminatn analysis, but come back to `recipes` to look at PLS regression.  Even though there are 200+ recipes in this dataset, I'm going to take a subset of 30 to demonstrate issues having to do with the "curse of dimensionality", i.e. having more variables than observations.
 
 ```{r}
 set.seed(888)
 recipes <- read_rds(here("data", "recipes_wide.rds"))
-nofrosting <- read_rds(here("data", "nofrosting_wide.rds")) %>% sample_n(30)
+
+nofrosting <-
+  read_rds(here("data", "nofrosting_wide.rds")) %>%
+  sample_n(30) %>%  
+  #puts factor names in title case for prettier plots
+  mutate(type = fct_relabel(type, tools::toTitleCase))
 ```
 
 
 
 # What ingredients vary the most among baked goods?
 
-To answer this question, we do PCA
+PCA, an unsupervised analysis, answers the question "what ingredients vary among muffins and cupcakes together"
 
 ```{r}
 baked.pca <- opls(select(nofrosting, -type, -recipe_id), scaleC = "standard", plotL = FALSE)
 ```
 
-I'm imagining a correlation plot where there is a circle drawn representing the significance cutoff and only arrows outside of that significance cutoff labeled.  This could be a job for gghighlight or ggrepel or some combination.
+A few ingredients get dropped because none of the recipes in my random sample of 30 have those ingredients.  Notice that "type" is excluded in the PCA.  PCA is totally agnostic to whether a recipe is a muffin or cupcake recipe.
 
-First I'll have to make a dataframe of correlations between loadings and data.
+## Correlation plot
 
+This shows the correlation between ingredients and the principle components.
 
 ```{r}
-scores <- get_scores(baked.pca)
+pca.scores <- get_scores(baked.pca)
 
-data <- baked.pca@suppLs$xModelMN %>%
+pca.data <-
+  baked.pca@suppLs$xModelMN %>%
   as_tibble()
 
-cor.dat2 <-
-  cor(scores[2:3], data) %>%
+pca.cor.dat <-
+  cor(pca.scores[2:3], pca.data) %>%
     t() %>%
     as_tibble(rownames = "variable") %>% 
   rowwise() %>% 
@@ -63,32 +74,62 @@ cor.dat2 <-
   mutate(t = distance * sqrt((165-2)/(1-distance^2))) %>% 
   mutate(p.dist = pt(t, df = 165-2, lower.tail = FALSE)) %>% 
   mutate(p.adj = p.adjust(p.dist, method = "bonf"))
-cor.dat2
+# pca.cor.dat
 ```
 
 
 ```{r}
-ggplot(cor.dat2) +
+pca.loading.plot <-
+  ggplot(pca.cor.dat) +
   geom_segment(aes(x = 0, y = 0, xend = p1, yend = p2),
                arrow = arrow(length = unit(0.15, "cm"))) +
   gghighlight(p.adj < 0.05, use_direct_label = FALSE) +
-  geom_label_repel(aes(x = p1, y = p2, label = variable), segment.alpha = 0.6,direction = "y" ) +
+  geom_label_repel(aes(x = p1, y = p2, label = variable),
+                   segment.alpha = 0.6, direction = "y", size = 2.7, 
+                   min.segment.length = 0, force = 3) +
   theme_bw() +
-  labs(x = glue("Correlation to PC1 ({baked.pca@modelDF$R2X[1]*100}%)"),
-       y = glue("Correlation to PC2 ({baked.pca@modelDF$R2X[2]*100}%)"))
+  xlim(-0.6, 1) +
+  labs(x = "Correlation to PC1",
+       y = "Correlation to PC2",
+       title = "PCA correlation plot")
+pca.loading.plot
 ```
 
-
-The axis that explains most of the variation, only explains 7.2%.  This axis is negatively correlated with butter, sugar, cream cheese, "unitless", chocolate, and vanilla while it is positively correlated with fruit, salt, oil, flour, baking powder, and oats.
-
-Axis 1 has a tradeoff in leavening between baking powder and baking soda.  Makes sense as you probably need about the same total amount of leavening always.  Baking soda is correlated with some acidic ingredients like yogurt, sour cream, and vegetable while baking powder is correlated with basic milk.  Makes sense.
+Axis 1 has a tradeoff in leavening between baking powder and baking soda.  This makes sense as you probably need about the same total amount of leavening always.  Baking soda is correlated with some acidic ingredients like yogurt, sour cream, and vegetable while baking powder is correlated with basic milk. 
 
 Axis 2 is a "healthiness" axis going from savory/healthy at the top to sweet/unhealthy at the bottom.
 
+## Score Plot
+
 ```{r}
-plot_pca(baked.pca, nofrosting$type)
+mycolors <- c("Muffin" = "#5B2E0A", "Cupcake" = "#FE282E")
 ```
-No separation along the first axis (leavening/pH) even though that's where the most variation is.  *Slight* separation along the healthyness axis with muffins tending to be a little more healthy than cupcakes.
+```{r}
+# pca.score.plot <- plot_pca(baked.pca, nofrosting$type)
+# pca.score.plot
+
+pca.score.dat <- get_plotdata(baked.pca)
+pca.score.plot<-
+  ggplot(pca.score.dat$scores, aes(x = p1, y = p2, color = nofrosting$type)) +
+  geom_point(size = 3) +
+  scale_color_manual("Group Membership:", values = mycolors) +
+  labs(x = glue("PC1 ({baked.pca@modelDF$R2X[1]*100}%)"),
+       y = glue("PC2 ({baked.pca@modelDF$R2X[2]*100}%)"),
+       title = "PCA score plot") +
+  theme_bw() +
+  theme(legend.position = "bottom")
+pca.score.plot
+```
+
+```{r include=FALSE}
+pca.plots <-
+  plot_grid(pca.score.plot + theme(legend.position = "none"), pca.loading.plot, ncol = 2, nrow = 1)
+save_plot(here("figs", "pca.png"), pca.plots,
+          ncol = 2)
+```
+
+
+There is no separation between muffins and cupcakes along the first axis (leavening/pH) even though that's where the most variation is.  There is *slight* separation along the healthyness axis with muffins tending to be a little more healthy than cupcakes.
 
 *BUT* this doesn't answer the question of whether cupcakes and muffins are different.  It answers a slightly different question: "Do cupcakes and muffins differ in the ingredients that vary the most among both cupcakes and muffins?"
 
@@ -98,17 +139,20 @@ A supervised analysis looks for a combination of variables that best explains ca
 
 ```{r}
 baked.plsda <- opls(select(nofrosting, -type, -recipe_id), nofrosting$type, plotL = FALSE, predI = 1, orthoI = 1, permI = 200)
-plot_oplsda(baked.plsda)
+# plot_oplsda(baked.plsda)
 ```
 
-```{r}
-scores <- get_scores(baked.plsda)
+## Loading Plot
 
-data <- baked.plsda@suppLs$xModelMN %>%
+```{r}
+pls.scores <- get_scores(baked.plsda)
+
+pls.data <- 
+  baked.plsda@suppLs$xModelMN %>%
   as_tibble()
 
-cor.dat2 <-
-  cor(scores[3:4], data) %>%
+pls.cor.dat <-
+  cor(pls.scores[3:4], pls.data) %>%
     t() %>%
     as_tibble(rownames = "variable") %>% 
   rowwise() %>% 
@@ -117,37 +161,120 @@ cor.dat2 <-
   mutate(t = distance * sqrt((165-2)/(1-distance^2))) %>% 
   mutate(p.dist = pt(t, df = 165-2, lower.tail = FALSE)) %>% 
   mutate(p.adj = p.adjust(p.dist, method = "bonf"))
-cor.dat2
+# pls.cor.dat
 ```
 ```{r}
-ggplot(cor.dat2) +
+pls.loading.plot <-
+  ggplot(pls.cor.dat) +
   geom_segment(aes(x = 0, y = 0, xend = p1, yend = o1),
                arrow = arrow(length = unit(0.15, "cm"))) +
   gghighlight(p.adj < 0.05, use_direct_label = FALSE) +
-  geom_label_repel(aes(x = p1, y = o1, label = variable), segment.alpha = 0.6,direction = "y" ) +
+  geom_label_repel(aes(x = p1, y = o1, label = variable),
+                   segment.alpha = 0.6,direction = "y", size = 2.7, 
+                   min.segment.length = 0, force = 3, box.padding = 0.3) +
   theme_bw() +
-  labs(x = glue("Correlation to PC1 ({baked.plsda@modelDF$R2X[1]*100}%)"),
-       y = glue("Correlation to PC2 ({baked.plsda@modelDF$R2X[2]*100}%)"))
+  labs(x = glue("Correlation to Axis 1"),
+       y = glue("Correlation to Axis 2"),
+       title = "PLS correlation plot")
+pls.loading.plot
 ```
 
+## Score Plot
 
 ```{r}
-get_loadings(baked.plsda) %>% arrange(desc(abs(p1)))
+pls.score.dat <- get_plotdata(baked.plsda)
+pls.score.plot<-
+  ggplot(pls.score.dat$scores, aes(x = p1, y = o1, color = y1)) +
+  geom_point(size = 3) +
+  scale_color_manual("Group Membership:", values = mycolors) +
+  labs(x = glue("Axis 1 ({baked.plsda@modelDF$R2X[1]*100}%)"),
+       y = glue("Axis 2 ({baked.plsda@modelDF$R2X[2]*100}%)"),
+       title = "PLS score plot") +
+  annotate(geom = "text", x = 2, y = -4, label = TeX(glue("$R^2_Y = {pls.score.dat$model_stats$`R2Y(cum)`}$"))) +
+  theme_bw() +
+  theme(legend.position = "top")
+pls.score.plot
 ```
 
+Vanilla is very strongly correlated with being a cupcake and fruit, flour, and salt are strongly correlated with muffin-ness.
 
-fruit, flour, baking powder, salt, and oats are associated with muffins while cream cheese, butter, vanilla and sugar are associated with cupcakes.  Makes sense.
+```{r include=FALSE}
+pls.plots <-
+  plot_grid(pls.score.plot + theme(legend.position = "none"), pls.loading.plot, ncol = 2, nrow = 1)
+save_plot(here("figs", "pls.png"), pls.plots,
+          ncol = 2)
+```
 
 
 # Validation
-Is this just by chance?  We can test that through cross-validation where we train the PLS model with some data left out and then use it to predict the missing data to see how good it is.  It is pretty good! (use example data table with rows greyed out)
 
-We can also use permutation testing, where we randomly shuffle the muffin/cupcake label and see how the resulting PLS does.  We can ask how often the randomly permuted PLS does just as good a job or better at explaining differences between cupcakes and muffins compared to the PLS made with the real data.  
+Is this just by chance? Even this randomly permuted data sometimes looks like there is separation between muffins and cupcakes.  That's because PLS is *trying* to find separation.
 
-Why important?  Because even this randomly permuted data sometimes looks like there is separation between muffins and cupcakes.  That's because PLS is *trying* to find separation.
+## Cross-validation
+
+Essentially this involves training the PLS model on data with some of the recipes left out, then using that model to predict the baked good type.  The `ropls` package uses cross-validation to calculate a $Q^2$ statistic.  This can be interpreted as the predictive power of a model.  If a model is to be considered "good" a higher $Q^2$ is better than a lower one, numbers close to or below zero definitely indicate poor predictive power, and generally a value not much lower than $R^2_y$ is good.  In this case, the $Q^2$ is 0.58 which is pretty good!
+
+## Permuatation example
+
+Here, I've randomly shuffled the `type` column and re-run the PLS.   
+
+```{r}
+set.seed(201)
+nofrosting.perm <-
+  nofrosting %>% 
+  mutate(type = sample(type, replace = TRUE))
+
+perm.plsda <- opls(select(nofrosting.perm, -type, -recipe_id), nofrosting.perm$type, plotL = FALSE, predI = 1, orthoI = 1, permI = 20)
+```
+
+```{r}
+perm.score.dat <- get_plotdata(perm.plsda)
+perm.score.plot<-
+  ggplot(perm.score.dat$scores, aes(x = p1, y = o1, color = y1)) +
+  geom_point(size = 3) +
+  scale_color_manual("Group Membership (Randomized!):", values = mycolors) +
+  labs(x = glue("Axis 1 ({perm.plsda@modelDF$R2X[1]*100}%)"),
+       y = glue("Axis 2 ({perm.plsda@modelDF$R2X[2]*100}%)"),
+       title = "PLS score plot",
+       caption = TeX(glue("$R^2_Y = {perm.score.dat$model_stats$`R2Y(cum)`*100}%$"))) +
+  theme_bw() +
+  theme(legend.position = "top")
+perm.score.plot
+```
+
+You'll see that the R2Y is still pretty good and the visual separation in the score plot is still strong even though this is totally *random* data!  Permutation testing asks how often randomly permuted data performs better than the real deal.
+
+This is where the p-value output from `opls()` tells us.  For the real data, both $p_{R^2_Y}$ and $p_{Q^2}$ are < 0.005.  For this randomly permuted data the p-value is very high.
+
+```{r fig.height=3, fig.width=3, include=FALSE}
+library(animation)
+saveGIF({
+  i = 0
+  while(i < 15) {
+    df <- 
+      nofrosting %>% 
+      mutate(type = sample(type, replace = TRUE))
+    p.df <-
+      opls(select(df, -type, -recipe_id), df$type,
+           plotL = FALSE, printL = FALSE, predI = 1, orthoI = 1) %>%
+      get_plotdata()
+    p.out <-
+      ggplot(p.df$scores, aes(x = p1, y = o1, color = y1)) +
+      geom_point(size = 3) +
+      scale_color_manual("Randomized Label:", values = mycolors) +
+      labs(x = glue("Axis 1 ({p.df$axis_stats$R2X[1]*100}%)"),
+       y = glue("Axis 2 ({p.df$axis_stats$R2X[2]*100}%)"),
+       title = "PLS score plot",
+       subtitle = TeX(glue("$R^2_Y = {p.df$model_stats$`R2Y(cum)`}$"))) +
+      theme_bw() +
+      theme(legend.position = "top")
+    i = i+1
+    print(p.out)
+  }
+}, "test.gif", ani.height = 350, ani.width = 350)
+```
 
 
-Only 0.5% of random models did better, so the difference we've found is real!
 
 
 
