@@ -336,6 +336,7 @@ This data set is basically ready for analysis, although it contains cupcake reci
 
 ```{r}
 write_rds(recipes_tidy, here("data", "recipes_tidy.rds"))
+write_csv(recipes_tidy, here("data", "recipes_tidy.csv"))
 ```
 
 
@@ -375,4 +376,5 @@ nofrosting_tidy <-
 
 ```{r}
 write_rds(nofrosting_tidy, here("data", "nofrosting_tidy.rds"))
+write_csv(nofrosting_tidy, here("data", "nofrosting_tidy.csv"))
 ```

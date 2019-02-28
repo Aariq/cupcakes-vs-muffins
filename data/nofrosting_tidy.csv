@@ -1,0 +1,1609 @@
+type,recipe_id,ingredient,amount_sum,units_std,servings,value,amount_per
+cupcake,155084,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+cupcake,155084,butter,0.5,cups,12,"1/2 cup butter, at room temperature",0.041666666666666664
+cupcake,155084,eggs,3,eggs,12,"3 eggs, room temperature",0.25
+cupcake,155084,flour,1.75,cups,12,1 3/4 cups all-purpose flour,0.14583333333333334
+cupcake,155084,milk,0.25,cups,12,1/4 cup milk,0.020833333333333332
+cupcake,155084,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+cupcake,155084,sugar,0.5,cups,12,1/2 cup white sugar,0.041666666666666664
+cupcake,155084,unitless,1,NA,12,"2 large bananas, chopped",0.08333333333333333
+cupcake,155084,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,212429,baking soda,0.0208333,cups,30,1 teaspoon baking soda,6.944433333333333e-4
+cupcake,212429,butter,1,cups,30,"1 cup butter, softened",0.03333333333333333
+cupcake,212429,chocolate,0.5,cups,30,1/2 cup unsweetened cocoa powder,0.016666666666666666
+cupcake,212429,eggs,4,eggs,30,4 eggs,0.13333333333333333
+cupcake,212429,flour,2.5,cups,30,2 1/2 cups flour,0.08333333333333333
+cupcake,212429,milk,0.5,cups,30,1/2 cup milk,0.016666666666666666
+cupcake,212429,other,0.125,cups,30,1 (1 ounce) bottle mccormick® red food color,0.004166666666666667
+cupcake,212429,salt,0.01041665,cups,30,1/2 teaspoon salt,3.4722166666666663e-4
+cupcake,212429,sour cream,1,cups,30,1 cup sour cream,0.03333333333333333
+cupcake,212429,sugar,2,cups,30,2 cups sugar,0.06666666666666667
+cupcake,212429,vanilla,0.0416666,cups,30,2 teaspoons mccormick® pure vanilla extract,0.0013888866666666665
+cupcake,215375,baking powder,0.0416666,cups,32,2 teaspoons argo® baking powder,0.00130208125
+cupcake,215375,baking soda,0.0208333,cups,32,1 teaspoon baking soda,6.51040625e-4
+cupcake,215375,eggs,4,eggs,32,"4 eggs, slightly beaten",0.125
+cupcake,215375,flour,1.75,cups,32,1 3/4 cups all-purpose flour,0.0546875
+cupcake,215375,oil,0.75,cups,32,3/4 cup mazola® vegetable plus! oil,0.0234375
+cupcake,215375,salt,0.015624975,cups,32,3/4 teaspoon salt,4.8828046875e-4
+cupcake,215375,spice,0.0833332,cups,32,4 teaspoons spice islands® pumpkin pie spice,0.0026041625
+cupcake,215375,starch,0.25,cups,32,1/4 cup argo® or kingsford's® corn starch,0.0078125
+cupcake,215375,sugar,2,cups,32,2 cups sugar,0.0625
+cupcake,215375,vegetable,1.875,cups,32,1 (15 ounce) can pumpkin,0.05859375
+cupcake,217139,baking powder,0.03124995,cups,24,1 1/2 teaspoons baking powder,0.00130208125
+cupcake,217139,butter,0.75,cups,24,3/4 cup butter,0.03125
+cupcake,217139,eggs,6,eggs,24,6 eggs at room temperature,0.25
+cupcake,217139,flour,2.25,cups,24,2 1/4 cups all-purpose flour,0.09375
+cupcake,217139,fruit,0.0416666,cups,24,2 teaspoons lemon zest,0.0017361083333333333
+cupcake,217139,fruit juice,0.25,cups,24,1/4 cup fresh lemon juice,0.010416666666666666
+cupcake,217139,salt,0.01041665,cups,24,1/2 teaspoon salt,4.340270833333333e-4
+cupcake,217139,sugar,1.25,cups,24,1 1/4 cups white sugar,0.052083333333333336
+cupcake,218681,cream cheese,2,cups,12,2 cups cream cheese,0.16666666666666666
+cupcake,218681,eggs,3,eggs,12,3 eggs,0.25
+cupcake,218681,flour,0.125,cups,12,2 tablespoons flour,0.010416666666666666
+cupcake,218681,fruit,0.0013020833333333333,cups,12,pinch of orange zest,1.0850694444444444e-4
+cupcake,218681,honey,0.125,cups,12,2 tablespoons maille® honey dijon mustard,0.010416666666666666
+cupcake,218681,other,1,cups,12,1 cup creme fraiche,0.08333333333333333
+cupcake,218681,sugar,0.75,cups,12,3/4 cup sugar,0.0625
+cupcake,219859,baking soda,0.005208325,cups,8,1/4 teaspoon baking soda,6.51040625e-4
+cupcake,219859,butter,0.125,cups,8,"2 tablespoons melt® organic buttery spread, melted over low heat",0.015625
+cupcake,219859,buttermilk,0.5,cups,8,1/2 cup low fat buttermilk*,0.0625
+cupcake,219859,chocolate,0.125,cups,8,"2 tablespoons natural, unsweetened cocoa powder",0.015625
+cupcake,219859,eggs,4,eggs,8,2 eggs;2 egg whites,0.5
+cupcake,219859,flour,0.5,cups,8,1/2 cup coconut flour,0.0625
+cupcake,219859,low-cal sweetener,0.51041665,cups,8,"1/2 cup erythritol, such as now foods;1/2 teaspoon vanilla stevia extract",0.06380208125
+cupcake,219859,salt,0.005208325,cups,8,1/4 teaspoon salt,6.51040625e-4
+cupcake,219859,unitless,1,NA,8,7 drops red gel food coloring,0.125
+cupcake,229465,baking soda,0.0416666,cups,24,2 teaspoons baking soda,0.0017361083333333333
+cupcake,229465,buttermilk,1,cups,24,1 cup buttermilk,0.041666666666666664
+cupcake,229465,chocolate,0.5,cups,24,1/2 cup unsweetened cocoa,0.020833333333333332
+cupcake,229465,eggs,3,eggs,24,3 eggs,0.125
+cupcake,229465,flour,3.5,cups,24,3 1/2 cups cake flour,0.14583333333333334
+cupcake,229465,fruit,1,cups,24,1 cup applesauce,0.041666666666666664
+cupcake,229465,low-cal sweetener,1.125,cups,24,1 1/8 cups truvia® baking blend,0.046875
+cupcake,229465,oil,1,cups,24,1 cup canola oil,0.041666666666666664
+cupcake,229465,other,0.15624995,cups,24,1/8 cup red food coloring (see note);1 1/2 teaspoons vanilla,0.006510414583333333
+cupcake,229465,salt,0.03124995,cups,24,1 1/2 teaspoons salt,0.00130208125
+cupcake,229465,vinegar,0.05208325,cups,24,2 1/2 teaspoons vinegar,0.0021701354166666666
+cupcake,229952,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+cupcake,229952,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+cupcake,229952,butter,0.5,cups,12,"1/2 cup butter, room temperature",0.041666666666666664
+cupcake,229952,eggs,2,eggs,12,"2 eggs, room temperature",0.16666666666666666
+cupcake,229952,flour,2,cups,12,2 cups unbleached all-purpose flour,0.16666666666666666
+cupcake,229952,milk,0.5,cups,12,"1/2 cup milk, room temperature",0.041666666666666664
+cupcake,229952,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+cupcake,229952,spice,0.057291575,cups,12,1 teaspoon ground cinnamon;1 teaspoon ground ginger;1/2 teaspoon ground nutmeg;1/4 teaspoon ground cloves,0.0047742979166666664
+cupcake,229952,sugar,1.5,cups,12,1 1/2 cups brown sugar,0.125
+cupcake,229952,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,229952,vegetable,1,cups,12,"1 cup cooked, mashed sweet potatoes",0.08333333333333333
+cupcake,230203,baking powder,0.0416666,cups,24,2 teaspoons baking powder,0.0017361083333333333
+cupcake,230203,baking soda,0.0416666,cups,24,2 teaspoons baking soda,0.0017361083333333333
+cupcake,230203,butter,0.5,cups,24,1/2 cup butter,0.020833333333333332
+cupcake,230203,cream cheese,1,cups,24,"1 (8 ounce) package cream cheese, softened",0.041666666666666664
+cupcake,230203,eggs,2,eggs,24,2 eggs,0.08333333333333333
+cupcake,230203,flour,2,cups,24,2 cups all-purpose flour,0.08333333333333333
+cupcake,230203,fruit,3.3333333333333335,cups,24,1/3 cup applesauce;3 cups mashed ripe bananas,0.1388888888888889
+cupcake,230203,nut,1,cups,24,1 cup chopped pecans,0.041666666666666664
+cupcake,230203,oil,0.5,cups,24,1/2 cup canola oil,0.020833333333333332
+cupcake,230203,salt,0.01041665,cups,24,1/2 teaspoon salt,4.340270833333333e-4
+cupcake,230203,spice,0.0625,cups,24,1 tablespoon ground cinnamon,0.0026041666666666665
+cupcake,230203,sugar,2,cups,24,1 cup brown sugar;1 cup white sugar,0.08333333333333333
+cupcake,230203,vanilla,0.0208333,cups,24,1 teaspoon vanilla extract,8.680541666666666e-4
+cupcake,231832,baking powder,0.0625,cups,24,1 tablespoon baking powder,0.0026041666666666665
+cupcake,231832,butter,0.5,cups,24,1/2 cup unsalted butter at room temperature,0.020833333333333332
+cupcake,231832,cream,0.5,cups,24,1/2 cup cold heavy whipping cream,0.020833333333333332
+cupcake,231832,eggs,3,eggs,24,2 large egg whites at room temperature;1 egg at room temperature,0.125
+cupcake,231832,flour,2.5,cups,24,2 1/2 cups sifted cake flour,0.10416666666666667
+cupcake,231832,milk,1,cups,24,1 cup whole milk at room temperature,0.041666666666666664
+cupcake,231832,nut,1.005208325,cups,24,1/4 teaspoon almond extract;1 cup chopped pecans,0.04188368020833333
+cupcake,231832,salt,0.01041665,cups,24,1/2 teaspoon salt,4.340270833333333e-4
+cupcake,231832,sugar,1.5,cups,24,1 1/2 cups white sugar,0.0625
+cupcake,231832,vanilla,0.005208325,cups,24,1/4 teaspoon vanilla extract,2.1701354166666666e-4
+cupcake,232371,baking soda,0.015624975,cups,12,3/4 teaspoon baking soda,0.00130208125
+cupcake,232371,butter,0.3125,cups,12,"5 tablespoons butter, cut into chunks",0.026041666666666668
+cupcake,232371,eggs,3,eggs,12,2 eggs;1 egg yolk,0.25
+cupcake,232371,flour,1.25,cups,12,1 1/4 cups all-purpose flour,0.10416666666666667
+cupcake,232371,milk,0.6666666666666666,cups,12,2/3 cup milk,0.05555555555555555
+cupcake,232371,nut,0.5,cups,12,1/2 cup shredded coconut,0.041666666666666664
+cupcake,232371,salt,0.0013020833333333333,cups,12,1 pinch salt,1.0850694444444444e-4
+cupcake,232371,sugar,1,cups,12,1 cup white sugar,0.08333333333333333
+cupcake,232371,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,233298,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+cupcake,233298,butter,0.5,cups,12,"1/2 cup butter, softened",0.041666666666666664
+cupcake,233298,buttermilk,0.5,cups,12,1/2 cup buttermilk or sour milk,0.041666666666666664
+cupcake,233298,chocolate,0.25,cups,12,2 (1 ounce) squares sweet baking chocolate,0.020833333333333332
+cupcake,233298,eggs,2,eggs,12,2 eggs,0.16666666666666666
+cupcake,233298,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+cupcake,233298,nut,0.6666666666666666,cups,12,2/3 cup toasted shaved coconut*,0.05555555555555555
+cupcake,233298,other,0.01041665,cups,12,1/2 teaspoon vanilla,8.680541666666666e-4
+cupcake,233298,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+cupcake,233298,sugar,0.5,cups,12,1/2 cup sugar,0.041666666666666664
+cupcake,233298,unitless,1,NA,12,caramel ice cream topping,0.08333333333333333
+cupcake,233298,water,0.25,cups,12,1/4 cup water,0.020833333333333332
+cupcake,233433,butter,1,cups,24,"1 cup butter, softened",0.041666666666666664
+cupcake,233433,eggs,3,eggs,24,3 eggs,0.125
+cupcake,233433,flour,2,cups,24,2 cups all-purpose flour,0.08333333333333333
+cupcake,233433,fruit,0.0625,cups,24,1 tablespoon raspberry extract,0.0026041666666666665
+cupcake,233433,milk,0.5,cups,24,1/2 cup milk,0.020833333333333332
+cupcake,233433,sugar,2,cups,24,2 cups white sugar,0.08333333333333333
+cupcake,233433,unitless,1,NA,24,6 drops blue food coloring,0.041666666666666664
+cupcake,234135,baking soda,0.0416666,cups,24,2 teaspoons baking soda,0.0017361083333333333
+cupcake,234135,flour,3,cups,24,3 cups all-purpose flour,0.125
+cupcake,234135,oil,0.6666666666666666,cups,24,2/3 cup canola oil,0.027777777777777776
+cupcake,234135,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+cupcake,234135,spice,0.0416666,cups,24,1 teaspoon ground cinnamon;1/2 teaspoon ground cloves;1/2 teaspoon ground nutmeg,0.0017361083333333333
+cupcake,234135,sugar,2,cups,24,2 cups white sugar,0.08333333333333333
+cupcake,234135,vanilla,0.0416666,cups,24,2 teaspoons vanilla extract,0.0017361083333333333
+cupcake,234135,vinegar,0.125,cups,24,2 tablespoons distilled white vinegar,0.005208333333333333
+cupcake,234135,water,2,cups,24,2 cups water,0.08333333333333333
+cupcake,234679,baking powder,0.015624975,cups,24,3/4 teaspoon baking powder,6.51040625e-4
+cupcake,234679,butter,0.75,cups,24,"3/4 cup butter, softened",0.03125
+cupcake,234679,buttermilk,1,cups,24,1 cup buttermilk,0.041666666666666664
+cupcake,234679,eggs,3,eggs,24,3 eggs,0.125
+cupcake,234679,flour,2.3333333333333335,cups,24,2 1/3 cups all-purpose flour,0.09722222222222222
+cupcake,234679,spice,0.13541665,cups,24,1 tablespoon pumpkin pie spice;1 tablespoon ground cinnamon;1/2 teaspoon ground ginger,0.005642360416666666
+cupcake,234679,sugar,2.5,cups,24,2 1/2 cups white sugar,0.10416666666666667
+cupcake,234679,vegetable,1.875,cups,24,1 (15 ounce) can solid-pack pumpkin puree,0.078125
+cupcake,234807,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+cupcake,234807,baking soda,0.005208325,cups,12,1/4 teaspoon baking soda,4.340270833333333e-4
+cupcake,234807,butter,0.25,cups,12,"1/4 cup butter, softened",0.020833333333333332
+cupcake,234807,buttermilk,0.75,cups,12,3/4 cup buttermilk,0.0625
+cupcake,234807,chocolate,0.1875,cups,12,3 tablespoons unsweetened cocoa powder,0.015625
+cupcake,234807,eggs,2,eggs,12,2 large eggs,0.16666666666666666
+cupcake,234807,flour,1.3333333333333333,cups,12,1 1/3 cups all-purpose flour,0.1111111111111111
+cupcake,234807,other,0.0625,cups,12,1 tablespoon red food coloring,0.005208333333333333
+cupcake,234807,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+cupcake,234807,sugar,1,cups,12,1 cup white sugar,0.08333333333333333
+cupcake,234807,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,234807,vinegar,0.0416666,cups,12,2 teaspoons white vinegar,0.0034722166666666665
+cupcake,236008,baking powder,0.0208333,cups,24,1 teaspoon baking powder,8.680541666666666e-4
+cupcake,236008,baking soda,0.0416666,cups,24,2 teaspoons baking soda,0.0017361083333333333
+cupcake,236008,buttermilk,1,cups,24,1 cup buttermilk,0.041666666666666664
+cupcake,236008,chocolate,1,cups,24,1 cup dark chocolate chips,0.041666666666666664
+cupcake,236008,eggs,2,eggs,24,2 eggs,0.08333333333333333
+cupcake,236008,flour,2,cups,24,2 cups whole wheat flour,0.08333333333333333
+cupcake,236008,other,1.5,cups,24,"1 cup cold, strong, brewed coffee;1/2 cup bacon grease",0.0625
+cupcake,236008,salt,0.01041665,cups,24,1/2 teaspoon sea salt,4.340270833333333e-4
+cupcake,236008,sugar,2,cups,24,2 cups demerara sugar,0.08333333333333333
+cupcake,236008,unitless,1,NA,24,24 slices bacon,0.041666666666666664
+cupcake,237036,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+cupcake,237036,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+cupcake,237036,butter,0.125,cups,12,"2 tablespoons unsalted butter, softened",0.010416666666666666
+cupcake,237036,eggs,2,eggs,12,2 large eggs,0.16666666666666666
+cupcake,237036,flour,1.6666666666666665,cups,12,1 2/3 cups all-purpose flour,0.13888888888888887
+cupcake,237036,fruit,0.75,cups,12,3/4 cup mashed ripe bananas,0.0625
+cupcake,237036,milk,0.5,cups,12,1/2 cup milk,0.041666666666666664
+cupcake,237036,nut,0.3125,cups,12,5 tablespoons creamy natural peanut butter,0.026041666666666668
+cupcake,237036,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+cupcake,237036,sugar,0.75,cups,12,3/4 cup firmly packed light brown sugar,0.0625
+cupcake,237036,vanilla,0.03124995,cups,12,1 1/2 teaspoons vanilla extract,0.0026041625
+cupcake,237099,baking soda,0.0208333,cups,44,1 teaspoon baking soda,4.734840909090909e-4
+cupcake,237099,chocolate,0.25,cups,44,1/4 cup unsweetened cocoa powder,0.005681818181818182
+cupcake,237099,flour,1.5,cups,44,1 1/2 cups all-purpose flour,0.03409090909090909
+cupcake,237099,oil,0.3333333333333333,cups,44,1/3 cup vegetable oil,0.007575757575757575
+cupcake,237099,salt,0.01041665,cups,44,1/2 teaspoon salt,2.3674204545454545e-4
+cupcake,237099,sugar,1.125,cups,44,"1 cup white sugar;2 tablespoons white sugar, or as needed",0.02556818181818182
+cupcake,237099,vanilla,0.0208333,cups,44,1 teaspoon vanilla extract,4.734840909090909e-4
+cupcake,237099,vinegar,0.0625,cups,44,1 tablespoon vinegar,0.0014204545454545455
+cupcake,237099,water,1,cups,44,1 cup water,0.022727272727272728
+cupcake,238285,baking soda,0.0416666,cups,24,2 teaspoons baking soda,0.0017361083333333333
+cupcake,238285,chocolate,1.5,cups,24,"1 cup unsweetened cocoa powder;1/2 cup chocolate chips, or more to taste",0.0625
+cupcake,238285,flour,2.25,cups,24,2 1/4 cups whole wheat flour,0.09375
+cupcake,238285,oil,0.5,cups,24,1/2 cup canola oil,0.020833333333333332
+cupcake,238285,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+cupcake,238285,sugar,2,cups,24,2 cups brown sugar,0.08333333333333333
+cupcake,238285,unitless,1,NA,24,"1 over-ripe banana, mashed",0.041666666666666664
+cupcake,238285,vinegar,0.0833332,cups,24,4 teaspoons apple cider vinegar,0.0034722166666666665
+cupcake,238285,water,1.5,cups,24,1 1/2 cups water,0.0625
+cupcake,238748,baking powder,0.015624975,cups,24,3/4 teaspoon baking powder,6.51040625e-4
+cupcake,238748,baking soda,0.0208333,cups,24,1 teaspoon baking soda,8.680541666666666e-4
+cupcake,238748,butter,0.75,cups,24,"3/4 cup butter, softened",0.03125
+cupcake,238748,chocolate,0.75,cups,24,3/4 cup unsweetened cocoa powder,0.03125
+cupcake,238748,eggs,3,eggs,24,3 eggs,0.125
+cupcake,238748,flour,2,cups,24,2 cups all-purpose flour,0.08333333333333333
+cupcake,238748,milk,1.5,cups,24,1 1/2 cups milk,0.0625
+cupcake,238748,nut,0.5,cups,24,1/2 cup seedless raspberry preserves,0.020833333333333332
+cupcake,238748,other,0.0416666,cups,24,2 teaspoons vanilla,0.0017361083333333333
+cupcake,238748,salt,0.01041665,cups,24,1/2 teaspoon salt,4.340270833333333e-4
+cupcake,238748,sugar,1.5,cups,24,1 1/2 cups granulated sugar,0.0625
+cupcake,238748,unitless,1,NA,24,"fresh raspberries, for garnish",0.041666666666666664
+cupcake,238752,baking powder,0.03124995,cups,12,1 1/2 teaspoons baking powder,0.0026041625
+cupcake,238752,baking soda,0.005208325,cups,12,1/4 teaspoon baking soda,4.340270833333333e-4
+cupcake,238752,butter,0.375,cups,12,"6 tablespoons butter, softened",0.03125
+cupcake,238752,eggs,2,eggs,12,2 eggs,0.16666666666666666
+cupcake,238752,flour,1.75,cups,12,1 3/4 cups all-purpose flour,0.14583333333333334
+cupcake,238752,milk,1,cups,12,1 cup milk,0.08333333333333333
+cupcake,238752,molasses,0.5,cups,12,1/2 cup molasses,0.041666666666666664
+cupcake,238752,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+cupcake,238752,spice,0.026041625,cups,12,1 teaspoon ground cinnamon;1/4 teaspoon ground ginger,0.0021701354166666666
+cupcake,238752,sugar,0.5,cups,12,1/2 cup granulated sugar,0.041666666666666664
+cupcake,238752,unitless,1,NA,12,orange and black decorating sugar,0.08333333333333333
+cupcake,238756,baking powder,0.0208333,cups,24,1 teaspoon baking powder,8.680541666666666e-4
+cupcake,238756,baking soda,0.0208333,cups,24,1 teaspoon baking soda,8.680541666666666e-4
+cupcake,238756,chocolate,1,cups,24,1 cup mini jelly beans or chocolate egg candies,0.041666666666666664
+cupcake,238756,eggs,1,eggs,24,"1 egg, lightly beaten",0.041666666666666664
+cupcake,238756,flour,2,cups,24,2 cups all-purpose flour,0.08333333333333333
+cupcake,238756,fruit,0.5,cups,24,1/2 cup unsweetened applesauce,0.020833333333333332
+cupcake,238756,nut,1,cups,24,"1 cup flaked coconut, toasted",0.041666666666666664
+cupcake,238756,oil,0.5,cups,24,1/2 cup canola oil,0.020833333333333332
+cupcake,238756,other,0.0208333,cups,24,1 teaspoon vanilla,8.680541666666666e-4
+cupcake,238756,salt,0.0026041625,cups,24,1/8 teaspoon salt,1.0850677083333333e-4
+cupcake,238756,spice,0.046874925,cups,24,2 teaspoons ground cinnamon;1/4 teaspoon ground nutmeg,0.001953121875
+cupcake,238756,sugar,1,cups,24,1 cup granulated sugar,0.041666666666666664
+cupcake,238756,vegetable,2,cups,24,2 cups shredded carrots,0.08333333333333333
+cupcake,239196,baking powder,0.01041665,cups,12,1/2 teaspoon baking powder,8.680541666666666e-4
+cupcake,239196,butter,0.5,cups,12,"1/2 cup butter, softened",0.041666666666666664
+cupcake,239196,eggs,2,eggs,12,2 eggs,0.16666666666666666
+cupcake,239196,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+cupcake,239196,fruit,0.0416666,cups,12,2 teaspoons lemon extract,0.0034722166666666665
+cupcake,239196,milk,0.6666666666666666,cups,12,2/3 cup cold milk,0.05555555555555555
+cupcake,239196,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+cupcake,239196,sugar,0.75,cups,12,"3/4 cup white sugar, or more to taste",0.0625
+cupcake,239261,baking powder,0.0416666,cups,24,2 teaspoons argo® baking powder,0.0017361083333333333
+cupcake,239261,butter,0.5,cups,24,"1/2 cup butter, softened",0.020833333333333332
+cupcake,239261,cream cheese,1,cups,24,"1 (8 ounce) package cream cheese, softened",0.041666666666666664
+cupcake,239261,eggs,4,eggs,24,4 eggs,0.16666666666666666
+cupcake,239261,flour,2,cups,24,2 cups flour,0.08333333333333333
+cupcake,239261,fruit,0.125,cups,24,2 tablespoons freshly grated orange peel,0.005208333333333333
+cupcake,239261,milk,0.25,cups,24,1/4 cup milk,0.010416666666666666
+cupcake,239261,oil,0.25,cups,24,1/4 cup mazola® corn oil,0.010416666666666666
+cupcake,239261,salt,0.01041665,cups,24,1/2 teaspoon salt,4.340270833333333e-4
+cupcake,239261,sugar,1.25,cups,24,1 1/4 cups sugar,0.052083333333333336
+cupcake,239261,vanilla,0.0208333,cups,24,1 teaspoon spice islands® pure vanilla extract,8.680541666666666e-4
+cupcake,239596,baking powder,0.03124995,cups,24,1 1/2 teaspoons baking powder,0.00130208125
+cupcake,239596,baking soda,0.03124995,cups,24,1 1/2 teaspoons baking soda,0.00130208125
+cupcake,239596,eggs,2,eggs,24,2 eggs,0.08333333333333333
+cupcake,239596,flour,2.125,cups,24,2 1/8 cups all-purpose flour,0.08854166666666667
+cupcake,239596,fruit,0.0208333,cups,24,1 teaspoon lemon extract,8.680541666666666e-4
+cupcake,239596,fruit juice,1,cups,24,1 cup strained fresh lemon juice,0.041666666666666664
+cupcake,239596,milk,1,cups,24,1 cup milk,0.041666666666666664
+cupcake,239596,oil,0.5,cups,24,1/2 cup vegetable oil,0.020833333333333332
+cupcake,239596,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+cupcake,239596,sugar,2,cups,24,2 cups white sugar,0.08333333333333333
+cupcake,239596,vanilla,0.0208333,cups,24,1 teaspoon vanilla extract,8.680541666666666e-4
+cupcake,240140,baking powder,0.026041625,cups,30,1 1/4 teaspoons baking powder,8.680541666666666e-4
+cupcake,240140,baking soda,0.0208333,cups,30,1 teaspoon baking soda,6.944433333333333e-4
+cupcake,240140,eggs,4,eggs,30,4 eggs,0.13333333333333333
+cupcake,240140,flour,2.5,cups,30,2 1/2 cups all-purpose flour,0.08333333333333333
+cupcake,240140,oil,1.5,cups,30,1 1/2 cups vegetable oil,0.05
+cupcake,240140,salt,0.01041665,cups,30,1/2 teaspoon salt,3.4722166666666663e-4
+cupcake,240140,spice,0.05208325,cups,30,1 1/2 teaspoons ground cinnamon;1 teaspoon ground allspice,0.0017361083333333333
+cupcake,240140,sugar,2,cups,30,1 1/2 cups white sugar;1/2 cup brown sugar,0.06666666666666667
+cupcake,240140,vegetable,1.5,cups,30,1 1/2 cups shredded carrots,0.05
+cupcake,241405,baking powder,0.0208333,cups,24,1 teaspoon baking powder,8.680541666666666e-4
+cupcake,241405,baking soda,0.0416666,cups,24,2 teaspoons baking soda,0.0017361083333333333
+cupcake,241405,buttermilk,1,cups,24,1 cup buttermilk,0.041666666666666664
+cupcake,241405,chocolate,0.75,cups,24,3/4 cup unsweetened cocoa powder,0.03125
+cupcake,241405,eggs,2,eggs,24,2 eggs,0.08333333333333333
+cupcake,241405,flour,2,cups,24,2 cups gluten-free all purpose baking flour,0.08333333333333333
+cupcake,241405,oil,0.5,cups,24,1/2 cup canola oil,0.020833333333333332
+cupcake,241405,other,1.046874925,cups,24,2 1/4 teaspoons xanthan gum;1 cup cold strong-brewed coffee,0.04361978854166667
+cupcake,241405,salt,0.01041665,cups,24,1/2 teaspoon sea salt,4.340270833333333e-4
+cupcake,241405,sugar,2,cups,24,2 cups white sugar,0.08333333333333333
+cupcake,241405,unitless,2,NA,24,12 slices bacon;1 fluid ounce whiskey,0.08333333333333333
+cupcake,241429,baking powder,0.026041625,cups,12,1 1/4 teaspoons baking powder,0.0021701354166666666
+cupcake,241429,butter,0.3333333333333333,cups,12,"1/3 cup unsalted butter, softened",0.027777777777777776
+cupcake,241429,eggs,1,eggs,12,1 large egg,0.08333333333333333
+cupcake,241429,flour,1.25,cups,12,1 1/4 cups cake flour,0.10416666666666667
+cupcake,241429,milk,0.5,cups,12,1/2 cup unsweetened coconut milk,0.041666666666666664
+cupcake,241429,nut,0.5,cups,12,1/2 cup sweetened shredded coconut,0.041666666666666664
+cupcake,241429,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+cupcake,241429,sugar,0.3333333333333333,cups,12,1/3 cup white sugar,0.027777777777777776
+cupcake,241429,vanilla,0.01041665,cups,12,1/2 teaspoon vanilla extract,8.680541666666666e-4
+cupcake,242508,baking powder,0.01041665,cups,12,1/2 teaspoon baking powder,8.680541666666666e-4
+cupcake,242508,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+cupcake,242508,buttermilk,0.3333333333333333,cups,12,1/3 cup buttermilk,0.027777777777777776
+cupcake,242508,eggs,2,eggs,12,2 eggs,0.16666666666666666
+cupcake,242508,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+cupcake,242508,fruit,0.1875,cups,12,3 tablespoons pink lemonade powder,0.015625
+cupcake,242508,oil,0.25,cups,12,1/4 cup vegetable oil,0.020833333333333332
+cupcake,242508,sugar,0.5,cups,12,1/2 cup white sugar,0.041666666666666664
+cupcake,242508,unitless,1,NA,12,"1 dash red food coloring, or as desired",0.08333333333333333
+cupcake,242508,water,0.25,cups,12,1/4 cup cold water,0.020833333333333332
+cupcake,245000,baking powder,0.01041665,cups,12,1/2 teaspoon baking powder,8.680541666666666e-4
+cupcake,245000,eggs,2,eggs,12,"2 eggs, separated",0.16666666666666666
+cupcake,245000,flour,0.5,cups,12,1/2 cup cake flour,0.041666666666666664
+cupcake,245000,milk,0.25,cups,12,1/4 cup milk,0.020833333333333332
+cupcake,245000,other,0.005208325,cups,12,1/4 teaspoon cream of tartar,4.340270833333333e-4
+cupcake,245000,salt,0.0013020833333333333,cups,12,1 pinch salt,1.0850694444444444e-4
+cupcake,245000,sugar,0.5,cups,12,"1/2 cup white sugar, divided",0.041666666666666664
+cupcake,245000,unitless,1,NA,12,1 dash vanilla extract,0.08333333333333333
+cupcake,245174,baking powder,0.0208333,cups,24,1 teaspoon baking powder,8.680541666666666e-4
+cupcake,245174,butter,1,cups,24,"1 cup butter, softened",0.041666666666666664
+cupcake,245174,eggs,2,eggs,24,2 eggs,0.08333333333333333
+cupcake,245174,flour,2,cups,24,2 cups all-purpose flour,0.08333333333333333
+cupcake,245174,milk,0.75,cups,24,3/4 cup milk,0.03125
+cupcake,245174,nut,0.0026041625,cups,24,1/8 teaspoon almond extract,1.0850677083333333e-4
+cupcake,245174,salt,0.01041665,cups,24,1/2 teaspoon salt,4.340270833333333e-4
+cupcake,245174,spice,0.0208333,cups,24,1 teaspoon peppermint extract,8.680541666666666e-4
+cupcake,245174,sugar,2,cups,24,2 cups white sugar,0.08333333333333333
+cupcake,245174,unitless,1,NA,24,red food coloring (optional),0.041666666666666664
+cupcake,245178,chocolate,0.3333333333333333,cups,48,1/3 cup cocoa powder,0.006944444444444444
+cupcake,245178,flour,1.5,cups,48,1 1/2 cups pastry flour,0.03125
+cupcake,245178,oil,0.5,cups,48,1/2 cup vegetable oil,0.010416666666666666
+cupcake,245178,sugar,1,cups,48,1 cup white sugar,0.020833333333333332
+cupcake,245178,vanilla,0.0208333,cups,48,1 teaspoon vanilla extract,4.340270833333333e-4
+cupcake,245178,water,1,cups,48,1 cup water,0.020833333333333332
+cupcake,245407,baking powder,0.005208325,cups,12,1/4 teaspoon baking powder,4.340270833333333e-4
+cupcake,245407,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+cupcake,245407,butter,0.5,cups,12,"1/2 cup butter, at room temperature",0.041666666666666664
+cupcake,245407,chocolate,0.5,cups,12,1/2 cup unsweetened cocoa powder,0.041666666666666664
+cupcake,245407,eggs,2,eggs,12,2 eggs,0.16666666666666666
+cupcake,245407,flour,1.3333333333333333,cups,12,1 1/3 cups all-purpose flour,0.1111111111111111
+cupcake,245407,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+cupcake,245407,spice,0.125,cups,12,2 tablespoons crushed peppermint candies,0.010416666666666666
+cupcake,245407,sugar,1.125,cups,12,1 cup white sugar;2 tablespoons white sugar,0.09375
+cupcake,245407,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,245407,water,1,cups,12,1 cup boiling water,0.08333333333333333
+cupcake,245742,baking soda,0.015624975,cups,12,3/4 teaspoon baking soda,0.00130208125
+cupcake,245742,butter,0.25,cups,12,1/4 cup unsalted butter,0.020833333333333332
+cupcake,245742,chocolate,0.25,cups,12,2 (1 ounce) squares semisweet chocolate,0.020833333333333332
+cupcake,245742,eggs,1,eggs,12,1 egg,0.08333333333333333
+cupcake,245742,flour,1.125,cups,12,1 cup all-purpose flour;2 tablespoons all-purpose flour,0.09375
+cupcake,245742,milk,0.125,cups,12,2 tablespoons milk,0.010416666666666666
+cupcake,245742,salt,0.0026041625,cups,12,1/8 teaspoon salt,2.1701354166666666e-4
+cupcake,245742,sugar,1,cups,12,1 cup white sugar,0.08333333333333333
+cupcake,245742,unitless,1,NA,12,1/2 drop pure peppermint extract,0.08333333333333333
+cupcake,245742,vinegar,0.01041665,cups,12,1/2 teaspoon distilled white vinegar,8.680541666666666e-4
+cupcake,245742,water,0.5,cups,12,1/2 cup boiling water,0.041666666666666664
+cupcake,246441,baking powder,0.0208333,cups,24,1 teaspoon baking powder,8.680541666666666e-4
+cupcake,246441,eggs,3,eggs,24,"3 eggs, beaten",0.125
+cupcake,246441,flour,2.4270833333333335,cups,24,2 1/3 cups all-purpose flour;1 1/2 tablespoons all-purpose flour,0.10112847222222222
+cupcake,246441,milk,0.3333333333333333,cups,24,1/3 cup coconut milk,0.013888888888888888
+cupcake,246441,nut,1.3333333333333333,cups,24,1 1/3 cups dried shredded coconut,0.05555555555555555
+cupcake,246441,oil,1,cups,24,1 cup vegetable oil,0.041666666666666664
+cupcake,246441,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+cupcake,246441,sugar,1.59375,cups,24,1 1/2 cups white sugar;1 1/2 tablespoons white sugar,0.06640625
+cupcake,246441,vanilla,0.0208333,cups,24,1 teaspoon vanilla extract,8.680541666666666e-4
+cupcake,246585,baking powder,0.0416666,cups,24,2 teaspoons baking powder,0.0017361083333333333
+cupcake,246585,eggs,4,eggs,24,"4 eggs, lightly beaten",0.16666666666666666
+cupcake,246585,flour,2,cups,24,2 cups flour,0.08333333333333333
+cupcake,246585,oil,1.25,cups,24,1 1/4 cups vegetable oil,0.052083333333333336
+cupcake,246585,salt,0.01041665,cups,24,1/2 teaspoon salt,4.340270833333333e-4
+cupcake,246585,spice,0.05208325,cups,24,"2 teaspoons mccormick® cinnamon, ground;1/2 teaspoon mccormick® nutmeg, ground",0.0021701354166666666
+cupcake,246585,sugar,2,cups,24,2 cups granulated sugar,0.08333333333333333
+cupcake,246585,vanilla,0.0625,cups,24,1 tablespoon mccormick® pure vanilla extract,0.0026041666666666665
+cupcake,246585,vegetable,3,cups,24,3 cups finely grated carrots,0.125
+cupcake,246848,baking soda,0.0208333,cups,24,1 teaspoon baking soda,8.680541666666666e-4
+cupcake,246848,butter,1,cups,24,"1 cup butter, softened",0.041666666666666664
+cupcake,246848,chocolate,0.375,cups,24,6 tablespoons unsweetened cocoa powder,0.015625
+cupcake,246848,eggs,4,eggs,24,4 eggs,0.16666666666666666
+cupcake,246848,flour,1.25,cups,24,1 1/4 cups all-purpose flour,0.052083333333333336
+cupcake,246848,milk,0.25,cups,24,1/4 cup milk,0.010416666666666666
+cupcake,246848,sugar,1,cups,24,1 cup white sugar,0.041666666666666664
+cupcake,254219,baking powder,0.0416666,cups,24,2 teaspoons baking powder,0.0017361083333333333
+cupcake,254219,baking soda,0.01041665,cups,24,1/2 teaspoon baking soda,4.340270833333333e-4
+cupcake,254219,buttermilk,1,cups,24,1 cup buttermilk,0.041666666666666664
+cupcake,254219,chocolate,1,cups,24,1 cup unsweetened cocoa powder,0.041666666666666664
+cupcake,254219,eggs,2,eggs,24,2 eggs,0.08333333333333333
+cupcake,254219,flour,2,cups,24,"2 cups all-purpose flour, sifted",0.08333333333333333
+cupcake,254219,oil,0.5,cups,24,1/2 cup vegetable oil,0.020833333333333332
+cupcake,254219,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+cupcake,254219,sugar,2,cups,24,2 cups white sugar,0.08333333333333333
+cupcake,254219,vanilla,0.0208333,cups,24,1 teaspoon vanilla extract,8.680541666666666e-4
+cupcake,254219,water,1,cups,24,1 cup hot water,0.041666666666666664
+cupcake,255301,baking powder,0.01041665,cups,12,1/4 teaspoon baking powder;1/4 teaspoon baking powder,8.680541666666666e-4
+cupcake,255301,baking soda,0.0208333,cups,12,1/2 teaspoon baking soda;1/2 teaspoon baking soda,0.0017361083333333333
+cupcake,255301,butter,0.5,cups,12,"1/4 cup unsalted butter, softened;1/4 cup unsalted butter, softened",0.041666666666666664
+cupcake,255301,buttermilk,0.6666666666666666,cups,12,1/3 cup buttermilk;1/3 cup buttermilk,0.05555555555555555
+cupcake,255301,chocolate,1,cups,12,"1/2 cup chocolate chips, or to taste (optional);1/2 cup chocolate chips, or to taste (optional)",0.08333333333333333
+cupcake,255301,eggs,2,eggs,12,1 egg;1 egg,0.16666666666666666
+cupcake,255301,flour,2.5,cups,12,1 1/4 cups all-purpose flour;1 1/4 cups all-purpose flour,0.20833333333333334
+cupcake,255301,salt,0.0026041666666666665,cups,12,1 pinch salt;1 pinch salt,2.1701388888888888e-4
+cupcake,255301,sugar,1.75,cups,12,1/2 cup white sugar;6 tablespoons lightly packed brown sugar;1/2 cup white sugar;6 tablespoons lightly packed brown sugar,0.14583333333333334
+cupcake,255301,unitless,2,NA,12,"2 ripe bananas, mashed;2 ripe bananas, mashed",0.16666666666666666
+cupcake,255324,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+cupcake,255324,baking soda,0.03124995,cups,12,1 1/2 teaspoons baking soda,0.0026041625
+cupcake,255324,chocolate,0.5,cups,12,1/2 cup semisweet chocolate chips,0.041666666666666664
+cupcake,255324,eggs,4,eggs,12,4 eggs,0.3333333333333333
+cupcake,255324,flour,2.0625,cups,12,2 cups cake flour;1 tablespoon cake flour,0.171875
+cupcake,255324,fruit,1,cups,12,"1 (8 ounce) can crushed pineapple, drained",0.08333333333333333
+cupcake,255324,nut,0.5,cups,12,1/2 cup chopped walnuts,0.041666666666666664
+cupcake,255324,oil,1.5,cups,12,1 1/2 cups vegetable oil,0.125
+cupcake,255324,salt,0.0208333,cups,12,1 teaspoon salt,0.0017361083333333333
+cupcake,255324,spice,0.0416666,cups,12,2 teaspoons ground cinnamon,0.0034722166666666665
+cupcake,255324,sugar,2,cups,12,2 cups white sugar,0.16666666666666666
+cupcake,255324,vegetable,2,cups,12,2 cups grated carrots,0.16666666666666666
+cupcake,255405,baking powder,0.0208333,cups,18,1 teaspoon baking powder,0.0011574055555555556
+cupcake,255405,butter,0.5,cups,18,"1/2 cup unsalted butter, softened",0.027777777777777776
+cupcake,255405,eggs,1,eggs,18,1 egg,0.05555555555555555
+cupcake,255405,flour,2,cups,18,2 cups flour,0.1111111111111111
+cupcake,255405,fruit,1,cups,18,1 cup musselman's® apple butter,0.05555555555555555
+cupcake,255405,salt,0.0208333,cups,18,1 teaspoon salt,0.0011574055555555556
+cupcake,255405,sour cream,0.5,cups,18,1/2 cup plain greek yogurt (or sour cream),0.027777777777777776
+cupcake,255405,spice,0.03124995,cups,18,1/2 teaspoon ground nutmeg;1 teaspoon ground cinnamon,0.0017361083333333333
+cupcake,255405,sugar,1,cups,18,1 cup sugar,0.05555555555555555
+cupcake,255405,vanilla,0.0208333,cups,18,1 teaspoon vanilla extract,0.0011574055555555556
+cupcake,256145,baking powder,0.0208333,cups,36,1 teaspoon baking powder,5.787027777777778e-4
+cupcake,256145,baking soda,0.0208333,cups,36,1 teaspoon baking soda,5.787027777777778e-4
+cupcake,256145,butter,0.5,cups,36,1/2 cup unsalted butter,0.013888888888888888
+cupcake,256145,cornmeal,0.5,cups,36,1/2 cup yellow cornmeal,0.013888888888888888
+cupcake,256145,eggs,2,eggs,36,2 eggs,0.05555555555555555
+cupcake,256145,flour,1.5,cups,36,1 1/2 cups all-purpose flour,0.041666666666666664
+cupcake,256145,milk,0.5,cups,36,1/2 cup whole milk,0.013888888888888888
+cupcake,256145,salt,0.0013020833333333333,cups,36,1 pinch salt,3.616898148148148e-5
+cupcake,256145,sour cream,0.25,cups,36,1/4 cup sour cream,0.006944444444444444
+cupcake,256145,sugar,1,cups,36,1 cup granulated sugar,0.027777777777777776
+cupcake,257262,baking powder,0.0416666,cups,24,2 teaspoons baking powder,0.0017361083333333333
+cupcake,257262,butter,1,cups,24,"1 cup butter, softened",0.041666666666666664
+cupcake,257262,eggs,2,eggs,24,2 eggs,0.08333333333333333
+cupcake,257262,flour,1.5,cups,24,1 1/2 cups all-purpose flour,0.0625
+cupcake,257262,milk,0.5,cups,24,1/2 cup milk,0.020833333333333332
+cupcake,257262,salt,0.01041665,cups,24,1/2 teaspoon salt,4.340270833333333e-4
+cupcake,257262,sugar,1,cups,24,1 cup white sugar,0.041666666666666664
+cupcake,257262,vanilla,0.01041665,cups,24,1/2 teaspoon vanilla extract,4.340270833333333e-4
+cupcake,257388,cream cheese,2,cups,24,"2 (8 ounce) packages cream cheese, softened",0.08333333333333333
+cupcake,257388,eggs,2,eggs,24,2 eggs,0.08333333333333333
+cupcake,257388,flour,0.25,cups,24,1/4 cup all-purpose flour,0.010416666666666666
+cupcake,257388,milk,0.5,cups,24,1/2 cup milk,0.020833333333333332
+cupcake,257388,sour cream,0.25,cups,24,1/4 cup sour cream,0.010416666666666666
+cupcake,257388,sugar,0.25,cups,24,1/4 cup white sugar,0.010416666666666666
+cupcake,257388,vanilla,0.01041665,cups,24,1/2 teaspoon vanilla extract,4.340270833333333e-4
+cupcake,259701,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+cupcake,259701,chocolate,0.25,cups,12,1/4 cup unsweetened cocoa powder,0.020833333333333332
+cupcake,259701,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+cupcake,259701,oil,0.3333333333333333,cups,12,1/3 cup vegetable oil,0.027777777777777776
+cupcake,259701,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+cupcake,259701,sugar,1,cups,12,1 cup white sugar,0.08333333333333333
+cupcake,259701,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,259701,vinegar,0.0208333,cups,12,1 teaspoon white vinegar,0.0017361083333333333
+cupcake,259701,water,1,cups,12,1 cup water,0.08333333333333333
+cupcake,260072,baking powder,0.03124995,cups,12,1 1/2 teaspoons baking powder,0.0026041625
+cupcake,260072,butter,0.5,cups,12,"1/2 cup unsalted butter, softened",0.041666666666666664
+cupcake,260072,eggs,2,eggs,12,2 eggs,0.16666666666666666
+cupcake,260072,flour,1.75,cups,12,1 3/4 cups all-purpose flour,0.14583333333333334
+cupcake,260072,low-cal sweetener,0.51041665,cups,12,"1/2 cup pyure organic all purpose stevia blend;1/2 teaspoon pyure organic liquid stevia extract, vanilla flavor",0.04253472083333334
+cupcake,260072,milk,0.75,cups,12,3/4 cup milk,0.0625
+cupcake,260072,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+cupcake,260072,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,260333,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+cupcake,260333,butter,0.5,cups,12,1/2 cup butter,0.041666666666666664
+cupcake,260333,chocolate,0.5,cups,12,1/2 cup unsweetened cocoa powder,0.041666666666666664
+cupcake,260333,eggs,1,eggs,12,1 egg,0.08333333333333333
+cupcake,260333,flour,1.125,cups,12,1 cup all-purpose flour;2 tablespoons all-purpose flour,0.09375
+cupcake,260333,milk,1,cups,12,1 cup milk,0.08333333333333333
+cupcake,260333,salt,0.0208333,cups,12,1 teaspoon salt,0.0017361083333333333
+cupcake,260333,sugar,1,cups,12,1 cup white sugar,0.08333333333333333
+cupcake,260333,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,260741,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+cupcake,260741,butter,0.75,cups,12,3/4 cup unsalted butter,0.0625
+cupcake,260741,chocolate,0.5625,cups,12,9 tablespoons unsweetened cocoa powder,0.046875
+cupcake,260741,eggs,3,eggs,12,3 eggs,0.25
+cupcake,260741,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+cupcake,260741,sugar,0.875,cups,12,3/4 cup white sugar;2 tablespoons white sugar,0.07291666666666667
+cupcake,260741,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,260741,water,0.3125,cups,12,"5 tablespoons boiling water, or more if needed",0.026041666666666668
+cupcake,260742,baking powder,0.01041665,cups,24,1/2 teaspoon baking powder,4.340270833333333e-4
+cupcake,260742,baking soda,0.005208325,cups,24,1/4 teaspoon baking soda,2.1701354166666666e-4
+cupcake,260742,butter,0.5,cups,24,"1/2 cup unsalted butter, at room temperature",0.020833333333333332
+cupcake,260742,chocolate,0.5,cups,24,1/2 cup unsweetened cocoa powder,0.020833333333333332
+cupcake,260742,eggs,2,eggs,24,2 large eggs,0.08333333333333333
+cupcake,260742,flour,0.8125,cups,24,3/4 cup all-purpose flour;1 tablespoon all-purpose flour,0.033854166666666664
+cupcake,260742,milk,0.5,cups,24,1/2 cup milk,0.020833333333333332
+cupcake,260742,salt,0.0013020833333333333,cups,24,1 pinch salt,5.425347222222222e-5
+cupcake,260742,sugar,0.6666666,cups,24,10 tablespoons white sugar;2 teaspoons vanilla sugar,0.027777775
+cupcake,260742,vinegar,0.0625,cups,24,1 tablespoon white vinegar,0.0026041666666666665
+cupcake,260743,baking powder,0.01041665,cups,12,1/2 teaspoon baking powder,8.680541666666666e-4
+cupcake,260743,baking soda,0.005208325,cups,12,1/4 teaspoon baking soda,4.340270833333333e-4
+cupcake,260743,butter,0.5,cups,12,"1/2 cup unsalted butter, at room temperature",0.041666666666666664
+cupcake,260743,chocolate,0.5,cups,12,1/2 cup unsweetened cocoa powder,0.041666666666666664
+cupcake,260743,eggs,2,eggs,12,2 large eggs,0.16666666666666666
+cupcake,260743,flour,0.8125,cups,12,3/4 cup all-purpose flour;1 tablespoon all-purpose flour,0.06770833333333333
+cupcake,260743,milk,0.5,cups,12,1/2 cup milk,0.041666666666666664
+cupcake,260743,salt,0.0013020833333333333,cups,12,1 pinch salt,1.0850694444444444e-4
+cupcake,260743,sugar,0.6666666,cups,12,10 tablespoons white sugar;2 teaspoons vanilla sugar,0.05555555
+cupcake,260743,vinegar,0.0625,cups,12,1 tablespoon white vinegar,0.005208333333333333
+cupcake,260774,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+cupcake,260774,butter,0.75,cups,12,3/4 cup unsalted butter,0.0625
+cupcake,260774,chocolate,0.5625,cups,12,9 tablespoons unsweetened cocoa powder,0.046875
+cupcake,260774,eggs,3,eggs,12,3 eggs,0.25
+cupcake,260774,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+cupcake,260774,sugar,0.875,cups,12,3/4 cup white sugar;2 tablespoons white sugar,0.07291666666666667
+cupcake,260774,water,0.3125,cups,12,"5 tablespoons boiling water, or more if needed",0.026041666666666668
+cupcake,260788,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+cupcake,260788,chocolate,0.25,cups,12,1/4 cup unsweetened cocoa powder,0.020833333333333332
+cupcake,260788,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+cupcake,260788,fruit,0.3333333333333333,cups,12,1/3 cup natural unsweetened applesauce,0.027777777777777776
+cupcake,260788,oil,0.0625,cups,12,1 tablespoon vegetable oil,0.005208333333333333
+cupcake,260788,salt,0.005208325,cups,12,1/4 teaspoon coarse kosher salt,4.340270833333333e-4
+cupcake,260788,spice,0.03124995,cups,12,"1 teaspoon ground cinnamon, or to taste;1/2 teaspoon cayenne pepper, or to taste",0.0026041625
+cupcake,260788,sugar,1,cups,12,1 cup raw cane sugar,0.08333333333333333
+cupcake,260788,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,260788,vinegar,0.0208333,cups,12,1 teaspoon distilled white vinegar,0.0017361083333333333
+cupcake,260788,water,1,cups,12,1 cup water,0.08333333333333333
+cupcake,260789,baking powder,0.03124995,cups,12,1 1/2 teaspoons baking powder,0.0026041625
+cupcake,260789,baking soda,0.005208325,cups,12,1/4 teaspoon baking soda,4.340270833333333e-4
+cupcake,260789,butter,0.25,cups,12,"1/4 cup butter, at room temperature",0.020833333333333332
+cupcake,260789,chocolate,0.6666666666666666,cups,12,2/3 cup unsweetened cocoa powder,0.05555555555555555
+cupcake,260789,eggs,1,eggs,12,1 egg,0.08333333333333333
+cupcake,260789,flour,1.3333333333333333,cups,12,1 1/3 cups all-purpose flour,0.1111111111111111
+cupcake,260789,milk,1,cups,12,1 cup milk,0.08333333333333333
+cupcake,260789,other,0.01041665,cups,12,1/2 teaspoon instant coffee granules,8.680541666666666e-4
+cupcake,260789,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+cupcake,260789,spice,0.005208325,cups,12,1/4 teaspoon ground cinnamon,4.340270833333333e-4
+cupcake,260789,sugar,1,cups,12,1/2 cup white sugar;1/2 cup brown sugar,0.08333333333333333
+cupcake,260789,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,261244,baking powder,0.0208333,cups,30,1 teaspoon baking powder,6.944433333333333e-4
+cupcake,261244,baking soda,0.0208333,cups,30,1 teaspoon baking soda,6.944433333333333e-4
+cupcake,261244,buttermilk,0.5,cups,30,1/2 cup buttermilk,0.016666666666666666
+cupcake,261244,eggs,3,eggs,30,3 eggs,0.1
+cupcake,261244,flour,2.5,cups,30,2 1/2 cups all-purpose flour,0.08333333333333333
+cupcake,261244,oil,0.5,cups,30,1/2 cup vegetable oil,0.016666666666666666
+cupcake,261244,salt,0.03124995,cups,30,1 1/2 teaspoons fine sea salt,0.001041665
+cupcake,261244,spice,0.0833332,cups,30,2 teaspoons ground cinnamon;1 teaspoon ground allspice;1 teaspoon ground ginger,0.002777773333333333
+cupcake,261244,sugar,2,cups,30,1 cup white sugar;1 cup packed light brown sugar,0.06666666666666667
+cupcake,261244,vanilla,0.0208333,cups,30,1 teaspoon vanilla extract,6.944433333333333e-4
+cupcake,261244,vegetable,4,cups,30,"4 cups shredded carrots, or to taste",0.13333333333333333
+cupcake,261245,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+cupcake,261245,eggs,3,eggs,12,3 eggs,0.25
+cupcake,261245,flour,1.6666666666666665,cups,12,1 2/3 cups all-purpose flour,0.13888888888888887
+cupcake,261245,oil,0.625,cups,12,1/2 cup vegetable oil;2 tablespoons vegetable oil,0.052083333333333336
+cupcake,261245,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+cupcake,261245,spice,0.0416666,cups,12,2 teaspoons ground cinnamon,0.0034722166666666665
+cupcake,261245,sugar,1.2708333,cups,12,1 1/4 cups brown sugar;1 teaspoon vanilla sugar,0.105902775
+cupcake,261245,vegetable,2.25,cups,12,2 1/4 cups grated carrots,0.1875
+cupcake,261443,baking powder,0.01041665,cups,10,1/2 teaspoon baking powder,0.001041665
+cupcake,261443,butter,0.5,cups,10,"1/2 cup butter, softened",0.05
+cupcake,261443,eggs,2,eggs,10,2 eggs,0.2
+cupcake,261443,flour,1,cups,10,1 cup all-purpose flour,0.1
+cupcake,261443,milk,0.5,cups,10,1/2 cup whole milk,0.05
+cupcake,261443,nut,1.5,cups,10,1 cup ground hazelnuts;1/2 cup nutella® hazelnut spread,0.15
+cupcake,261443,salt,0.0013020833333333333,cups,10,1 pinch salt,1.3020833333333333e-4
+cupcake,261443,sugar,1,cups,10,1 cup granulated sugar,0.1
+cupcake,261589,baking powder,0.0833332,cups,36,2 teaspoons baking powder;2 teaspoons baking powder,0.002314811111111111
+cupcake,261589,butter,1.5,cups,36,3/4 cup unsalted butter;3/4 cup unsalted butter,0.041666666666666664
+cupcake,261589,chocolate,1.125,cups,36,9 tablespoons unsweetened cocoa powder;9 tablespoons unsweetened cocoa powder,0.03125
+cupcake,261589,eggs,6,eggs,36,3 eggs;3 eggs,0.16666666666666666
+cupcake,261589,flour,2,cups,36,1 cup all-purpose flour;1 cup all-purpose flour,0.05555555555555555
+cupcake,261589,sugar,1.75,cups,36,3/4 cup white sugar;2 tablespoons white sugar;3/4 cup white sugar;2 tablespoons white sugar,0.04861111111111111
+cupcake,261589,water,0.625,cups,36,"5 tablespoons boiling water, or as needed;5 tablespoons boiling water, or as needed",0.017361111111111112
+cupcake,262447,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+cupcake,262447,butter,0.75,cups,12,3/4 cup unsalted butter,0.0625
+cupcake,262447,chocolate,0.5625,cups,12,9 tablespoons unsweetened cocoa powder,0.046875
+cupcake,262447,eggs,3,eggs,12,3 eggs,0.25
+cupcake,262447,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+cupcake,262447,sugar,0.875,cups,12,3/4 cup white sugar;2 tablespoons white sugar,0.07291666666666667
+cupcake,262447,water,0.3125,cups,12,"5 tablespoons boiling water, or more if needed",0.026041666666666668
+cupcake,262507,baking powder,0.03124995,cups,12,1 1/2 teaspoons baking powder,0.0026041625
+cupcake,262507,eggs,2,eggs,12,2 eggs,0.16666666666666666
+cupcake,262507,flour,1.5,cups,12,1 1/2 cups sifted all-purpose flour,0.125
+cupcake,262507,fruit,0.03124995,cups,12,1 1/2 teaspoons key lime zest,0.0026041625
+cupcake,262507,fruit juice,0.1875,cups,12,3 tablespoons key lime juice,0.015625
+cupcake,262507,milk,0.5,cups,12,1/2 cup milk,0.041666666666666664
+cupcake,262507,oil,0.5,cups,12,1/2 cup virgin coconut oil,0.041666666666666664
+cupcake,262507,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+cupcake,262507,sugar,1,cups,12,1 cup white sugar,0.08333333333333333
+cupcake,262507,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,262585,baking powder,0.01041665,cups,30,1/2 teaspoon baking powder,3.4722166666666663e-4
+cupcake,262585,baking soda,0.0208333,cups,30,1 teaspoon baking soda,6.944433333333333e-4
+cupcake,262585,butter,1.125,cups,30,"1 cup unsalted butter, softened;2 tablespoons unsalted butter, softened",0.0375
+cupcake,262585,eggs,3,eggs,30,3 eggs,0.1
+cupcake,262585,flour,3.5,cups,30,3 1/2 cups all-purpose flour,0.11666666666666667
+cupcake,262585,fruit,0.0416666,cups,30,2 teaspoons grated lemon zest,0.0013888866666666665
+cupcake,262585,salt,0.01041665,cups,30,1/2 teaspoon salt,3.4722166666666663e-4
+cupcake,262585,sour cream,2,cups,30,1 (16 ounce) container sour cream,0.06666666666666667
+cupcake,262585,sugar,1.75,cups,30,1 3/4 cups white sugar,0.058333333333333334
+cupcake,262585,vanilla,0.0208333,cups,30,1 teaspoon vanilla extract,6.944433333333333e-4
+cupcake,262603,baking powder,0.0208333,cups,8,1 teaspoon baking powder,0.0026041625
+cupcake,262603,butter,0.40625,cups,8,"6 1/2 tablespoons unsalted butter, at room temperature",0.05078125
+cupcake,262603,eggs,2,eggs,8,2 small eggs,0.25
+cupcake,262603,flour,0.75,cups,8,3/4 cup all-purpose flour,0.09375
+cupcake,262603,salt,0.0013020833333333333,cups,8,1 pinch salt,1.6276041666666666e-4
+cupcake,262603,sugar,0.3958333,cups,8,6 tablespoons white sugar;1 teaspoon vanilla sugar,0.0494791625
+cupcake,262603,vanilla,0.0208333,cups,8,1 teaspoon vanilla extract,0.0026041625
+cupcake,76935,chocolate,1,cups,8,"8 ounces semisweet chocolate chips, or bars, cut into bite-size chunks",0.125
+cupcake,76935,eggs,5,eggs,8,5 large eggs,0.625
+cupcake,76935,flour,0.0833332,cups,8,"4 teaspoons flour (or matzo meal, ground in a blender to a fine powder)",0.01041665
+cupcake,76935,margarine,1,cups,8,1 cup unsalted butter or unsalted margarine*,0.125
+cupcake,76935,salt,0.0013020833333333333,cups,8,pinch of salt,1.6276041666666666e-4
+cupcake,76935,sugar,0.5,cups,8,1/2 cup sugar,0.0625
+cupcake,79313,baking soda,0.026041625,cups,12,1 1/4 teaspoons baking soda,0.0021701354166666666
+cupcake,79313,eggs,2,eggs,12,"2 eggs, lightly beaten",0.16666666666666666
+cupcake,79313,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+cupcake,79313,fruit,0.5,cups,12,1/2 cup crushed pineapple,0.041666666666666664
+cupcake,79313,nut,1,cups,12,1 cup chopped walnuts,0.08333333333333333
+cupcake,79313,oil,0.5,cups,12,1/2 cup vegetable oil,0.041666666666666664
+cupcake,79313,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+cupcake,79313,spice,0.046874925,cups,12,1 1/2 teaspoons ground cinnamon;1/2 teaspoon ground nutmeg;1/4 teaspoon ground ginger,0.00390624375
+cupcake,79313,sugar,1.4583333333333333,cups,12,1 1/8 cups white sugar;1/3 cup brown sugar,0.12152777777777778
+cupcake,79313,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+cupcake,79313,vegetable,2,cups,12,2 cups shredded carrots,0.16666666666666666
+muffin,111924,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,111924,butter,0.625,cups,12,"1/2 cup butter, melted;2 tablespoons butter, melted",0.052083333333333336
+muffin,111924,buttermilk,1,cups,12,1 cup buttermilk,0.08333333333333333
+muffin,111924,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,111924,flour,2.5833333333333335,cups,12,2 1/4 cups all-purpose flour;1/3 cup all-purpose flour,0.2152777777777778
+muffin,111924,fruit,2,cups,12,2 cups diced apples,0.16666666666666666
+muffin,111924,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,111924,spice,0.0208333,cups,12,1 teaspoon ground cinnamon,0.0017361083333333333
+muffin,111924,sugar,2,cups,12,1 1/2 cups packed brown sugar;1/2 cup packed brown sugar,0.16666666666666666
+muffin,111924,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,112976,baking powder,0.005208325,cups,48,1/4 teaspoon baking powder,1.0850677083333333e-4
+muffin,112976,baking soda,0.0208333,cups,48,1 teaspoon baking soda,4.340270833333333e-4
+muffin,112976,butter,1.25,cups,48,1/2 cup melted butter;1 (6 ounce) package butterscotch chips,0.026041666666666668
+muffin,112976,eggs,2,eggs,48,2 eggs,0.041666666666666664
+muffin,112976,flour,1.75,cups,48,1 3/4 cups all-purpose flour,0.036458333333333336
+muffin,112976,salt,0.01041665,cups,48,1/2 teaspoon salt,2.1701354166666666e-4
+muffin,112976,spice,0.0416666,cups,48,1 teaspoon ground cinnamon;1/2 teaspoon ground ginger;1/2 teaspoon ground nutmeg,8.680541666666666e-4
+muffin,112976,sugar,1,cups,48,1/2 cup brown sugar;1/2 cup white sugar,0.020833333333333332
+muffin,112976,vegetable,1,cups,48,1 cup canned pumpkin,0.020833333333333332
+muffin,143264,baking powder,0.026041625,cups,12,1 1/4 teaspoons baking powder,0.0021701354166666666
+muffin,143264,baking soda,0.03124995,cups,12,1 1/2 teaspoons baking soda,0.0026041625
+muffin,143264,butter,0.125,cups,12,"2 tablespoons butter, softened",0.010416666666666666
+muffin,143264,cream cheese,0.25,cups,12,"1/4 cup cream cheese, softened",0.020833333333333332
+muffin,143264,eggs,3,eggs,12,3 eggs,0.25
+muffin,143264,flour,1.3333333333333333,cups,12,1 1/3 cups all-purpose flour,0.1111111111111111
+muffin,143264,oil,0.75,cups,12,3/4 cup vegetable oil,0.0625
+muffin,143264,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,143264,spice,0.03124995,cups,12,1 1/2 teaspoons ground cinnamon,0.0026041625
+muffin,143264,sugar,2.5,cups,12,1 cup white sugar;1 1/2 cups sifted confectioners' sugar,0.20833333333333334
+muffin,143264,vanilla,0.0416666,cups,12,1 teaspoon vanilla extract;1 teaspoon vanilla extract,0.0034722166666666665
+muffin,143264,vegetable,2,cups,12,2 cups grated carrot,0.16666666666666666
+muffin,148555,baking soda,0.0208333,cups,16,1 teaspoon baking soda,0.00130208125
+muffin,148555,eggs,2,eggs,16,"2 eggs, lightly beaten",0.125
+muffin,148555,flour,2,cups,16,2 cups whole wheat flour,0.125
+muffin,148555,honey,1,cups,16,1 cup honey,0.0625
+muffin,148555,nut,0.5,cups,16,1/2 cup almonds,0.03125
+muffin,148555,oats,0.5,cups,16,1/2 cup oatmeal,0.03125
+muffin,148555,oil,0.25,cups,16,1/4 cup vegetable oil,0.015625
+muffin,148555,salt,0.01041665,cups,16,1/2 teaspoon salt,6.51040625e-4
+muffin,148555,spice,0.057291575,cups,16,1 teaspoon ground cinnamon;1/4 teaspoon ground nutmeg;1/4 teaspoon ground ginger;1/4 teaspoon ground cloves;1 teaspoon cinnamon,0.0035807234375
+muffin,148555,sugar,0.5,cups,16,1/2 cup brown sugar,0.03125
+muffin,148555,unitless,1,NA,16,1 sweet potato,0.0625
+muffin,148555,vanilla,0.0208333,cups,16,1 teaspoon vanilla extract,0.00130208125
+muffin,148555,yogurt,0.75,cups,16,1 (6 ounce) container vanilla yogurt,0.046875
+muffin,150141,baking powder,0.0208333,cups,24,1 teaspoon baking powder,8.680541666666666e-4
+muffin,150141,baking soda,0.0208333,cups,24,1 teaspoon baking soda,8.680541666666666e-4
+muffin,150141,butter,0.0625,cups,24,1 tablespoon melted butter,0.0026041666666666665
+muffin,150141,buttermilk,1,cups,24,1 cup buttermilk,0.041666666666666664
+muffin,150141,eggs,1,eggs,24,1 egg,0.041666666666666664
+muffin,150141,flour,2.5,cups,24,2 1/2 cups flour,0.10416666666666667
+muffin,150141,fruit,1.5,cups,24,1 1/2 cups diced rhubarb,0.0625
+muffin,150141,nut,0.5,cups,24,1/2 cup chopped walnuts,0.020833333333333332
+muffin,150141,oil,0.5,cups,24,1/2 cup vegetable oil,0.020833333333333332
+muffin,150141,salt,0.01041665,cups,24,1/2 teaspoon salt,4.340270833333333e-4
+muffin,150141,spice,0.0208333,cups,24,1 teaspoon ground cinnamon,8.680541666666666e-4
+muffin,150141,sugar,1.5833333333333333,cups,24,1 1/4 cups brown sugar;1/3 cup white sugar,0.06597222222222222
+muffin,150141,vanilla,0.0208333,cups,24,1 teaspoon vanilla extract,8.680541666666666e-4
+muffin,15073,baking powder,0.0625,cups,12,1 tablespoon baking powder,0.005208333333333333
+muffin,15073,chocolate,1.125,cups,12,2 tablespoons unsweetened cocoa powder;1 cup semisweet chocolate chips,0.09375
+muffin,15073,eggs,1,eggs,12,"1 egg, beaten",0.08333333333333333
+muffin,15073,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,15073,fruit,1.5,cups,12,1 1/2 cups mashed bananas,0.125
+muffin,15073,oil,0.6666666666666666,cups,12,2/3 cup sunflower seed oil,0.05555555555555555
+muffin,15073,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,15073,sugar,0.5,cups,12,1/2 cup white sugar,0.041666666666666664
+muffin,15073,vanilla,0.03124995,cups,12,1 1/2 teaspoons vanilla extract,0.0026041625
+muffin,152175,agave,0.25,cups,6,1/4 cup agave nectar,0.041666666666666664
+muffin,152175,baking soda,0.01041665,cups,6,1/2 teaspoon baking soda,0.0017361083333333333
+muffin,152175,cornmeal,0.5,cups,6,1/2 cup cornmeal,0.08333333333333333
+muffin,152175,flour,0.5,cups,6,1/2 cup whole-wheat pastry flour,0.08333333333333333
+muffin,152175,fruit,0.5,cups,6,1/2 cup applesauce,0.08333333333333333
+muffin,152175,milk,0.5,cups,6,1/2 cup soy milk,0.08333333333333333
+muffin,152175,oil,0.125,cups,6,2 tablespoons canola oil,0.020833333333333332
+muffin,152175,salt,0.01041665,cups,6,1/2 teaspoon salt,0.0017361083333333333
+muffin,155527,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,155527,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,155527,chocolate,0.5,cups,12,1/2 cup chocolate chips (optional),0.041666666666666664
+muffin,155527,flour,2,cups,12,2 cups flour,0.16666666666666666
+muffin,155527,mayonnaise,1,cups,12,1 cup mayonnaise,0.08333333333333333
+muffin,155527,sugar,1,cups,12,1 cup white sugar,0.08333333333333333
+muffin,155527,unitless,1,NA,12,"3 ripe bananas, mashed",0.08333333333333333
+muffin,159466,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,159466,bran,1.5,cups,12,1 1/2 cups bran cereal (such as kellogg's all-bran® original cereal),0.125
+muffin,159466,butter,0.125,cups,12,2 tablespoons melted butter,0.010416666666666666
+muffin,159466,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,159466,flour,1,cups,12,1 cup whole wheat flour,0.08333333333333333
+muffin,159466,fruit,0.5,cups,12,1/2 cup raisins,0.041666666666666664
+muffin,159466,honey,0.5,cups,12,1/2 cup honey,0.041666666666666664
+muffin,159466,milk,0.75,cups,12,3/4 cup milk,0.0625
+muffin,159466,spice,0.0208333,cups,12,1 teaspoon ground cinnamon,0.0017361083333333333
+muffin,159466,unitless,2,NA,12,"1 apple, cored and shredded;1 ripe banana, mashed",0.16666666666666666
+muffin,16755,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,16755,cornmeal,1,cups,12,1 cup cornmeal,0.08333333333333333
+muffin,16755,eggs,1,eggs,12,"1 egg, beaten",0.08333333333333333
+muffin,16755,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,16755,milk,1,cups,12,1 cup milk,0.08333333333333333
+muffin,16755,oil,0.25,cups,12,1/4 cup canola oil,0.020833333333333332
+muffin,16755,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,16755,sugar,0.3333333333333333,cups,12,1/3 cup white sugar,0.027777777777777776
+muffin,16877,baking powder,0.0208333,cups,15,1 teaspoon baking powder,0.0013888866666666665
+muffin,16877,baking soda,0.0416666,cups,15,2 teaspoons baking soda,0.002777773333333333
+muffin,16877,bran,0.75,cups,15,3/4 cup oat bran,0.05
+muffin,16877,eggs,2,eggs,15,"2 eggs, beaten",0.13333333333333333
+muffin,16877,flour,1.5,cups,15,1 1/2 cups all-purpose flour,0.1
+muffin,16877,fruit,0.5,cups,15,1/2 cup raisins,0.03333333333333333
+muffin,16877,milk,0.75,cups,15,3/4 cup skim milk,0.05
+muffin,16877,nut,1.75,cups,15,3/4 cup ground flax seed;1 cup chopped mixed nuts,0.11666666666666667
+muffin,16877,oil,0.125,cups,15,2 tablespoons vegetable oil,0.008333333333333333
+muffin,16877,salt,0.0208333,cups,15,1 teaspoon salt,0.0013888866666666665
+muffin,16877,spice,0.0416666,cups,15,2 teaspoons ground cinnamon,0.002777773333333333
+muffin,16877,sugar,1,cups,15,1 cup brown sugar,0.06666666666666667
+muffin,16877,unitless,1,NA,15,"2 apples, peeled, shredded",0.06666666666666667
+muffin,16877,vanilla,0.0208333,cups,15,1 teaspoon vanilla extract,0.0013888866666666665
+muffin,16877,vegetable,2,cups,15,2 cups shredded carrots,0.13333333333333333
+muffin,16945,butter,0.6666666666666666,cups,9,"2/3 cup butter, softened",0.07407407407407407
+muffin,16945,eggs,2,eggs,9,"2 eggs, beaten",0.2222222222222222
+muffin,16945,flour,0.5,cups,9,1/2 cup all-purpose flour,0.05555555555555555
+muffin,16945,nut,1,cups,9,1 cup chopped pecans,0.1111111111111111
+muffin,16945,sugar,1,cups,9,1 cup packed light brown sugar,0.1111111111111111
+muffin,17292,baking powder,0.01041665,cups,12,1/2 teaspoon baking powder,8.680541666666666e-4
+muffin,17292,butter,0.5,cups,12,"1/2 cup butter, softened",0.041666666666666664
+muffin,17292,cornmeal,0.75,cups,12,3/4 cup cornmeal,0.0625
+muffin,17292,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,17292,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,17292,honey,0.25,cups,12,1/4 cup honey,0.020833333333333332
+muffin,17292,milk,0.5,cups,12,1/2 cup milk,0.041666666666666664
+muffin,17292,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,17292,sugar,0.6666666666666666,cups,12,2/3 cup white sugar,0.05555555555555555
+muffin,17292,vegetable,0.75,cups,12,"3/4 cup frozen corn kernels, thawed",0.0625
+muffin,17652,baking powder,0.0208333,cups,10,1 teaspoon baking powder,0.00208333
+muffin,17652,baking soda,0.0208333,cups,10,1 teaspoon baking soda,0.00208333
+muffin,17652,butter,0.3958333333333333,cups,10,"1/3 cup butter, melted;1 tablespoon butter",0.03958333333333333
+muffin,17652,eggs,1,eggs,10,"1 egg, lightly beaten",0.1
+muffin,17652,flour,1.625,cups,10,1 1/2 cups all-purpose flour;2 tablespoons all-purpose flour,0.1625
+muffin,17652,salt,0.01041665,cups,10,1/2 teaspoon salt,0.001041665
+muffin,17652,spice,0.0026041625,cups,10,1/8 teaspoon ground cinnamon,2.6041625e-4
+muffin,17652,sugar,1.0833333333333333,cups,10,3/4 cup white sugar;1/3 cup packed brown sugar,0.10833333333333332
+muffin,17652,unitless,1,NA,10,"3 bananas, mashed",0.1
+muffin,17830,baking powder,0.03124995,cups,8,1 1/2 teaspoons baking powder,0.00390624375
+muffin,17830,butter,0.3333333333333333,cups,8,"1/3 cup butter, melted",0.041666666666666664
+muffin,17830,chocolate,1,cups,8,1 cup semisweet chocolate chips,0.125
+muffin,17830,eggs,1,eggs,8,1 egg,0.125
+muffin,17830,flour,1.5,cups,8,1 1/2 cups all-purpose flour,0.1875
+muffin,17830,milk,1,cups,8,1 cup milk,0.125
+muffin,17830,salt,0.01041665,cups,8,1/2 teaspoon salt,0.00130208125
+muffin,17830,sugar,0.5,cups,8,1/2 cup white sugar,0.0625
+muffin,18015,baking soda,0.0208333,cups,10,1 teaspoon baking soda,0.00208333
+muffin,18015,eggs,2,eggs,10,"2 eggs, beaten",0.2
+muffin,18015,flour,2,cups,10,2 cups all-purpose flour,0.2
+muffin,18015,salt,0.0208333,cups,10,1 teaspoon salt,0.00208333
+muffin,18015,sugar,0.75,cups,10,3/4 cup white sugar,0.075
+muffin,18015,unitless,1,NA,10,"3 very ripe bananas, mashed",0.1
+muffin,18347,baking powder,0.0625,cups,12,1 tablespoon baking powder,0.005208333333333333
+muffin,18347,butter,0.5,cups,12,"1/2 cup butter, melted",0.041666666666666664
+muffin,18347,cornmeal,0.5,cups,12,1/2 cup cornmeal,0.041666666666666664
+muffin,18347,eggs,1,eggs,12,"1 egg, beaten",0.08333333333333333
+muffin,18347,flour,1.25,cups,12,1 1/4 cups all-purpose flour,0.10416666666666667
+muffin,18347,fruit,1,cups,12,1 cup frozen blueberries,0.08333333333333333
+muffin,18347,milk,1,cups,12,1 cup milk,0.08333333333333333
+muffin,18347,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,18347,sugar,0.5,cups,12,1/2 cup brown sugar,0.041666666666666664
+muffin,20029,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,20029,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,20029,chocolate,0.5,cups,12,1/2 cup semisweet chocolate chips,0.041666666666666664
+muffin,20029,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,20029,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,20029,fruit,1.6666666666666665,cups,12,1 1/3 cups mashed ripe banana;1/3 cup applesauce,0.13888888888888887
+muffin,20029,nut,0.5,cups,12,1/2 cup chopped walnuts,0.041666666666666664
+muffin,20029,oats,1,cups,12,1 cup quick cooking oats,0.08333333333333333
+muffin,20029,salt,0.026041625,cups,12,1 1/4 teaspoons salt,0.0021701354166666666
+muffin,20029,spice,0.0208333,cups,12,1 teaspoon ground cinnamon,0.0017361083333333333
+muffin,20029,sugar,0.75,cups,12,3/4 cup packed brown sugar,0.0625
+muffin,20029,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,20237,baking soda,0.0208333,cups,18,1 teaspoon baking soda,0.0011574055555555556
+muffin,20237,butter,0.0833332,cups,18,4 teaspoons butter,0.004629622222222222
+muffin,20237,eggs,2,eggs,18,"2 eggs, lightly beaten",0.1111111111111111
+muffin,20237,flour,2.625,cups,18,2 1/2 cups all-purpose flour;2 tablespoons all-purpose flour,0.14583333333333334
+muffin,20237,fruit,2,cups,18,"2 cups peeled, cored and chopped apple",0.1111111111111111
+muffin,20237,oil,0.5,cups,18,1/2 cup vegetable oil,0.027777777777777776
+muffin,20237,salt,0.01041665,cups,18,1/2 teaspoon salt,5.787027777777778e-4
+muffin,20237,spice,0.07291665,cups,18,1 tablespoon pumpkin pie spice;1/2 teaspoon ground cinnamon,0.004050925
+muffin,20237,sugar,2.25,cups,18,2 cups white sugar;1/4 cup white sugar,0.125
+muffin,20237,vegetable,1,cups,18,1 cup canned pumpkin puree,0.05555555555555555
+muffin,20919,baking powder,0.03124995,cups,12,1 1/2 teaspoons baking powder,0.0026041625
+muffin,20919,butter,0.6666666666666666,cups,12,"1/3 cup butter, melted;1/3 cup butter, melted",0.05555555555555555
+muffin,20919,eggs,1,eggs,12,"1 egg, lightly beaten",0.08333333333333333
+muffin,20919,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,20919,milk,0.5,cups,12,1/2 cup milk,0.041666666666666664
+muffin,20919,salt,0.0026041625,cups,12,1/8 teaspoon salt,2.1701354166666666e-4
+muffin,20919,spice,0.015624975,cups,12,1/4 teaspoon ground nutmeg;1/2 teaspoon ground cinnamon,0.00130208125
+muffin,20919,sugar,0.75,cups,12,1/2 cup white sugar;1/4 cup white sugar,0.0625
+muffin,20933,baking powder,0.0625,cups,12,1 tablespoon baking powder,0.005208333333333333
+muffin,20933,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,20933,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,20933,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,20933,fruit,1,cups,12,1 cup mashed ripe banana,0.08333333333333333
+muffin,20933,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+muffin,20933,sour cream,0.25,cups,12,1/4 cup sour cream,0.020833333333333332
+muffin,20933,sugar,0.25,cups,12,1/4 cup white sugar,0.020833333333333332
+muffin,20933,vanilla,0.01041665,cups,12,1/2 teaspoon vanilla extract,8.680541666666666e-4
+muffin,20995,baking soda,0.0416666,cups,12,2 teaspoons baking soda,0.0034722166666666665
+muffin,20995,eggs,3,eggs,12,3 eggs,0.25
+muffin,20995,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,20995,fruit,0.5,cups,12,1/2 cup raisins,0.041666666666666664
+muffin,20995,nut,1,cups,12,1/2 cup chopped walnuts;1/2 cup unsweetened flaked coconut,0.08333333333333333
+muffin,20995,oil,1,cups,12,1 cup vegetable oil,0.08333333333333333
+muffin,20995,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+muffin,20995,spice,0.0416666,cups,12,2 teaspoons ground cinnamon,0.0034722166666666665
+muffin,20995,sugar,1.25,cups,12,1 1/4 cups white sugar,0.10416666666666667
+muffin,20995,unitless,1,NA,12,"1 apple - peeled, cored and shredded",0.08333333333333333
+muffin,20995,vanilla,0.0416666,cups,12,2 teaspoons vanilla extract,0.0034722166666666665
+muffin,20995,vegetable,2,cups,12,2 cups shredded carrots,0.16666666666666666
+muffin,214651,baking powder,0.0208333,cups,24,1 teaspoon baking powder,8.680541666666666e-4
+muffin,214651,flour,1,cups,24,1 cup all-purpose flour,0.041666666666666664
+muffin,214651,margarine,0.5,cups,24,"1/4 cup margarine, melted;1/4 cup margarine, melted",0.020833333333333332
+muffin,214651,milk,0.5,cups,24,1/2 cup milk,0.020833333333333332
+muffin,214651,spice,0.036458275,cups,24,3/4 teaspoon ground nutmeg;1 teaspoon ground cinnamon,0.0015190947916666666
+muffin,214651,sugar,1,cups,24,1/2 cup white sugar;1/2 cup white sugar,0.041666666666666664
+muffin,218614,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,218614,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,218614,flour,1.5,cups,12,1 1/2 cups whole wheat flour,0.125
+muffin,218614,fruit,2.5,cups,12,1/2 cup unsweetened applesauce;1 pint fresh blueberries,0.20833333333333334
+muffin,218614,milk,0.3333333333333333,cups,12,1/3 cup milk,0.027777777777777776
+muffin,218614,oil,0.3333333333333333,cups,12,1/3 cup vegetable oil,0.027777777777777776
+muffin,218614,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,218614,sugar,0.75,cups,12,3/4 cup white sugar,0.0625
+muffin,220651,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,220651,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,220651,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,220651,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,220651,milk,0.5,cups,12,1/2 cup milk,0.041666666666666664
+muffin,220651,oats,0.75,cups,12,3/4 cup instant oatmeal,0.0625
+muffin,220651,oil,0.5,cups,12,1/2 cup vegetable oil,0.041666666666666664
+muffin,220651,salt,0.0013020833333333333,cups,12,1 pinch salt,1.0850694444444444e-4
+muffin,220651,sugar,0.6666666666666666,cups,12,2/3 cup brown sugar,0.05555555555555555
+muffin,222337,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,222337,butter,0.5,cups,12,1/2 cup unsalted butter,0.041666666666666664
+muffin,222337,buttermilk,1,cups,12,1 cup buttermilk,0.08333333333333333
+muffin,222337,cornmeal,1,cups,12,1 cup yellow cornmeal,0.08333333333333333
+muffin,222337,eggs,2,eggs,12,2 large eggs,0.16666666666666666
+muffin,222337,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,222337,fruit,0.75,cups,12,3/4 cup chopped dried sweetened pineapple,0.0625
+muffin,222337,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,222601,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,222601,chocolate,0.5,cups,12,1/2 cup miniature semisweet chocolate chips,0.041666666666666664
+muffin,222601,eggs,1,eggs,12,"1 egg, lightly beaten",0.08333333333333333
+muffin,222601,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,222601,fruit juice,0.0625,cups,12,1 tablespoon lemon juice,0.005208333333333333
+muffin,222601,milk,0.25,cups,12,1/4 cup milk,0.020833333333333332
+muffin,222601,nut,0.5,cups,12,1/2 cup chopped walnuts,0.041666666666666664
+muffin,222601,oil,0.5,cups,12,1/2 cup vegetable oil,0.041666666666666664
+muffin,222601,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,222601,spice,0.0208333,cups,12,1 teaspoon ground cinnamon,0.0017361083333333333
+muffin,222601,sugar,0.75,cups,12,3/4 cup white sugar,0.0625
+muffin,222601,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,222601,vegetable,1,cups,12,1 cup shredded zucchini,0.08333333333333333
+muffin,223041,baking powder,0.0625,cups,16,1 tablespoon baking powder,0.00390625
+muffin,223041,baking soda,0.01041665,cups,16,1/2 teaspoon baking soda,6.51040625e-4
+muffin,223041,butter,0.5,cups,16,"1/2 cup butter, softened",0.03125
+muffin,223041,eggs,2,eggs,16,2 large eggs,0.125
+muffin,223041,flour,3,cups,16,3 cups all-purpose flour,0.1875
+muffin,223041,fruit,2.0625,cups,16,1 tablespoon grated lemon zest;2 cups fresh blueberries,0.12890625
+muffin,223041,milk,0.5,cups,16,1/2 cup milk,0.03125
+muffin,223041,oil,0.125,cups,16,2 tablespoons vegetable oil,0.0078125
+muffin,223041,salt,0.015624975,cups,16,3/4 teaspoon salt,9.765609375e-4
+muffin,223041,sour cream,1,cups,16,1 cup sour cream,0.0625
+muffin,223041,sugar,1,cups,16,1 cup white sugar,0.0625
+muffin,223425,baking soda,0.0208333,cups,24,1 teaspoon baking soda,8.680541666666666e-4
+muffin,223425,butter,0.1875,cups,24,"3 tablespoons butter, softened",0.0078125
+muffin,223425,eggs,2,eggs,24,2 eggs,0.08333333333333333
+muffin,223425,flour,2.75,cups,24,1 1/2 cups whole wheat flour;1 cup unbleached all-purpose flour;1/4 cup whole wheat flour,0.11458333333333333
+muffin,223425,fruit,2,cups,24,2 cups peeled and chopped apples,0.08333333333333333
+muffin,223425,oil,0.5,cups,24,1/2 cup vegetable oil,0.020833333333333332
+muffin,223425,salt,0.01041665,cups,24,1/2 teaspoon salt,4.340270833333333e-4
+muffin,223425,spice,0.0833333,cups,24,1 tablespoon pumpkin pie spice;1 teaspoon ground cinnamon,0.003472220833333333
+muffin,223425,sugar,2,cups,24,1 1/2 cups raw sugar;1/2 cup raw sugar,0.08333333333333333
+muffin,223425,vegetable,1,cups,24,1 cup canned pumpkin,0.041666666666666664
+muffin,22375,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,22375,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,22375,chocolate,1.5,cups,12,1/2 cup unsweetened cocoa powder;1 cup semisweet chocolate chips,0.125
+muffin,22375,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,22375,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,22375,milk,1.25,cups,12,1 1/4 cups milk,0.10416666666666667
+muffin,22375,nut,1.0833333333333333,cups,12,3/4 cup chopped walnuts;1/3 cup whole almonds,0.09027777777777778
+muffin,22375,oil,0.125,cups,12,2 tablespoons vegetable oil,0.010416666666666666
+muffin,22375,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+muffin,22375,sugar,1.75,cups,12,1 1/2 cups white sugar;4 tablespoons white sugar,0.14583333333333334
+muffin,22375,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,22458,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,22458,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,22458,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,22458,milk,1,cups,12,1 cup milk,0.08333333333333333
+muffin,22458,oats,1,cups,12,1 cup quick cooking oats,0.08333333333333333
+muffin,22458,oil,0.25,cups,12,1/4 cup vegetable oil,0.020833333333333332
+muffin,22458,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,22458,sugar,0.25,cups,12,1/4 cup white sugar,0.020833333333333332
+muffin,227995,baking soda,0.026041625,cups,12,1 1/4 teaspoons baking soda,0.0021701354166666666
+muffin,227995,bran,1.75,cups,12,1 3/4 cups bran cereal,0.14583333333333334
+muffin,227995,buttermilk,0.75,cups,12,3/4 cup buttermilk,0.0625
+muffin,227995,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,227995,flour,1.25,cups,12,1 1/4 cups all-purpose flour,0.10416666666666667
+muffin,227995,fruit,0.75,cups,12,3/4 cup peeled and finely chopped apple,0.0625
+muffin,227995,nut,0.25,cups,12,1/4 cup chopped walnuts (optional),0.020833333333333332
+muffin,227995,oil,0.25,cups,12,1/4 cup canola oil,0.020833333333333332
+muffin,227995,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+muffin,227995,spice,0.0208333,cups,12,1 teaspoon ground cinnamon,0.0017361083333333333
+muffin,227995,sugar,0.75,cups,12,3/4 cup white sugar,0.0625
+muffin,227995,vegetable,0.75,cups,12,3/4 cup grated carrot,0.0625
+muffin,228553,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,228553,chocolate,1.5,cups,12,3/4 cup chocolate chips;1/2 cup unsweetened cocoa powder;1/4 cup chocolate chips,0.125
+muffin,228553,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,228553,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,228553,milk,0.5,cups,12,1/2 cup milk,0.041666666666666664
+muffin,228553,oil,0.5,cups,12,1/2 cup vegetable oil,0.041666666666666664
+muffin,228553,sugar,1,cups,12,1 cup white sugar,0.08333333333333333
+muffin,228553,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,228553,yogurt,1,cups,12,1 cup plain yogurt,0.08333333333333333
+muffin,228562,baking powder,0.0208333,cups,18,1 teaspoon baking powder,0.0011574055555555556
+muffin,228562,baking soda,0.0416666,cups,18,2 teaspoons baking soda,0.002314811111111111
+muffin,228562,butter,0.125,cups,18,"2 tablespoons butter, softened",0.006944444444444444
+muffin,228562,eggs,3,eggs,18,3 eggs,0.16666666666666666
+muffin,228562,flour,2.625,cups,18,2 1/2 cups all-purpose flour;2 tablespoons all-purpose flour,0.14583333333333334
+muffin,228562,fruit,0.75,cups,18,1/2 cup applesauce;1/4 cup raisins (optional),0.041666666666666664
+muffin,228562,oats,0.625,cups,18,1/2 cup rolled oats;2 tablespoons rolled oats,0.034722222222222224
+muffin,228562,oil,0.6666666666666666,cups,18,2/3 cup vegetable oil,0.037037037037037035
+muffin,228562,salt,0.0208333,cups,18,1 teaspoon salt,0.0011574055555555556
+muffin,228562,spice,0.0833332,cups,18,4 teaspoons pumpkin pie spice,0.004629622222222222
+muffin,228562,sugar,2.25,cups,18,1 cup brown sugar;1 cup white sugar;1/4 cup packed brown sugar,0.125
+muffin,228562,vanilla,0.0208333,cups,18,1 teaspoon vanilla extract,0.0011574055555555556
+muffin,228562,vegetable,1.5,cups,18,1 1/2 cups pumpkin puree,0.08333333333333333
+muffin,22960,baking powder,0.0416666,cups,24,2 teaspoons baking powder,0.0017361083333333333
+muffin,22960,baking soda,0.0416666,cups,24,2 teaspoons baking soda,0.0017361083333333333
+muffin,22960,chocolate,2,cups,24,2 cups semisweet chocolate chips,0.08333333333333333
+muffin,22960,eggs,4,eggs,24,4 eggs,0.16666666666666666
+muffin,22960,flour,3,cups,24,3 cups all-purpose flour,0.125
+muffin,22960,oil,1.5,cups,24,1 1/2 cups vegetable oil,0.0625
+muffin,22960,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+muffin,22960,spice,0.0208333,cups,24,1 teaspoon ground cinnamon,8.680541666666666e-4
+muffin,22960,sugar,2,cups,24,2 cups white sugar,0.08333333333333333
+muffin,22960,vegetable,1.875,cups,24,1 (15 ounce) can pumpkin,0.078125
+muffin,231643,baking soda,0.03124995,cups,12,1 1/2 teaspoons baking soda,0.0026041625
+muffin,231643,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,231643,flour,1,cups,12,1 cup whole wheat flour,0.08333333333333333
+muffin,231643,fruit,0.5,cups,12,1/2 cup dried cherries,0.041666666666666664
+muffin,231643,nut,1,cups,12,1/2 cup shredded coconut;1/2 cup chopped pecans,0.08333333333333333
+muffin,231643,oats,0.5,cups,12,1/2 cup rolled oats,0.041666666666666664
+muffin,231643,oil,0.25,cups,12,1/4 cup vegetable oil,0.020833333333333332
+muffin,231643,salt,0.0208333,cups,12,1 teaspoon salt,0.0017361083333333333
+muffin,231643,spice,0.03124995,cups,12,1 teaspoon ground cinnamon;1/2 teaspoon ground ginger,0.0026041625
+muffin,231643,sugar,0.5,cups,12,1/2 cup packed brown sugar,0.041666666666666664
+muffin,231643,unitless,3,NA,12,"2 carrots, shredded;2 bananas, mashed;1 zucchini, shredded",0.25
+muffin,231643,yogurt,0.25,cups,12,1/4 cup yogurt,0.020833333333333332
+muffin,23294,baking soda,0.0208333,cups,24,1 teaspoon baking soda,8.680541666666666e-4
+muffin,23294,eggs,4,eggs,24,4 eggs,0.16666666666666666
+muffin,23294,flour,4,cups,24,4 cups all-purpose flour,0.16666666666666666
+muffin,23294,fruit,2,cups,24,2 cups blueberries,0.08333333333333333
+muffin,23294,oil,1,cups,24,1 cup vegetable oil,0.041666666666666664
+muffin,23294,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+muffin,23294,sour cream,2,cups,24,2 cups sour cream,0.08333333333333333
+muffin,23294,sugar,2,cups,24,2 cups white sugar,0.08333333333333333
+muffin,23294,vanilla,0.0208333,cups,24,1 teaspoon vanilla extract,8.680541666666666e-4
+muffin,23305,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,23305,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,23305,butter,0.625,cups,12,"1/2 cup butter, softened;2 tablespoons butter, chilled",0.052083333333333336
+muffin,23305,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,23305,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,23305,fruit,1,cups,12,1 cup mashed ripe banana,0.08333333333333333
+muffin,23305,nut,0.75,cups,12,1/2 cup chopped walnuts;1/4 cup chopped walnuts,0.0625
+muffin,23305,oats,1.3958333333333333,cups,12,1 cup rolled oats;1 tablespoon rolled oats;1/3 cup rolled oats,0.11631944444444443
+muffin,23305,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,23305,sour cream,0.5,cups,12,1/2 cup sour cream,0.041666666666666664
+muffin,23305,spice,0.01041665,cups,12,1/4 teaspoon ground cinnamon;1/4 teaspoon ground cinnamon,8.680541666666666e-4
+muffin,23305,sugar,1.25,cups,12,1 cup white sugar;4 tablespoons brown sugar,0.10416666666666667
+muffin,23305,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,23309,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,23309,butter,0.625,cups,12,"1/2 cup butter, softened;2 tablespoons butter, chilled",0.052083333333333336
+muffin,23309,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,23309,flour,2.125,cups,12,2 cups all-purpose flour;2 tablespoons all-purpose flour,0.17708333333333334
+muffin,23309,fruit,1.5,cups,12,1 1/2 cups blueberries,0.125
+muffin,23309,milk,0.5,cups,12,1/2 cup milk,0.041666666666666664
+muffin,23309,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,23309,spice,0.005208325,cups,12,1/4 teaspoon ground cinnamon,4.340270833333333e-4
+muffin,23309,sugar,0.875,cups,12,3/4 cup white sugar;2 tablespoons brown sugar,0.07291666666666667
+muffin,23309,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,23787,baking powder,0.0625,cups,18,1 tablespoon baking powder,0.003472222222222222
+muffin,23787,baking soda,0.0416666,cups,18,2 teaspoons baking soda,0.002314811111111111
+muffin,23787,eggs,4,eggs,18,4 eggs,0.2222222222222222
+muffin,23787,flour,2,cups,18,2 cups all-purpose flour,0.1111111111111111
+muffin,23787,fruit,1,cups,18,1 cup raisins,0.05555555555555555
+muffin,23787,oil,1,cups,18,1 cup vegetable oil,0.05555555555555555
+muffin,23787,salt,0.0208333,cups,18,1 teaspoon salt,0.0011574055555555556
+muffin,23787,spice,0.0208333,cups,18,1 teaspoon ground cinnamon,0.0011574055555555556
+muffin,23787,sugar,0.75,cups,18,3/4 cup brown sugar,0.041666666666666664
+muffin,23787,vegetable,3,cups,18,3 cups shredded carrots,0.16666666666666666
+muffin,23787,water,2,cups,18,2 cups warm water,0.1111111111111111
+muffin,23815,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,23815,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,23815,butter,0.25,cups,12,"4 tablespoons butter, melted",0.020833333333333332
+muffin,23815,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,23815,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,23815,fruit,2,cups,12,2 cups blueberries,0.16666666666666666
+muffin,23815,sugar,1,cups,12,1 cup white sugar,0.08333333333333333
+muffin,23815,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,23815,yogurt,1,cups,12,1 (8 ounce) container blueberry flavored yogurt,0.08333333333333333
+muffin,24011,baking powder,0.01041665,cups,12,1/2 teaspoon baking powder,8.680541666666666e-4
+muffin,24011,baking soda,0.0416666,cups,12,2 teaspoons baking soda,0.0034722166666666665
+muffin,24011,eggs,3,eggs,12,3 eggs,0.25
+muffin,24011,flour,3,cups,12,3 cups all-purpose flour,0.25
+muffin,24011,oil,0.6666666666666666,cups,12,2/3 cup vegetable oil,0.05555555555555555
+muffin,24011,salt,0.0208333,cups,12,1 teaspoon salt,0.0017361083333333333
+muffin,24011,spice,0.1458331,cups,12,2 teaspoons ground cloves;2 teaspoons ground cinnamon;2 teaspoons ground nutmeg;1 teaspoon ground allspice,0.012152758333333333
+muffin,24011,sugar,2,cups,12,2 cups white sugar,0.16666666666666666
+muffin,24011,unitless,1,NA,12,"1 small sugar pumpkin, seeded",0.08333333333333333
+muffin,24149,baking powder,0.03124995,cups,12,1 1/2 teaspoons baking powder,0.0026041625
+muffin,24149,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,24149,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,24149,margarine,0.375,cups,12,"6 tablespoons margarine, melted",0.03125
+muffin,24149,milk,0.5,cups,12,1/2 cup milk,0.041666666666666664
+muffin,24149,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,24149,shortening,0.3333333333333333,cups,12,1/3 cup shortening,0.027777777777777776
+muffin,24149,spice,0.026041625,cups,12,1/4 teaspoon nutmeg;1 teaspoon ground cinnamon,0.0021701354166666666
+muffin,24149,sugar,1,cups,12,1/2 cup white sugar;1/2 cup white sugar,0.08333333333333333
+muffin,24352,baking powder,0.0416666,cups,6,2 teaspoons baking powder,0.006944433333333333
+muffin,24352,butter,0.5,cups,6,"1/2 cup butter, cubed",0.08333333333333333
+muffin,24352,eggs,1,eggs,6,1 egg,0.16666666666666666
+muffin,24352,flour,1.8333333333333333,cups,6,1 1/2 cups all-purpose flour;1/3 cup all-purpose flour,0.3055555555555555
+muffin,24352,milk,0.3333333333333333,cups,6,1/3 cup milk,0.05555555555555555
+muffin,24352,oil,0.3333333333333333,cups,6,1/3 cup vegetable oil,0.05555555555555555
+muffin,24352,salt,0.01041665,cups,6,1/2 teaspoon salt,0.0017361083333333333
+muffin,24352,spice,0.05208325,cups,6,1 teaspoon ground cinnamon;1 1/2 teaspoons ground cinnamon,0.008680541666666666
+muffin,24352,sugar,1.25,cups,6,3/4 cup white sugar;1/2 cup white sugar,0.20833333333333334
+muffin,24352,unitless,1,NA,6,"2 apples - peeled, cored and chopped",0.16666666666666666
+muffin,245442,baking powder,0.0416666,cups,24,2 teaspoons baking powder,0.0017361083333333333
+muffin,245442,baking soda,0.0208333,cups,24,1 teaspoon baking soda,8.680541666666666e-4
+muffin,245442,butter,0.25,cups,24,1/4 cup melted butter,0.010416666666666666
+muffin,245442,eggs,4,eggs,24,4 large eggs,0.16666666666666666
+muffin,245442,flour,2,cups,24,2 cups all-purpose flour,0.08333333333333333
+muffin,245442,nut,1,cups,24,"1 cup chopped pecans, plus more for topping",0.041666666666666664
+muffin,245442,oil,1,cups,24,1 cup vegetable oil,0.041666666666666664
+muffin,245442,salt,0.0208333,cups,24,1 teaspoon kosher salt,8.680541666666666e-4
+muffin,245442,spice,0.05338533333333333,cups,24,2 teaspoons cinnamon;1/2 teaspoon ground ginger;1 pinch freshly grated nutmeg,0.002224388888888889
+muffin,245442,sugar,2.0416666,cups,24,1 1/2 cups white sugar;1/2 cup light brown sugar;2 teaspoons demerara sugar for topping,0.08506944166666668
+muffin,245442,vegetable,2,cups,24,2 cups mashed sweet potato (yams),0.08333333333333333
+muffin,25209,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,25209,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,25209,buttermilk,1,cups,12,1 cup buttermilk,0.08333333333333333
+muffin,25209,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,25209,flour,1,cups,12,1 cup whole wheat flour,0.08333333333333333
+muffin,25209,fruit,0.5,cups,12,1/2 cup applesauce,0.041666666666666664
+muffin,25209,oats,1,cups,12,1 cup rolled oats,0.08333333333333333
+muffin,25209,sugar,0.5,cups,12,1/2 cup brown sugar,0.041666666666666664
+muffin,25224,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,25224,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,25224,bran,1.5,cups,12,1 1/2 cups wheat bran,0.125
+muffin,25224,buttermilk,1,cups,12,1 cup buttermilk,0.08333333333333333
+muffin,25224,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,25224,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,25224,fruit,0.5,cups,12,1/2 cup raisins,0.041666666666666664
+muffin,25224,oil,0.3333333333333333,cups,12,1/3 cup vegetable oil,0.027777777777777776
+muffin,25224,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,25224,sugar,0.6666666666666666,cups,12,2/3 cup brown sugar,0.05555555555555555
+muffin,25224,vanilla,0.01041665,cups,12,1/2 teaspoon vanilla extract,8.680541666666666e-4
+muffin,27326,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,27326,butter,0.125,cups,12,2 tablespoons softened butter,0.010416666666666666
+muffin,27326,buttermilk,0.5,cups,12,1/2 cup buttermilk,0.041666666666666664
+muffin,27326,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,27326,flour,2.25,cups,12,2 cups all-purpose flour;1/4 cup all-purpose flour,0.1875
+muffin,27326,fruit juice,0.5,cups,12,1/2 cup orange juice,0.041666666666666664
+muffin,27326,oil,0.3333333333333333,cups,12,1/3 cup vegetable oil,0.027777777777777776
+muffin,27326,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,27326,spice,0.0624999,cups,12,1 1/2 teaspoons ground cinnamon;1 1/2 teaspoons ground cinnamon,0.005208325
+muffin,27326,sugar,1.1875,cups,12,3/4 cup white sugar;3 tablespoons brown sugar;1/4 cup white sugar,0.09895833333333333
+muffin,27326,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,33093,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,33093,butter,0.0625,cups,12,"1 tablespoon butter, melted",0.005208333333333333
+muffin,33093,eggs,1,eggs,12,"1 egg, beaten",0.08333333333333333
+muffin,33093,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,33093,milk,0.75,cups,12,3/4 cup milk,0.0625
+muffin,33093,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+muffin,33093,spice,0.0416666,cups,12,2 teaspoons pumpkin pie spice,0.0034722166666666665
+muffin,33093,sugar,0.5,cups,12,1/2 cup white sugar,0.041666666666666664
+muffin,33093,unitless,1,NA,12,"1/2 pound peeled, seeded and cubed butternut squash",0.08333333333333333
+muffin,33155,baking powder,0.026041625,cups,12,1 1/4 teaspoons baking powder,0.0021701354166666666
+muffin,33155,baking soda,0.005208325,cups,12,1/4 teaspoon baking soda,4.340270833333333e-4
+muffin,33155,eggs,1,eggs,12,"1 egg, beaten",0.08333333333333333
+muffin,33155,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,33155,fruit,1,cups,12,1 cup fresh blueberries,0.08333333333333333
+muffin,33155,fruit juice,0.5,cups,12,1/2 cup orange juice,0.041666666666666664
+muffin,33155,oats,0.5,cups,12,1/2 cup quick cooking oats,0.041666666666666664
+muffin,33155,oil,0.5,cups,12,1/2 cup vegetable oil,0.041666666666666664
+muffin,33155,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,33155,spice,0.005208325,cups,12,1/4 teaspoon ground cinnamon,4.340270833333333e-4
+muffin,33155,sugar,0.5416666,cups,12,1/2 cup white sugar;2 teaspoons white sugar,0.04513888333333333
+muffin,33157,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,33157,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,33157,butter,0.5625,cups,12,1/2 cup butter;1 tablespoon butter,0.046875
+muffin,33157,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,33157,flour,2.0625,cups,12,2 cups all-purpose flour;1 tablespoon all-purpose flour,0.171875
+muffin,33157,fruit,1.5,cups,12,1 1/2 cups chopped apples,0.125
+muffin,33157,other,0.026041625,cups,12,1 1/4 teaspoons vanilla,0.0021701354166666666
+muffin,33157,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,33157,spice,0.0026041625,cups,12,1/8 teaspoon ground cinnamon,2.1701354166666666e-4
+muffin,33157,sugar,1.3333333333333333,cups,12,1 cup white sugar;1/3 cup packed brown sugar,0.1111111111111111
+muffin,35757,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,35757,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,35757,buttermilk,1,cups,12,1 cup buttermilk,0.08333333333333333
+muffin,35757,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,35757,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,35757,fruit,1,cups,12,1 cup chopped fresh strawberries,0.08333333333333333
+muffin,35757,oats,1,cups,12,1 cup rolled oats,0.08333333333333333
+muffin,35757,oil,0.25,cups,12,1/4 cup vegetable oil,0.020833333333333332
+muffin,35757,other,0.0208333,cups,12,1 teaspoon vanilla,0.0017361083333333333
+muffin,35757,salt,0.0208333,cups,12,1 teaspoon salt,0.0017361083333333333
+muffin,35757,sugar,0.75,cups,12,3/4 cup brown sugar,0.0625
+muffin,36397,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,36397,butter,0.25,cups,12,"1/4 cup butter, softened",0.020833333333333332
+muffin,36397,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,36397,flour,1.75,cups,12,1 3/4 cups all-purpose flour,0.14583333333333334
+muffin,36397,fruit,1.5,cups,12,1 1/2 cups chopped fresh strawberries,0.125
+muffin,36397,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+muffin,36397,spice,0.005208325,cups,12,1/4 teaspoon ground nutmeg,4.340270833333333e-4
+muffin,36397,sugar,0.75,cups,12,1/2 cup white sugar;1/4 cup white sugar,0.0625
+muffin,36397,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,39949,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,39949,eggs,1,eggs,12,"1 eggs, beaten",0.08333333333333333
+muffin,39949,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,39949,fruit,2,cups,12,"1 cup unsweetened applesauce;1 cup fresh or frozen cranberries, chopped",0.16666666666666666
+muffin,39949,nut,0.5,cups,12,"1/2 cup pecans, chopped",0.041666666666666664
+muffin,39949,oil,0.3333333333333333,cups,12,1/3 cup vegetable oil,0.027777777777777776
+muffin,39949,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,39949,spice,0.0208333,cups,12,1 teaspoon ground cinnamon,0.0017361083333333333
+muffin,39949,sugar,0.5,cups,12,1/2 cup white sugar,0.041666666666666664
+muffin,40403,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,40403,butter,0.5,cups,12,1/2 cup unsalted butter,0.041666666666666664
+muffin,40403,buttermilk,0.5,cups,12,1/2 cup buttermilk,0.041666666666666664
+muffin,40403,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,40403,flour,2,cups,12,"2 cups all-purpose flour, divided",0.16666666666666666
+muffin,40403,fruit,2,cups,12,"1 pint fresh blueberries - rinsed, drained and patted dry",0.16666666666666666
+muffin,40403,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,40403,sugar,1.375,cups,12,1 1/4 cups white sugar;2 tablespoons white sugar,0.11458333333333333
+muffin,42719,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,42719,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,42719,butter,0.3333333333333333,cups,12,"1/3 cup butter, melted",0.027777777777777776
+muffin,42719,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,42719,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,42719,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,42719,sugar,0.75,cups,12,3/4 cup white sugar,0.0625
+muffin,42719,unitless,1,NA,12,"3 large bananas, mashed",0.08333333333333333
+muffin,48968,baking powder,0.0416666,cups,6,2 teaspoons baking powder,0.006944433333333333
+muffin,48968,butter,0.625,cups,6,"1/2 cup butter;2 tablespoons butter, cubed",0.10416666666666667
+muffin,48968,eggs,2,eggs,6,2 eggs,0.3333333333333333
+muffin,48968,flour,1.9375,cups,6,1 3/4 cups all-purpose flour;3 tablespoons all-purpose flour,0.3229166666666667
+muffin,48968,fruit,2,cups,6,"2 cups peeled, cored and sliced apples",0.3333333333333333
+muffin,48968,milk,0.5,cups,6,1/2 cup milk,0.08333333333333333
+muffin,48968,nut,0.5,cups,6,1/2 cup walnuts,0.08333333333333333
+muffin,48968,salt,0.01041665,cups,6,1/2 teaspoon salt,0.0017361083333333333
+muffin,48968,spice,0.0208333,cups,6,1/2 teaspoon ground cinnamon;1/2 teaspoon ground cinnamon,0.0034722166666666665
+muffin,48968,sugar,1.5,cups,6,1 1/4 cups white sugar;1/4 cup white sugar,0.25
+muffin,48968,vanilla,0.0208333,cups,6,1 teaspoon vanilla extract,0.0034722166666666665
+muffin,49383,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,49383,eggs,2,eggs,12,2 egg whites,0.16666666666666666
+muffin,49383,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,49383,fruit,1.03124995,cups,12,1/2 teaspoon lemon extract (optional);1 teaspoon grated lemon zest;1 cup frozen raspberries,0.08593749583333334
+muffin,49383,fruit juice,0.0625,cups,12,1 tablespoon lemon juice,0.005208333333333333
+muffin,49383,oil,0.1875,cups,12,3 tablespoons vegetable oil,0.015625
+muffin,49383,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+muffin,49383,sugar,0.875,cups,12,3/4 cup white sugar;2 tablespoons white sugar for decoration (optional),0.07291666666666667
+muffin,49383,yogurt,0.5,cups,12,1/2 cup plain yogurt,0.041666666666666664
+muffin,52635,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,52635,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,52635,bran,1.5,cups,12,1 1/2 cups wheat bran,0.125
+muffin,52635,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,52635,flour,1,cups,12,1/2 cup all-purpose flour;1/2 cup whole wheat flour,0.08333333333333333
+muffin,52635,fruit,1.5,cups,12,1/2 cup unsweetened applesauce;1 cup blueberries,0.125
+muffin,52635,milk,1,cups,12,1 cup nonfat milk,0.08333333333333333
+muffin,52635,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,52635,sugar,0.6666666666666666,cups,12,2/3 cup brown sugar,0.05555555555555555
+muffin,52635,vanilla,0.01041665,cups,12,1/2 teaspoon vanilla extract,8.680541666666666e-4
+muffin,55334,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,55334,baking soda,0.005208325,cups,12,1/4 teaspoon baking soda,4.340270833333333e-4
+muffin,55334,buttermilk,0.3333333333333333,cups,12,1/3 cup buttermilk,0.027777777777777776
+muffin,55334,eggs,2,eggs,12,"2 eggs, slightly beaten",0.16666666666666666
+muffin,55334,flour,2,cups,12,2 cups whole wheat flour,0.16666666666666666
+muffin,55334,fruit,0.75,cups,12,1/2 cup applesauce;1/4 cup golden raisins (optional),0.0625
+muffin,55334,nut,0.25,cups,12,1/4 cup chopped pecans (optional),0.020833333333333332
+muffin,55334,oil,0.25,cups,12,1/4 cup canola oil,0.020833333333333332
+muffin,55334,salt,0.0208333,cups,12,1 teaspoon salt,0.0017361083333333333
+muffin,55334,spice,0.0416666,cups,12,2 teaspoons pumpkin pie spice,0.0034722166666666665
+muffin,55334,sugar,1,cups,12,"2/3 cup brown sugar, firmly packed;1/3 cup white sugar",0.08333333333333333
+muffin,55334,vegetable,0.5,cups,12,1/2 cup canned pumpkin,0.041666666666666664
+muffin,56312,baking powder,0.015624975,cups,12,3/4 teaspoon baking powder,0.00130208125
+muffin,56312,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,56312,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,56312,flour,1.5,cups,12,1 1/2 cups whole wheat flour,0.125
+muffin,56312,fruit,0.5,cups,12,1/2 cup raisins,0.041666666666666664
+muffin,56312,honey,0.5,cups,12,1/2 cup honey,0.041666666666666664
+muffin,56312,nut,0.5,cups,12,1/2 cup chopped walnuts,0.041666666666666664
+muffin,56312,oil,0.5,cups,12,1/2 cup vegetable oil,0.041666666666666664
+muffin,56312,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,56312,spice,0.0208333,cups,12,1 teaspoon pumpkin pie spice,0.0017361083333333333
+muffin,56312,sugar,0.5,cups,12,1/2 cup packed brown sugar,0.041666666666666664
+muffin,56312,vegetable,0.75,cups,12,3/4 cup canned pumpkin puree,0.0625
+muffin,59248,baking powder,0.03124995,cups,36,1 1/2 teaspoons baking powder,8.680541666666666e-4
+muffin,59248,baking soda,0.03124995,cups,36,1 1/2 teaspoons baking soda,8.680541666666666e-4
+muffin,59248,eggs,6,eggs,36,6 eggs,0.16666666666666666
+muffin,59248,flour,4.75,cups,36,4 3/4 cups all-purpose flour,0.13194444444444445
+muffin,59248,fruit,2.5,cups,36,1 1/2 cups raisins;1 cup unsweetened applesauce,0.06944444444444445
+muffin,59248,nut,1,cups,36,1 cup chopped walnuts,0.027777777777777776
+muffin,59248,salt,0.03124995,cups,36,1 1/2 teaspoons salt,8.680541666666666e-4
+muffin,59248,spice,0.09374985,cups,36,1 1/2 teaspoons nutmeg;1 1/2 teaspoons cinnamon;1 1/2 teaspoons ground cloves,0.0026041625
+muffin,59248,sugar,4,cups,36,4 cups white sugar,0.1111111111111111
+muffin,59248,vegetable,3.625,cups,36,1 (29 ounce) can pumpkin,0.10069444444444445
+muffin,6706,baking powder,0.0833332,cups,24,4 teaspoons baking powder,0.0034722166666666665
+muffin,6706,eggs,2,eggs,24,2 eggs,0.08333333333333333
+muffin,6706,flour,2.25,cups,24,1/4 cup all-purpose flour;2 cups all-purpose flour,0.09375
+muffin,6706,fruit,2,cups,24,2 cups fresh blueberries,0.08333333333333333
+muffin,6706,margarine,0.25,cups,24,1/4 cup margarine,0.010416666666666666
+muffin,6706,milk,1,cups,24,1 cup milk,0.041666666666666664
+muffin,6706,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+muffin,6706,sugar,1.5,cups,24,1 1/2 cups white sugar,0.0625
+muffin,6706,vanilla,0.0208333,cups,24,1 teaspoon vanilla extract,8.680541666666666e-4
+muffin,6714,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,6714,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,6714,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,6714,flour,1.5,cups,12,1 1/2 cups unbleached all-purpose flour,0.125
+muffin,6714,fruit,1,cups,12,1 cup mashed bananas,0.08333333333333333
+muffin,6714,milk,0.75,cups,12,3/4 cup milk,0.0625
+muffin,6714,oats,1,cups,12,1 cup rolled oats,0.08333333333333333
+muffin,6714,oil,0.3333333333333333,cups,12,1/3 cup vegetable oil,0.027777777777777776
+muffin,6714,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,6714,sugar,0.5,cups,12,1/2 cup white sugar,0.041666666666666664
+muffin,6714,vanilla,0.01041665,cups,12,1/2 teaspoon vanilla extract,8.680541666666666e-4
+muffin,6753,baking powder,0.0833332,cups,12,4 teaspoons baking powder,0.006944433333333333
+muffin,6753,chocolate,0.75,cups,12,3/4 cup semisweet chocolate chips,0.0625
+muffin,6753,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,6753,flour,1.25,cups,12,1 1/4 cups all-purpose flour,0.10416666666666667
+muffin,6753,milk,1.25,cups,12,1 1/4 cups milk,0.10416666666666667
+muffin,6753,nut,1,cups,12,1 cup chopped pecans,0.08333333333333333
+muffin,6753,oats,1.25,cups,12,1 1/4 cups quick cooking oats,0.10416666666666667
+muffin,6753,oil,0.5,cups,12,1/2 cup vegetable oil,0.041666666666666664
+muffin,6753,salt,0.0208333,cups,12,1 teaspoon salt,0.0017361083333333333
+muffin,6753,sugar,0.75,cups,12,3/4 cup packed brown sugar,0.0625
+muffin,6766,baking powder,0.0625,cups,12,1 tablespoon baking powder,0.005208333333333333
+muffin,6766,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,6766,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,6766,fruit,1,cups,12,"1 cup blueberries, rinsed and drained",0.08333333333333333
+muffin,6766,milk,1,cups,12,1 cup milk,0.08333333333333333
+muffin,6766,oats,1.25,cups,12,1 1/4 cups quick cooking oats,0.10416666666666667
+muffin,6766,oil,0.25,cups,12,1/4 cup vegetable oil,0.020833333333333332
+muffin,6766,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,6766,sugar,0.3333333333333333,cups,12,1/3 cup white sugar,0.027777777777777776
+muffin,6805,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,6805,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,6805,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,6805,fruit,0.5,cups,12,1/2 cup fresh blueberries,0.041666666666666664
+muffin,6805,milk,1,cups,12,1 cup milk,0.08333333333333333
+muffin,6805,oil,0.3333333333333333,cups,12,1/3 cup vegetable oil,0.027777777777777776
+muffin,6805,sugar,0.5,cups,12,1/2 cup white sugar,0.041666666666666664
+muffin,6854,baking powder,0.0833332,cups,12,2 teaspoons baking powder;2 teaspoons baking powder,0.006944433333333333
+muffin,6854,butter,1.25,cups,12,"1/2 cup butter;2 tablespoons butter, diced;1/2 cup butter;2 tablespoons butter, diced",0.10416666666666667
+muffin,6854,eggs,4,eggs,12,2 eggs;2 eggs,0.3333333333333333
+muffin,6854,flour,4.4375,cups,12,2 cups all-purpose flour;1 1/2 tablespoons all-purpose flour;2 tablespoons all-purpose flour;2 cups all-purpose flour;1 1/2 tablespoons all-purpose flour;2 tablespoons all-purpose flour,0.3697916666666667
+muffin,6854,fruit,3.01041665,cups,12,1 1/2 cups fresh blueberries;1/4 teaspoon lemon zest;1 1/2 cups fresh blueberries;1/4 teaspoon lemon zest,0.25086805416666663
+muffin,6854,milk,1,cups,12,1/2 cup milk;1/2 cup milk,0.08333333333333333
+muffin,6854,salt,0.0208333,cups,12,1/2 teaspoon salt;1/2 teaspoon salt,0.0017361083333333333
+muffin,6854,spice,0.0208333,cups,12,1/2 teaspoon ground cinnamon;1/2 teaspoon ground cinnamon,0.0017361083333333333
+muffin,6854,sugar,2.125,cups,12,3/4 cup white sugar;5 tablespoons white sugar;3/4 cup white sugar;5 tablespoons white sugar,0.17708333333333334
+muffin,6854,vanilla,0.0416666,cups,12,1 teaspoon vanilla extract;1 teaspoon vanilla extract,0.0034722166666666665
+muffin,6865,baking powder,0.0416666,cups,8,2 teaspoons baking powder,0.005208325
+muffin,6865,butter,0.25,cups,8,"1/4 cup butter, cubed",0.03125
+muffin,6865,eggs,1,eggs,8,1 egg,0.125
+muffin,6865,flour,1.8333333333333333,cups,8,1 1/2 cups all-purpose flour;1/3 cup all-purpose flour,0.22916666666666666
+muffin,6865,fruit,1,cups,8,1 cup fresh blueberries,0.125
+muffin,6865,milk,0.3333333333333333,cups,8,1/3 cup milk,0.041666666666666664
+muffin,6865,oil,0.3333333333333333,cups,8,1/3 cup vegetable oil,0.041666666666666664
+muffin,6865,salt,0.01041665,cups,8,1/2 teaspoon salt,0.00130208125
+muffin,6865,spice,0.03124995,cups,8,1 1/2 teaspoons ground cinnamon,0.00390624375
+muffin,6865,sugar,1.25,cups,8,3/4 cup white sugar;1/2 cup white sugar,0.15625
+muffin,6869,baking powder,0.0624999,cups,12,1 1/2 teaspoons baking powder;1 1/2 teaspoons baking powder,0.005208325
+muffin,6869,butter,0.0833332,cups,12,"2 teaspoons butter, melted;2 teaspoons butter, melted",0.006944433333333333
+muffin,6869,eggs,6,eggs,12,3 eggs;3 eggs,0.5
+muffin,6869,flour,6,cups,12,3 cups all-purpose flour;3 cups all-purpose flour,0.5
+muffin,6869,fruit juice,0.5,cups,12,1/4 cup orange juice;1/4 cup orange juice,0.041666666666666664
+muffin,6869,milk,3,cups,12,1 1/2 cups milk;1 1/2 cups milk,0.25
+muffin,6869,nut,0.2708332,cups,12,1 1/2 tablespoons poppy seeds;1 1/2 teaspoons almond extract;1/2 teaspoon almond extract;1 1/2 tablespoons poppy seeds;1 1/2 teaspoons almond extract;1/2 teaspoon almond extract,0.022569433333333333
+muffin,6869,oil,2.25,cups,12,1 1/8 cups vegetable oil;1 1/8 cups vegetable oil,0.1875
+muffin,6869,salt,0.0624999,cups,12,1 1/2 teaspoons salt;1 1/2 teaspoons salt,0.005208325
+muffin,6869,sugar,6.5,cups,12,2 1/2 cups white sugar;3/4 cup white sugar;2 1/2 cups white sugar;3/4 cup white sugar,0.5416666666666666
+muffin,6869,vanilla,0.0833332,cups,12,1 1/2 teaspoons vanilla extract;1/2 teaspoon vanilla extract;1 1/2 teaspoons vanilla extract;1/2 teaspoon vanilla extract,0.006944433333333333
+muffin,6874,baking powder,0.0624999,cups,12,3 teaspoons baking powder,0.005208325
+muffin,6874,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,6874,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,6874,milk,1,cups,12,1 cup milk,0.08333333333333333
+muffin,6874,oil,0.25,cups,12,1/4 cup vegetable oil,0.020833333333333332
+muffin,6874,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,6874,sugar,0.75,cups,12,3/4 cup white sugar,0.0625
+muffin,6957,baking powder,0.0625,cups,12,1 tablespoon baking powder,0.005208333333333333
+muffin,6957,chocolate,0.5,cups,12,1/2 cup semisweet chocolate chips,0.041666666666666664
+muffin,6957,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,6957,flour,1.75,cups,12,1 3/4 cups all-purpose flour,0.14583333333333334
+muffin,6957,fruit,1,cups,12,1 cup mashed bananas,0.08333333333333333
+muffin,6957,milk,0.25,cups,12,1/4 cup milk,0.020833333333333332
+muffin,6957,oil,0.25,cups,12,1/4 cup vegetable oil,0.020833333333333332
+muffin,6957,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,6957,sugar,0.5,cups,12,1/2 cup white sugar,0.041666666666666664
+muffin,69664,baking powder,0.0625,cups,16,1 tablespoon baking powder,0.00390625
+muffin,69664,butter,0.5,cups,16,"1/4 cup butter, melted;1/4 cup butter, melted",0.03125
+muffin,69664,eggs,1,eggs,16,"1 egg, beaten",0.0625
+muffin,69664,flour,2.5,cups,16,2 cups all-purpose flour;1/2 cup all-purpose flour,0.15625
+muffin,69664,fruit,1,cups,16,1 (8 ounce) can crushed pineapple,0.0625
+muffin,69664,milk,0.75,cups,16,3/4 cup milk,0.046875
+muffin,69664,salt,0.01041665,cups,16,1/2 teaspoon salt,6.51040625e-4
+muffin,69664,spice,0.005208325,cups,16,1/4 teaspoon ground cinnamon,3.255203125e-4
+muffin,69664,sugar,0.8333333333333333,cups,16,1/2 cup white sugar;1/3 cup packed brown sugar,0.05208333333333333
+muffin,6989,baking powder,0.03124995,cups,12,1 1/2 teaspoons baking powder,0.0026041625
+muffin,6989,baking soda,0.005208325,cups,12,1/4 teaspoon baking soda,4.340270833333333e-4
+muffin,6989,eggs,2,eggs,12,2 egg whites,0.16666666666666666
+muffin,6989,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,6989,fruit,1.0208333,cups,12,1 cup mashed bananas;1 teaspoon lemon zest,0.08506944166666668
+muffin,6989,nut,0.25,cups,12,1/4 cup chopped walnuts,0.020833333333333332
+muffin,6989,oil,0.1875,cups,12,3 tablespoons vegetable oil,0.015625
+muffin,6989,salt,0.0026041625,cups,12,1/8 teaspoon salt,2.1701354166666666e-4
+muffin,6989,sugar,0.75,cups,12,3/4 cup white sugar,0.0625
+muffin,69893,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,69893,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,69893,flour,2,cups,12,2 cups whole wheat flour,0.16666666666666666
+muffin,69893,fruit,1.5,cups,12,1/2 cup unsweetened applesauce;1 cup frozen sliced strawberries,0.125
+muffin,69893,oil,0.25,cups,12,1/4 cup vegetable oil,0.020833333333333332
+muffin,69893,spice,0.0625,cups,12,1 tablespoon ground cinnamon,0.005208333333333333
+muffin,69893,sugar,0.75,cups,12,3/4 cup packed brown sugar,0.0625
+muffin,69893,unitless,1,NA,12,"3 bananas, mashed",0.08333333333333333
+muffin,69893,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,6990,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,6990,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,6990,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,6990,nut,0.25,cups,12,1/4 cup chopped walnuts,0.020833333333333332
+muffin,6990,oil,0.5,cups,12,1/2 cup vegetable oil,0.041666666666666664
+muffin,6990,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,6990,sugar,1,cups,12,1 cup white sugar,0.08333333333333333
+muffin,6990,unitless,1,NA,12,"3 ripe bananas, mashed",0.08333333333333333
+muffin,7013,baking powder,0.0208333,cups,18,1 teaspoon baking powder,0.0011574055555555556
+muffin,7013,baking soda,0.0208333,cups,18,1 teaspoon baking soda,0.0011574055555555556
+muffin,7013,chocolate,1,cups,18,1 cup semisweet chocolate chips,0.05555555555555555
+muffin,7013,eggs,1,eggs,18,1 egg,0.05555555555555555
+muffin,7013,flour,2.25,cups,18,2 1/4 cups all-purpose flour,0.125
+muffin,7013,margarine,1,cups,18,1 cup margarine,0.05555555555555555
+muffin,7013,other,0.0625,cups,18,"1 tablespoon instant coffee granules, dissolved in",0.003472222222222222
+muffin,7013,salt,0.005208325,cups,18,1/4 teaspoon salt,2.893513888888889e-4
+muffin,7013,sugar,1.25,cups,18,1 1/4 cups white sugar,0.06944444444444445
+muffin,7013,unitless,1,NA,18,3 ripe bananas,0.05555555555555555
+muffin,7013,vanilla,0.0208333,cups,18,1 teaspoon vanilla extract,0.0011574055555555556
+muffin,7013,water,0.0625,cups,18,1 tablespoon water,0.003472222222222222
+muffin,7019,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,7019,chocolate,1.25,cups,12,1/4 cup unsweetened cocoa powder;1 cup semi-sweet chocolate chips,0.10416666666666667
+muffin,7019,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,7019,flour,1,cups,12,1 cup all-purpose flour,0.08333333333333333
+muffin,7019,fruit,0.5,cups,12,1/2 cup applesauce,0.041666666666666664
+muffin,7019,margarine,0.25,cups,12,"1/4 cup margarine, softened",0.020833333333333332
+muffin,7019,spice,0.005208325,cups,12,1/4 teaspoon ground cinnamon (optional),4.340270833333333e-4
+muffin,7019,sugar,1.125,cups,12,1/2 cup white sugar;1/2 cup light brown sugar;2 tablespoons confectioners' sugar (optional),0.09375
+muffin,7019,vanilla,0.01041665,cups,12,1/2 teaspoon vanilla extract,8.680541666666666e-4
+muffin,7067,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,7067,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,7067,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,7067,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,7067,fruit,0.0625,cups,12,1 tablespoon grated lemon zest,0.005208333333333333
+muffin,7067,fruit juice,0.3333333333333333,cups,12,1/3 cup lemon juice,0.027777777777777776
+muffin,7067,nut,0.25,cups,12,1/4 cup poppy seeds,0.020833333333333332
+muffin,7067,oil,0.25,cups,12,1/4 cup vegetable oil,0.020833333333333332
+muffin,7067,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,7067,sugar,0.9375,cups,12,3/4 cup white sugar;3 tablespoons white sugar,0.078125
+muffin,7067,yogurt,1,cups,12,1 cup lemon flavored yogurt,0.08333333333333333
+muffin,7113,baking powder,0.026041625,cups,12,1 1/4 teaspoons baking powder,0.0021701354166666666
+muffin,7113,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,7113,chocolate,0.5,cups,12,1/2 cup semisweet chocolate chips,0.041666666666666664
+muffin,7113,eggs,2,eggs,12,2 egg whites,0.16666666666666666
+muffin,7113,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,7113,fruit,1.25,cups,12,1 cup mashed bananas;1/4 cup applesauce,0.10416666666666667
+muffin,7113,salt,0.0026041625,cups,12,1/8 teaspoon salt,2.1701354166666666e-4
+muffin,7113,spice,0.01041665,cups,12,1/2 teaspoon ground cinnamon,8.680541666666666e-4
+muffin,7113,sugar,0.75,cups,12,3/4 cup white sugar,0.0625
+muffin,7159,baking powder,0.0416666,cups,18,2 teaspoons baking powder,0.002314811111111111
+muffin,7159,baking soda,0.01041665,cups,18,1/2 teaspoon baking soda,5.787027777777778e-4
+muffin,7159,eggs,3,eggs,18,1 egg;2 egg whites,0.16666666666666666
+muffin,7159,flour,2,cups,18,1 1/2 cups all-purpose flour;1/2 cup whole wheat flour,0.1111111111111111
+muffin,7159,fruit,1.5,cups,18,1 cup raisins;1/2 cup apple butter,0.08333333333333333
+muffin,7159,nut,0.125,cups,18,2 tablespoons chopped walnuts,0.006944444444444444
+muffin,7159,oil,0.25,cups,18,1/4 cup vegetable oil,0.013888888888888888
+muffin,7159,salt,0.01041665,cups,18,1/2 teaspoon salt,5.787027777777778e-4
+muffin,7159,spice,0.0625,cups,18,1 tablespoon ground cinnamon,0.003472222222222222
+muffin,7159,sugar,1.25,cups,18,1 1/4 cups white sugar,0.06944444444444445
+muffin,7159,unitless,1,NA,18,"1 apple - peeled, cored, and chopped",0.05555555555555555
+muffin,7159,vanilla,0.0625,cups,18,1 tablespoon vanilla extract,0.003472222222222222
+muffin,7159,vegetable,2,cups,18,2 cups grated carrots,0.1111111111111111
+muffin,7159,wheat germ,0.125,cups,18,2 tablespoons toasted wheat germ,0.006944444444444444
+muffin,7164,baking soda,0.0416666,cups,20,2 teaspoons baking soda,0.00208333
+muffin,7164,bran,4,cups,20,4 cups whole bran cereal,0.2
+muffin,7164,eggs,5,eggs,20,"5 eggs, beaten",0.25
+muffin,7164,flour,2,cups,20,2 cups all-purpose flour,0.1
+muffin,7164,fruit,2,cups,20,2 cups golden raisins,0.1
+muffin,7164,fruit juice,2,cups,20,2 cups pineapple juice,0.1
+muffin,7164,honey,0.5,cups,20,1/2 cup honey,0.025
+muffin,7164,oil,0.5,cups,20,1/2 cup vegetable oil,0.025
+muffin,7164,salt,0.0208333,cups,20,1 teaspoon salt,0.001041665
+muffin,7164,sugar,1,cups,20,1 cup packed brown sugar,0.05
+muffin,7167,baking powder,0.01041665,cups,24,1/2 teaspoon baking powder,4.340270833333333e-4
+muffin,7167,baking soda,0.0208333,cups,24,1 teaspoon baking soda,8.680541666666666e-4
+muffin,7167,chocolate,0.3333333333333333,cups,24,1/3 cup unsweetened cocoa powder,0.013888888888888888
+muffin,7167,eggs,3,eggs,24,3 eggs,0.125
+muffin,7167,flour,3,cups,24,3 cups all-purpose flour,0.125
+muffin,7167,oil,1,cups,24,1 cup vegetable oil,0.041666666666666664
+muffin,7167,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+muffin,7167,spice,0.0208333,cups,24,1/4 teaspoon ground cinnamon;1/4 teaspoon ground nutmeg;1/4 teaspoon ground cloves;1/4 teaspoon ground cardamom,8.680541666666666e-4
+muffin,7167,sugar,2,cups,24,2 cups white sugar,0.08333333333333333
+muffin,7167,vanilla,0.03124995,cups,24,1 1/2 teaspoons vanilla extract,0.00130208125
+muffin,7167,vegetable,2,cups,24,2 cups grated zucchini,0.08333333333333333
+muffin,7191,baking powder,0.05208325,cups,18,2 1/2 teaspoons baking powder,0.0028935138888888886
+muffin,7191,baking soda,0.01041665,cups,18,1/2 teaspoon baking soda,5.787027777777778e-4
+muffin,7191,eggs,2,eggs,18,2 eggs,0.1111111111111111
+muffin,7191,flour,2,cups,18,2 cups all-purpose flour,0.1111111111111111
+muffin,7191,fruit,1,cups,18,1 cup mashed ripe banana,0.05555555555555555
+muffin,7191,margarine,0.5,cups,18,1/2 cup margarine,0.027777777777777776
+muffin,7191,milk,0.375,cups,18,6 tablespoons milk,0.020833333333333332
+muffin,7191,salt,0.01041665,cups,18,1/2 teaspoon salt,5.787027777777778e-4
+muffin,7191,spice,0.0208333,cups,18,1 teaspoon ground cinnamon,0.0011574055555555556
+muffin,7191,sugar,1,cups,18,1 cup white sugar,0.05555555555555555
+muffin,7228,baking powder,0.0416666,cups,16,2 teaspoons baking powder,0.0026041625
+muffin,7228,baking soda,0.01041665,cups,16,1/2 teaspoon baking soda,6.51040625e-4
+muffin,7228,eggs,2,eggs,16,2 eggs,0.125
+muffin,7228,flour,1.5,cups,16,1 1/2 cups all-purpose flour,0.09375
+muffin,7228,fruit,1,cups,16,1 cup applesauce,0.0625
+muffin,7228,margarine,0.5,cups,16,1/2 cup margarine,0.03125
+muffin,7228,spice,0.0416666,cups,16,1 teaspoon ground cinnamon;1 teaspoon ground allspice,0.0026041625
+muffin,7228,sugar,0.6666666666666666,cups,16,2/3 cup white sugar,0.041666666666666664
+muffin,72816,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,72816,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,72816,eggs,4,eggs,12,4 egg whites,0.3333333333333333
+muffin,72816,flour,2,cups,12,2 cups whole wheat flour,0.16666666666666666
+muffin,72816,fruit,2.5,cups,12,1 1/2 cups mashed bananas;1 cup fresh blueberries,0.20833333333333334
+muffin,72816,spice,0.01041665,cups,12,1/2 teaspoon ground cinnamon,8.680541666666666e-4
+muffin,72816,sugar,0.3333333333333333,cups,12,1/3 cup brown sugar,0.027777777777777776
+muffin,72816,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,74658,baking soda,0.0208333,cups,16,1 teaspoon baking soda,0.00130208125
+muffin,74658,eggs,3,eggs,16,"3 eggs, lightly beaten",0.1875
+muffin,74658,flour,3,cups,16,3 cups all-purpose flour,0.1875
+muffin,74658,fruit,2,cups,16,"2 cups peeled, pitted, and chopped peaches",0.125
+muffin,74658,oil,1.25,cups,16,1 1/4 cups vegetable oil,0.078125
+muffin,74658,salt,0.0208333,cups,16,1 teaspoon salt,0.00130208125
+muffin,74658,spice,0.0625,cups,16,1 tablespoon ground cinnamon,0.00390625
+muffin,74658,sugar,2,cups,16,2 cups white sugar,0.125
+muffin,74935,baking powder,0.0208333,cups,24,1 teaspoon baking powder,8.680541666666666e-4
+muffin,74935,baking soda,0.0208333,cups,24,1 teaspoon baking soda,8.680541666666666e-4
+muffin,74935,eggs,3,eggs,24,3 eggs,0.125
+muffin,74935,flour,3,cups,24,1 1/2 cups all-purpose flour;3/4 cup whole wheat flour;3/4 cup oat flour,0.125
+muffin,74935,fruit,1,cups,24,1/2 cup unsweetened applesauce;1/2 cup raisins (optional),0.041666666666666664
+muffin,74935,honey,0.75,cups,24,3/4 cup honey,0.03125
+muffin,74935,nut,0.5,cups,24,1/2 cup chopped pecans (optional),0.020833333333333332
+muffin,74935,oil,0.5,cups,24,1/2 cup vegetable oil,0.020833333333333332
+muffin,74935,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+muffin,74935,spice,0.057291575,cups,24,2 1/2 teaspoons ground cinnamon;1/4 teaspoon ground nutmeg,0.0023871489583333332
+muffin,74935,sugar,1,cups,24,1 cup white sugar,0.041666666666666664
+muffin,74935,vanilla,0.0416666,cups,24,2 teaspoons vanilla extract,0.0017361083333333333
+muffin,74935,vegetable,2,cups,24,1 cup shredded zucchini;1 cup shredded carrots,0.08333333333333333
+muffin,74935,yogurt,1,cups,24,1 cup plain yogurt,0.041666666666666664
+muffin,75353,baking powder,0.0625,cups,12,1 tablespoon baking powder,0.005208333333333333
+muffin,75353,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,75353,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,75353,fruit,1,cups,12,1 cup blueberries,0.08333333333333333
+muffin,75353,milk,0.75,cups,12,3/4 cup milk,0.0625
+muffin,75353,nut,0.5,cups,12,1/2 cup chopped walnuts,0.041666666666666664
+muffin,75353,oats,1.0833333333333333,cups,12,3/4 cup quick cooking oats;1/3 cup quick cooking oats,0.09027777777777778
+muffin,75353,oil,0.5,cups,12,1/2 cup vegetable oil,0.041666666666666664
+muffin,75353,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,75353,spice,0.0208333,cups,12,1 teaspoon ground cinnamon,0.0017361083333333333
+muffin,75353,sugar,0.75,cups,12,1/2 cup sugar;1/4 cup brown sugar,0.0625
+muffin,75353,wheat germ,0.25,cups,12,1/4 cup wheat germ,0.020833333333333332
+muffin,76907,baking powder,0.0208333,cups,18,1 teaspoon baking powder,0.0011574055555555556
+muffin,76907,baking soda,0.0416666,cups,18,2 teaspoons baking soda,0.002314811111111111
+muffin,76907,cream cheese,0.25,cups,18,1/4 cup softened cream cheese,0.013888888888888888
+muffin,76907,eggs,3,eggs,18,"3 eggs, beaten",0.16666666666666666
+muffin,76907,flour,2,cups,18,1 cup all-purpose flour;1 cup whole wheat flour,0.1111111111111111
+muffin,76907,fruit,0.5,cups,18,1/2 cup raisins,0.027777777777777776
+muffin,76907,fruit juice,1,cups,18,"1 (8 ounce) can crushed pineapple, drained with juice reserved",0.05555555555555555
+muffin,76907,nut,0.5,cups,18,1/2 cup flaked coconut,0.027777777777777776
+muffin,76907,oats,0.5,cups,18,1/2 cup uncooked rolled oats,0.027777777777777776
+muffin,76907,oil,1,cups,18,1 cup canola oil,0.05555555555555555
+muffin,76907,salt,0.005208325,cups,18,1/4 teaspoon salt,2.893513888888889e-4
+muffin,76907,spice,0.0208333,cups,18,1 teaspoon cinnamon,0.0011574055555555556
+muffin,76907,sugar,1.5,cups,18,3/4 cup white sugar;3/4 cup brown sugar,0.08333333333333333
+muffin,76907,vanilla,0.0208333,cups,18,1 teaspoon vanilla extract,0.0011574055555555556
+muffin,76907,vegetable,2,cups,18,2 cups shredded carrots,0.1111111111111111
+muffin,7904,baking powder,0.0624999,cups,12,3 teaspoons baking powder,0.005208325
+muffin,7904,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,7904,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,7904,fruit,1,cups,12,"1 cup apples - peeled, cored and finely diced",0.08333333333333333
+muffin,7904,fruit juice,0.75,cups,12,3/4 cup apple juice,0.0625
+muffin,7904,oil,0.3333333333333333,cups,12,1/3 cup vegetable oil,0.027777777777777776
+muffin,7904,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,7904,spice,0.0208333,cups,12,1 teaspoon ground cinnamon,0.0017361083333333333
+muffin,7904,sugar,0.5,cups,12,1/2 cup white sugar,0.041666666666666664
+muffin,7906,baking powder,0.0624999,cups,12,3 teaspoons baking powder,0.005208325
+muffin,7906,chocolate,0.75,cups,12,3/4 cup mini semi-sweet chocolate chips,0.0625
+muffin,7906,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,7906,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,7906,milk,0.75,cups,12,3/4 cup milk,0.0625
+muffin,7906,oil,0.3333333333333333,cups,12,1/3 cup vegetable oil,0.027777777777777776
+muffin,7906,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,7906,sugar,0.8125,cups,12,1/2 cup white sugar;3 tablespoons white sugar;2 tablespoons brown sugar,0.06770833333333333
+muffin,7908,baking powder,0.0624999,cups,12,3 teaspoons baking powder,0.005208325
+muffin,7908,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,7908,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,7908,fruit,0.0625,cups,12,1 tablespoon grated lemon zest,0.005208333333333333
+muffin,7908,milk,0.75,cups,12,3/4 cup milk,0.0625
+muffin,7908,oil,0.3333333333333333,cups,12,1/3 cup vegetable oil,0.027777777777777776
+muffin,7908,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,7908,sugar,0.5,cups,12,1/2 cup white sugar,0.041666666666666664
+muffin,7958,baking powder,0.015624975,cups,12,3/4 teaspoon baking powder,0.00130208125
+muffin,7958,baking soda,0.01041665,cups,12,1/2 teaspoon baking soda,8.680541666666666e-4
+muffin,7958,chocolate,0.5,cups,12,1/2 cup semisweet chocolate chips,0.041666666666666664
+muffin,7958,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,7958,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,7958,oil,0.25,cups,12,1/4 cup vegetable oil,0.020833333333333332
+muffin,7958,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+muffin,7958,spice,0.0208333,cups,12,1/4 teaspoon ground cloves;1/2 teaspoon ground cinnamon;1/4 teaspoon ground nutmeg,0.0017361083333333333
+muffin,7958,sugar,0.75,cups,12,3/4 cup white sugar,0.0625
+muffin,7958,vegetable,0.75,cups,12,3/4 cup canned pumpkin,0.0625
+muffin,7958,water,0.25,cups,12,1/4 cup water,0.020833333333333332
+muffin,8116,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,8116,baking soda,0.0416666,cups,12,2 teaspoons baking soda,0.0034722166666666665
+muffin,8116,bran,1.5,cups,12,1 1/2 cups oat bran,0.125
+muffin,8116,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,8116,flour,1.5,cups,12,1 1/2 cups all-purpose flour,0.125
+muffin,8116,fruit,1,cups,12,1 cup chilled applesauce,0.08333333333333333
+muffin,8116,oil,0.25,cups,12,4 tablespoons vegetable oil,0.020833333333333332
+muffin,8116,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,8116,sugar,0.5,cups,12,1/2 cup dark brown sugar,0.041666666666666664
+muffin,8427,baking powder,0.0416666,cups,18,2 teaspoons baking powder,0.002314811111111111
+muffin,8427,butter,0.5,cups,18,1/2 cup butter,0.027777777777777776
+muffin,8427,eggs,2,eggs,18,2 eggs,0.1111111111111111
+muffin,8427,flour,2,cups,18,2 cups all-purpose flour,0.1111111111111111
+muffin,8427,fruit,2.5,cups,18,2 1/2 cups fresh blueberries,0.1388888888888889
+muffin,8427,milk,0.25,cups,18,1/4 cup milk,0.013888888888888888
+muffin,8427,salt,0.01041665,cups,18,1/2 teaspoon salt,5.787027777777778e-4
+muffin,8427,sugar,1.5,cups,18,1 1/4 cups white sugar;1/4 cup white sugar,0.08333333333333333
+muffin,8443,baking powder,0.0416666,cups,12,2 teaspoons baking powder,0.0034722166666666665
+muffin,8443,butter,0.5,cups,12,1/2 cup butter,0.041666666666666664
+muffin,8443,eggs,2,eggs,12,2 eggs,0.16666666666666666
+muffin,8443,flour,2,cups,12,2 cups all-purpose flour,0.16666666666666666
+muffin,8443,fruit,1.5,cups,12,1 1/2 cups fresh blueberries,0.125
+muffin,8443,milk,0.5,cups,12,1/2 cup milk,0.041666666666666664
+muffin,8443,salt,0.01041665,cups,12,1/2 teaspoon salt,8.680541666666666e-4
+muffin,8443,sugar,1.25,cups,12,1 1/4 cups white sugar,0.10416666666666667
+muffin,8449,baking powder,0.0416666,cups,8,2 teaspoons baking powder,0.005208325
+muffin,8449,eggs,1,eggs,8,1 egg,0.125
+muffin,8449,flour,1.75,cups,8,1 3/4 cups all-purpose flour,0.21875
+muffin,8449,fruit,1,cups,8,1 cup chopped strawberries,0.125
+muffin,8449,milk,0.5,cups,8,1/2 cup milk,0.0625
+muffin,8449,oil,0.25,cups,8,1/4 cup canola oil,0.03125
+muffin,8449,salt,0.01041665,cups,8,1/2 teaspoon salt,0.00130208125
+muffin,8449,sugar,0.5,cups,8,1/2 cup white sugar,0.0625
+muffin,8458,baking powder,0.0416666,cups,18,2 teaspoons baking powder,0.002314811111111111
+muffin,8458,butter,0.1875,cups,18,3 tablespoons butter,0.010416666666666666
+muffin,8458,cream cheese,1,cups,18,1 (8 ounce) package cream cheese,0.05555555555555555
+muffin,8458,eggs,3,eggs,18,1 egg;2 eggs,0.16666666666666666
+muffin,8458,flour,2.78125,cups,18,4 1/2 tablespoons all-purpose flour;2 1/2 cups all-purpose flour,0.1545138888888889
+muffin,8458,nut,0.1875,cups,18,3 tablespoons chopped pecans,0.010416666666666666
+muffin,8458,oil,0.3333333333333333,cups,18,1/3 cup olive oil,0.018518518518518517
+muffin,8458,salt,0.01041665,cups,18,1/2 teaspoon salt,5.787027777777778e-4
+muffin,8458,spice,0.057291575,cups,18,3/4 teaspoon ground cinnamon;2 teaspoons ground cinnamon,0.0031828652777777778
+muffin,8458,sugar,2.5,cups,18,3 tablespoons brown sugar;5 tablespoons white sugar;2 cups white sugar,0.1388888888888889
+muffin,8458,vanilla,0.0624999,cups,18,1 teaspoon vanilla extract;2 teaspoons vanilla extract,0.0034722166666666665
+muffin,8458,vegetable,1.3333333333333333,cups,18,1 1/3 cups canned pumpkin,0.07407407407407407
+muffin,86573,baking powder,0.0416666,cups,24,2 teaspoons baking powder,0.0017361083333333333
+muffin,86573,baking soda,0.0208333,cups,24,1 teaspoon baking soda,8.680541666666666e-4
+muffin,86573,butter,1,cups,24,"1 cup melted butter, cooled",0.041666666666666664
+muffin,86573,eggs,2,eggs,24,"2 eggs, lightly beaten",0.08333333333333333
+muffin,86573,flour,3,cups,24,3 cups all-purpose flour,0.125
+muffin,86573,fruit,0.25,cups,24,1/4 cup banana chips (optional),0.010416666666666666
+muffin,86573,milk,0.75,cups,24,3/4 cup milk,0.03125
+muffin,86573,nut,2,cups,24,1 cup chopped walnuts;1 cup shredded coconut,0.08333333333333333
+muffin,86573,other,1,cups,24,1 cup granola,0.041666666666666664
+muffin,86573,salt,0.0208333,cups,24,1 teaspoon salt,8.680541666666666e-4
+muffin,86573,sugar,2,cups,24,2 cups white sugar,0.08333333333333333
+muffin,86573,unitless,2,NA,24,"2 bananas, mashed;1 banana, chopped",0.08333333333333333
+muffin,86573,vanilla,0.0416666,cups,24,2 teaspoons vanilla extract,0.0017361083333333333
+muffin,86894,baking powder,0.0208333,cups,12,1 teaspoon baking powder,0.0017361083333333333
+muffin,86894,baking soda,0.0208333,cups,12,1 teaspoon baking soda,0.0017361083333333333
+muffin,86894,bran,0.25,cups,12,1/4 cup oat bran,0.020833333333333332
+muffin,86894,buttermilk,1,cups,12,1 cup buttermilk,0.08333333333333333
+muffin,86894,eggs,1,eggs,12,1 egg,0.08333333333333333
+muffin,86894,flour,1.5,cups,12,3/4 cup all-purpose flour;3/4 cup whole wheat flour,0.125
+muffin,86894,fruit,1,cups,12,1 cup blueberries,0.08333333333333333
+muffin,86894,nut,0.5,cups,12,1/2 cup chopped walnuts,0.041666666666666664
+muffin,86894,oats,0.25,cups,12,1/4 cup quick cooking oats,0.020833333333333332
+muffin,86894,oil,0.0625,cups,12,1 tablespoon vegetable oil,0.005208333333333333
+muffin,86894,salt,0.005208325,cups,12,1/4 teaspoon salt,4.340270833333333e-4
+muffin,86894,sugar,0.75,cups,12,3/4 cup white sugar,0.0625
+muffin,86894,unitless,1,NA,12,"1 banana, mashed",0.08333333333333333
+muffin,86894,vanilla,0.0208333,cups,12,1 teaspoon vanilla extract,0.0017361083333333333
+muffin,86894,wheat germ,0.25,cups,12,1/4 cup wheat germ,0.020833333333333332

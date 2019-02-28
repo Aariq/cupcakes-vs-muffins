@@ -14,3 +14,4 @@ And the following .rds files:
 3. `recipes_tidy.rds`: finalized dataframe containing all acceptable muffin and cupcake recipes with ingredients categorized and amounts summarized by recipe (e.g. if there are two kinds of sugar, they are added together).  This dataframe also contains number of servings and calories.
 4. `nofrosting_tidy.rds`: obviously cupcakes have frosting and muffins do not.  In this dataset, frosting and decoration ingredients are removed, as is the calories column since it is no longer accurate.
 5. `recipes_wide.rds`: A wide data frame (each ingredient in its own column) ready for multivariate analysis.
+6. `nofrosting_wide.rds`: A wide version of `nofrosting_tidy.rds`.
